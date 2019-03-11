@@ -7,6 +7,7 @@
                 </el-col>
                 <el-col :span="12">
                     <div class="grid-content bg-purple-light">
+                        <!--TODO  http://element-cn.eleme.io/#/zh-CN/component/menu -->
                         <el-row :gutter="10">
                             <el-col :xs="8" :sm="6" :md="4" :lg="4" :xl="1" class='u-color9b'>首页</el-col>
                             <el-col :xs="4" :sm="6" :md="8" :lg="4" :xl="11" class='u-color9b'>数据<i
