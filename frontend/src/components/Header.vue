@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import{Container,Header,Main,Footer} from 'element-ui'
 export default {
   name: 'NavHeader',
   components: {
