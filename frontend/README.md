@@ -1,11 +1,11 @@
-# frontend  你好
+# frontend  
 
 ## Project setup
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development你好
 ```
 npm run serve
 ```
