@@ -25,7 +25,7 @@
                                 <el-button type="primary" @click="register">注册</el-button>
                             </el-col>
                             <el-col :xs="4" :sm="4" :md="4" :lg="4" :xl="4">
-                                <el-button type="info">登录</el-button>
+                                <el-button type="info" @click="deng">登录</el-button>
                             </el-col>
                         </el-row>
                     </div>
@@ -50,9 +50,15 @@
         methods: {
             register(){
                 this.$router.push({path: '/api/registe'})
+            },
+            deng(){
+                this.$router.push({path: '/api/login'})
             }
-        }
+        },
+
     }
+
+
 </script>
 <style lang="less">
     .el-header {

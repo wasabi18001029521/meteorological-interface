@@ -4,6 +4,8 @@ import Welcome from './views/welcome'
 import dataTab from './views/welcome/data.vue'
 import Registe from '@/components/Registe.vue'
 import Service from '@/components/Service.vue'
+import Login from '@/components/Login.vue'
+
 
 Vue.use(Router)
 
@@ -28,6 +30,13 @@ export default new Router({
             path: '/api/service',
             name: 'service',
             component: Service
+        },
+        {
+            path: '/api/login',
+            name: 'login',
+            component: Login
+
         }
+
     ]
 })
