@@ -23,9 +23,6 @@
 </script>
 <style lang="less">
     .el-footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
         text-align: center;
         height: 83px !important;
         line-height: 83px;
