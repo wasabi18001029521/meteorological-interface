@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Welcome from './views/welcome'
 import dataTab from './views/welcome/data.vue'
-import Registe from '@/components/Registe.vue'
-import Service from '@/components/Service.vue'
-import Login from '@/components/Login.vue'
+import Register from './views/welcome/Register.vue'
+import Service from './views/welcome/Service.vue'
+import Login from './views/welcome/Login.vue'
 
 
 Vue.use(Router)
@@ -22,9 +22,9 @@ export default new Router({
             name: 'dataTab',
         },
         {
-            path: '/api/registe',
-            name: 'registe',
-            component: Registe
+            path: '/api/register',
+            name: 'register',
+            component: Register
         },
         {
             path: '/api/service',

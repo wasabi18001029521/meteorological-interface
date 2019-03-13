@@ -1,5 +1,5 @@
 <template>
-    <div class="regist">
+    <div class="register">
         <el-main>
            <div class="form1" style="background: #f3f7ec">
             <div class="context" >
@@ -30,7 +30,7 @@
 <script>
 
     export default {
-        name: 'registe',
+        name: 'register',
 
         data() {
             var checkAge = (rule, value, callback) => {};

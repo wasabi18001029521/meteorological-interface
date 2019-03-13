@@ -47,7 +47,7 @@
 				this.$router.push('/dataTab');
 			},
 		    register(){
-                this.$router.push({path: '/api/registe'})
+                this.$router.push({path: '/api/register'})
             },
             deng(){
                 this.$router.push({path: '/api/login'})
