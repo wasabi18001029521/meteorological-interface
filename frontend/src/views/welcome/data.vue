@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <el-container>
         <el-main>
             <div class='u-banner-box'>
                 <div class="u-banner">
@@ -110,7 +110,7 @@
                 </el-row>
             </div>
         </el-main>
-    </div>
+    </el-container>
 </template>
 
 <script>

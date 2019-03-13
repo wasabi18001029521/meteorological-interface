@@ -30,6 +30,7 @@
     .u-size42{ font-size: 42px; }
     .u-size20{ font-size: 20px; }
     .u-size16{ font-size: 16px; }
+    .u-line-height2{ line-height: 1em;}
     .u-line-height2{ line-height: 2em; }
     .u-line-height4{ line-height: 4em;}
     .el-main{ padding: 0px !important;}

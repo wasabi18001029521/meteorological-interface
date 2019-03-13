@@ -24,10 +24,12 @@
 <style lang="less">
     .el-footer {
         text-align: center;
-        height: 83px !important;
-        line-height: 83px;
-        background-color: rgb(45, 50, 54);
-        color: #9b9b9b;
+         background-color: #2d3236;
+         color: #9b9b9b;
+         height: auto !important;
+         line-height: 20px;
+         padding-top: 20px !important;
+         padding-bottom: 20px !important;
 
         .u-footer-logo {
             text-align: right;

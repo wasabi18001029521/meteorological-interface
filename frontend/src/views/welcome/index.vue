@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <el-container>
         <el-main>
             <div class='u-banner-box'>
                 <div class="u-banner">
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </el-main>
-    </div>
+    </el-container>
 </template>
 
 <script>
@@ -29,7 +29,7 @@
 </script>
 <style lang="less">
 .u-banner-box{
-    height: 519px;
+    height: 542px;
     position: relative;
     background-color:#fbfbfb;
     .u-banner{
