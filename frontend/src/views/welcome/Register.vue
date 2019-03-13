@@ -1,6 +1,6 @@
 <template>
-    <div class="register">
-        <el-main>
+<el-main>
+    <div class="register u-banner-box">
            <div class="form1" style="background: #f3f7ec">
             <div class="context" >
                 <h1 class="abc" align="center"  >注册账号</h1>
@@ -22,9 +22,8 @@
                 </el-form-item>
             </el-form>
            </div>
-        </el-main>
-
     </div>
+</el-main>
 </template>
 
 <script>

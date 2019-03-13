@@ -31,6 +31,7 @@
 .u-banner-box{
     height: 519px;
     position: relative;
+    background-color:#fbfbfb;
     .u-banner{
         text-align: center;
         height: 280px;

@@ -1,6 +1,6 @@
 <template>
-    <div class="login">
-        <el-main>
+<el-main>
+    <div class="login u-banner-box">
             <div class="form2" style="background: #fefff3">
                 <div class="context1" >
                     <h1 class="zhanghao" align="center"  >登录账号</h1>
@@ -16,19 +16,14 @@
                     <el-form-item>
                         <el-button type="primary" @click="submitForm('ruleForm2')" class="denglu">登   录</el-button>
                     </el-form-item>
-
                     <el-from-item>
                         <el-button type="text" class="zhaohuimima">找回密码</el-button>
                         <el-button type="text" >注册新用户</el-button>
-
                     </el-from-item>
-
-
                 </el-form>
             </div>
-        </el-main>
-
     </div>
+</el-main>
 </template>
 
 <script>
