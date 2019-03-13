@@ -46,16 +46,13 @@
             addData() {
 				this.$router.push('/dataTab');
 			},
-        },
-        methods: {
-            register(){
+		    register(){
                 this.$router.push({path: '/api/registe'})
             },
             deng(){
                 this.$router.push({path: '/api/login'})
             }
         },
-
     }
 
 
