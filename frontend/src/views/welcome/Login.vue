@@ -16,21 +16,16 @@
                     <el-form-item>
                         <el-button type="primary" @click="submitForm('ruleForm2')" class="denglu">登   录</el-button>
                     </el-form-item>
-                    <el-from-item>
-                        <el-button type="text" class="zhaohuimima">找回密码</el-button>
-                        <el-button type="text" >注册新用户</el-button>
-                    </el-from-item>
+                        <el-button type="text" @click="zh" class="zhaohuimima">找回密码</el-button>
+                        <el-button type="text" @click="zc"  class="asd">注册新用户</el-button>
                 </el-form>
             </div>
     </div>
 </el-main>
 </template>
-
 <script>
-
     export default {
         name: 'login',
-
         data() {
             var checkAge = (rule, value, callback) => {};
             var validatePass = (rule, value, callback) => {
@@ -52,6 +47,7 @@
                     callback();
                 }
             };
+
             return {
                 ruleForm2: {
                     pass: '',
@@ -65,25 +61,17 @@
                     checkPass: [
                         { validator: validatePass2, trigger: 'blur' }
                     ],
-
                 }
             };
         },
         methods: {
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
+            zc(){
+                this.$router.push({path: '/api/register'})
             },
-
-        },
-
-
+            zh(){
+                console.log("这里写找回")
+            }
+        }
     }
 </script>
 <style lang="less">
@@ -98,11 +86,8 @@
         background: #4585ff;
         width:440px;
         height: 50px;
-
     }
     .form2{
-
-
         margin: 0 auto;
         position: absolute;
         width:440px;
@@ -112,7 +97,6 @@
         margin-left:-200px;
         margin-top:-100px
     }
-
     .zhaohuimima {
         width:250px;
         margin: 0 auto;
@@ -123,7 +107,4 @@
         position:absolute;left:-50px;
         height: 40px;
     }
-
-
-
 </style>

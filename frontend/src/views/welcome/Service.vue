@@ -62,9 +62,6 @@
 
         </div>
         </div>
-
-
-
     </el-main>
 </template>
 
@@ -97,5 +94,4 @@
             }
         }
     }
-
 </style>

@@ -3,7 +3,7 @@
     <div class="register u-banner-box">
            <div class="form1" style="background: #f3f7ec">
             <div class="context" >
-                <h1 class="abc" align="center"  >注册账号</h1>
+                <h1 class="u-banner-text" align="center"  >注册账号</h1>
             </div>
             <br/>
             <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
@@ -15,10 +15,10 @@
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="text" class="abcd" @click="service"><<中国气象台服务协议>></el-button>
+                    <el-button type="text" class="u-banner-xieyi" @click="service"><<中国气象台服务协议>></el-button>
 
                     <br/>
-                    <el-button type="primary" @click="submitForm('ruleForm2')" class="abcde" >同意以上注册协议并注册</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm2')" class="u-banner-zhuce" >同意以上注册协议并注册</el-button>
                 </el-form-item>
             </el-form>
            </div>
@@ -69,31 +69,22 @@
                 }
             };
         },
-        methods: {
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
 
-        },
         methods: {
             service(){
                 this.$router.push({path: '/api/service'})
-                console.log(path)
+            },
+            submitForm(){
+                console.log("这里写注册")
             }
-        }
+        },
+
 
 
     }
 </script>
 <style lang="less">
-    .abc {
+    .u-banner-text {
         color: #ffffff;
         width:150px;
         margin: 0 auto;
@@ -116,11 +107,11 @@
         margin-left:-200px;
         margin-top:-100px
     }
-    .abcd{
+    .u-banner-xieyi{
         width:250px;
         margin: 0 auto;
     }
-    .abcde{
+    .u-banner-zhuce{
         width:350px;
         position:absolute;left:-55px;
     }
