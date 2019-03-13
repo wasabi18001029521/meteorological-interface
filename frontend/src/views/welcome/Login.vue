@@ -70,7 +70,10 @@
             },
             zh(){
                 console.log("这里写找回")
-            }
+            },
+            submitForm(){
+                console.log("这里写登录事件")
+            },
         }
     }
 </script>
