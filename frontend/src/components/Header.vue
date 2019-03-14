@@ -20,7 +20,8 @@
                                  <el-menu-item index="4">
                                     <el-button type="info" @click="deng">登录</el-button>
                                 </el-menu-item>
-                                <el-menu-item index="5">
+                                <el-menu-item index="5" @click='myMessage'>我的账号</el-menu-item>
+                                <el-menu-item index="6">
                                       <el-button type="primary" @click="register">注册</el-button>
                                 </el-menu-item>
 
@@ -57,6 +58,9 @@
             },
             deng(){
                 this.$router.push({path: '/api/login'})
+            },
+            myMessage(){
+                this.$router.push({path: '/myMessage'})
             }
         },
     }
@@ -70,7 +74,10 @@
         background-color: #545c64;
         color: #fff;
         li{
-            width: 18%;
+            width: 15%;
+        }
+        .el-menu.el-menu--horizontal{
+            border-bottom: none;
         }
     }
 </style>

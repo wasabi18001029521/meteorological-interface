@@ -6,6 +6,7 @@ import Price from './views/welcome/price.vue'
 import Register from './views/welcome/Register.vue'
 import Service from './views/welcome/Service.vue'
 import Login from './views/welcome/Login.vue'
+import myMessage from './views/welcome/myMessage.vue'
 
 
 Vue.use(Router)
@@ -42,7 +43,12 @@ export default new Router({
             name: 'login',
             component: Login
 
-        }
+        },
+        {
+            path: '/myMessage',
+            name: 'myMessage',
+            component: myMessage
+        },
 
     ]
 })
