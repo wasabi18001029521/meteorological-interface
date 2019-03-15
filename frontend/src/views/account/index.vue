@@ -26,7 +26,7 @@
                            <el-col :span="15"><div class="grid-content bg-purple-light">sdk39kehldfdd</div></el-col>
                          </el-row>
                          <el-row class='u-account-item'>
-                           <el-col :span="15" :offset="9"><el-button type="primary">修改密码</el-button></el-col>
+                           <el-col :span="15" :offset="9"><el-button type="primary"  >修改密码</el-button></el-col>
                          </el-row>
                     </el-tab-pane>
                     <el-tab-pane label="我的订单">
@@ -66,9 +66,8 @@
               return {
                 tabPosition: 'left'
               };
-            }
-
-    }
+            },
+      }
 </script>
 <style lang="less">
 .el-main{

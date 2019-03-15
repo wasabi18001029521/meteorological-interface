@@ -8,10 +8,10 @@
             <br/>
             <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
                 <el-form-item    label="邮箱" prop="pass">
-                    <el-input type="username" v-model="ruleForm2.pass" autocomplete="off" style="width:250px;height:0px" placeholder="您的工作邮箱"></el-input>
+                    <el-input type="username" v-model="ruleForm2.pass" autocomplete="off" style="width:250px;height:0px" placeholder="您的工作邮箱" ></el-input>
                 </el-form-item>
                 <el-form-item label="密码" prop="checkPass">
-                    <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off" style="width:250px;height:0px"  placeholder="6位以上字母和数字密码"></el-input>
+                    <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off" style="width:250px;height:0px"  placeholder="6位以上字母和数字密码" ></el-input>
                 </el-form-item>
 
                 <el-form-item>
@@ -75,7 +75,29 @@
                 this.$router.push({path: '/api/service'})
             },
             submitForm(){
-                console.log("这里写注册")
+                console.log(this.ruleForm2.pass)
+
+                this.$axios.post('http://localhost:8080/weather/zhuce', {
+                     username: this.ruleForm2.pass,
+                      password: this.ruleForm2.checkPass
+
+                })
+                .then(successResponse => {
+                    this.responseResult = JSON.stringify(successResponse.data)
+                    if (successResponse.data.code === 200) {
+                        this.$message({
+                            message: successResponse.data.message,
+                            type: 'success'
+                        });
+                    }if (successResponse.data.code !== 200) {
+                        //  alert(JSON.stringify(successResponse.data.message))
+                        this.$message({
+                            message: successResponse.data.message,
+                            type: 'warning'
+                        });
+
+
+                }}).catch(failResponse => {})
             }
         },
 
