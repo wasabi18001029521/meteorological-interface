@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Welcome from './views/welcome'
-import DataTab from './views/welcome/data.vue'
-import Price from './views/welcome/price.vue'
-import Register from './views/welcome/Register.vue'
-import Service from './views/welcome/Service.vue'
-import Login from './views/welcome/Login.vue'
-import myMessage from './views/welcome/myMessage.vue'
+import DataTab from './views/conventionaldata/index.vue'
+import Price from './views/price/index.vue'
+import Register from './views/register/index.vue'
+import Service from './views/register/protocol.vue'
+import Login from './views/login/index.vue'
+import myMessage from './views/account/index.vue'
 
 
 Vue.use(Router)
