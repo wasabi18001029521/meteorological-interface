@@ -51,6 +51,7 @@
                     </el-tab-pane>
                     <el-tab-pane label="访问量统计">
                         <div class='u-account-title'>访问量统计<span class='u-line'></span></div>
+                        <x-chart :id="id" :option="option"></x-chart>
                     </el-tab-pane>
                 </el-tabs>
              </div>
@@ -59,14 +60,24 @@
 </template>
 
 <script>
-
+    // 导入chart组件
+    import XChart from '../../components/chart.vue'
+    // 导入chart组件模拟数据
+    import options from '../../chart-options/options'
     export default {
         name: 'myMessage',
         data() {
+              let option = options.bar
               return {
-                tabPosition: 'left'
+                tabPosition: 'left',
+                // chart
+                id: 'test',
+                option: option,
               };
             },
+        components: {
+            XChart
+          }
       }
 </script>
 <style lang="less">
