@@ -1,6 +1,6 @@
 package cn.webyun.meteorologicalinterface.entity;
 
-public class VueLoginInfoVo {
+public class UserDo {
     private Integer id;
     private String username;
     private String password;

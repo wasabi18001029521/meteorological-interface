@@ -3,7 +3,7 @@
     <div class="login u-banner-box">
             <div class="form2" style="background: #fefff3">
                 <div class="context1" >
-                    <h1 class="zhanghao" align="center"  >登录账号</h1>
+                    <h1 class="account" align="center"  >登录账号</h1>
                 </div>
                 <br/>
                 <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
@@ -14,9 +14,10 @@
                         <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off" style="width:250px;height:0px"  placeholder="6位以上字母和数字密码"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm2')" class="denglu">登   录</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm2')" class="sign">登   录</el-button>
                     </el-form-item>
-                        <el-button type="text" @click="zh" class="zhaohuimima">找回密码</el-button>
+                        <el-button type="text" @click="zh" class="
+retrieve">找回密码</el-button>
                         <el-button type="text" @click="zc"  class="asd">注册新用户</el-button>
                 </el-form>
             </div>
@@ -78,7 +79,7 @@
     }
 </script>
 <style lang="less">
-    .zhanghao {
+    .account {
         color: #ffebef;
         width:150px;
         margin: 0 auto;
@@ -100,12 +101,12 @@
         margin-left:-200px;
         margin-top:-100px
     }
-    .zhaohuimima {
+    .retrieve {
         width:250px;
         margin: 0 auto;
         height: 65px;
     }
-    .denglu {
+    .sign {
         width:300px;
         position:absolute;left:-50px;
         height: 40px;

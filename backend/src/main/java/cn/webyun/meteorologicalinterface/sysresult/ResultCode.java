@@ -1,6 +1,6 @@
 package cn.webyun.meteorologicalinterface.sysresult;
 
-public enum  ResultCode {
+public enum ResultCode {
     /**
      * 成功
      */

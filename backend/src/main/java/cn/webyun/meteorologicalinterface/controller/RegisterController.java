@@ -1,8 +1,8 @@
 
-package cn.webyun.meteorologicalinterface.Controller;
+package cn.webyun.meteorologicalinterface.controller;
 
 
-import cn.webyun.meteorologicalinterface.entity.VueLoginInfoVo;
+import cn.webyun.meteorologicalinterface.entity.UserDo;
 import cn.webyun.meteorologicalinterface.service.UserService;
 import cn.webyun.meteorologicalinterface.sysresult.Result;
 import cn.webyun.meteorologicalinterface.sysresult.ResultFactory;
@@ -21,35 +21,28 @@ public class RegisterController {
 
 
     @CrossOrigin
-    @RequestMapping(value = "/zhuce", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public Result login(@Valid @RequestBody VueLoginInfoVo loginInfoVo, BindingResult bindingResult) {
+    public Result login(@Valid @RequestBody UserDo userDo, BindingResult bindingResult) {
 
 
-        //用户注册
-        if (loginInfoVo.getUsername().equals("")||loginInfoVo.getPassword().equals("")){
-            System.out.println(loginInfoVo.getUsername());
+        // 用户注册
+        if (userDo.getUsername().equals("")||userDo.getPassword().equals("")){
             String message = String.format("请输入用户名或者密码");
-
             return ResultFactory.buildFailResult(message);
         }
 
 
-        //y邮箱验证
-        boolean a = userService.email(loginInfoVo);
-        if(a!=true){
-            String message = String.format("请输入正确的邮箱");
-            return ResultFactory.buildFailResult(message);
-        }
-        boolean b = userService.findusername(loginInfoVo);
-        if(b==true){
+        // 邮箱验证
+        boolean username = userService.findusername(userDo);
+        if(username==true){
             String message = String.format("邮箱已被注册");
             return ResultFactory.buildFailResult(message);
         }
 
 
         try{
-            userService.Register(loginInfoVo);
+            userService.Register(userDo);
             return ResultFactory.buildSuccessResult("注册成功。");
         }catch (Exception e){
             e.printStackTrace();
