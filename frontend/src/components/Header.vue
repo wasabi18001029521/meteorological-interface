@@ -3,7 +3,7 @@
         <el-header>
             <el-row>
                 <el-col :span="12" :xs="5"  :sm="8" >
-                    <div class="grid-content bg-purple">中央气象台</div>
+                    <div class="grid-content bg-purple"><span class='u-logo'></span>中央气象台</div>
                 </el-col>
                 <el-col :span="12" :xs="19"  :sm="16" >
                     <div class="grid-content bg-purple-light">
@@ -78,6 +78,14 @@
         }
         .el-menu.el-menu--horizontal{
             border-bottom: none;
+        }
+        .u-logo{
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            background: url('../assets/img/logo.png');
+            vertical-align: middle;
+            margin-right: 20px;
         }
     }
 </style>

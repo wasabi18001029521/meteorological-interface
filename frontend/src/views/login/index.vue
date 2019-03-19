@@ -84,12 +84,17 @@ retrieve">找回密码</el-button>
         width:150px;
         margin: 0 auto;
         font-size:20px;
-        width:150px; height:100px; text-align:center; line-height:50px;
+        width:150px;
+        height:100px;
+        text-align:center;
+        line-height:50px;
+
     }
     .context1 {
         background: #4585ff;
         width:440px;
         height: 50px;
+        background: url('../../assets/img/bg-login.png');
     }
     .form2{
         margin: 0 auto;
@@ -99,7 +104,8 @@ retrieve">找回密码</el-button>
         left:50%;
         top:35%;
         margin-left:-200px;
-        margin-top:-100px
+        margin-top:-100px;
+        background-color: #fff !important
     }
     .retrieve {
         width:250px;

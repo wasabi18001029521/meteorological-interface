@@ -3,7 +3,7 @@
         <el-footer>
             <el-row :gutter="20">
                 <el-col :span="6">
-                    <div class="grid-content bg-purple u-footer-logo">中央气象台</div>
+                    <div class="grid-content bg-purple u-footer-logo"><span class='u-logo'></span>中央气象台</div>
                 </el-col>
                 <el-col :span="16">
                     <div class="grid-content bg-purple u-footer-text">Copyright 2005-2018 QiXiang.COM All rights
@@ -27,7 +27,7 @@
          background-color: #2d3236;
          color: #9b9b9b;
          height: auto !important;
-         line-height: 20px;
+         line-height: 35px;
          padding-top: 20px !important;
          padding-bottom: 20px !important;
 
@@ -37,6 +37,14 @@
 
         .u-footer-text {
             font-size: 12px;
+        }
+        .u-logo{
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            background: url('../assets/img/logo.png');
+            vertical-align: middle;
+            margin-right: 20px;
         }
     }
 </style>

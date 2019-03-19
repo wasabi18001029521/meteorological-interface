@@ -115,14 +115,14 @@
         color: #ffffff;
         width:150px;
         margin: 0 auto;
-        font-size:28px;
+        font-size:20px;
         width:150px; height:100px; text-align:center; line-height:50px;
         }
     .context {
         background: #4396ff;
         width:440px;
         height: 50px;
-
+        background: url('../../assets/img/bg-login.png');
     }
     .form1{
         margin: 0 auto;
@@ -132,7 +132,8 @@
         left:50%;
         top:35%;
         margin-left:-200px;
-        margin-top:-100px
+        margin-top:-100px;
+        background-color: #fff !important;
     }
     .u-banner-xieyi{
         width:250px;

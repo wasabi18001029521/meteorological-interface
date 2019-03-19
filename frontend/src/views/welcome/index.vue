@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-main>
-            <div class='u-banner-box'>
+            <div class='u-banner-box u-index-banner'>
                 <div class="u-banner">
                     <el-row class="u-size40 u-line-height2">
                       <el-col :span="24"><div class="grid-content bg-purple-dark">权威天气数据  极速稳定接入</div></el-col>
@@ -32,6 +32,7 @@
     height: 542px;
     position: relative;
     background-color:#fbfbfb;
+    color: #fff;
     .u-banner{
         text-align: center;
         height: 280px;
@@ -43,5 +44,7 @@
         margin-left: -340px;
         }
 }
-
+.u-index-banner{
+    background: url('../../assets/img/banner.jpg');
+}
 </style>
