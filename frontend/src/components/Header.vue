@@ -60,8 +60,14 @@
                 this.$router.push({path: '/api/login'})
             },
             myMessage(){
+
                 this.$router.push({path: '/myMessage'})
-            }
+
+
+            },
+
+
+
         },
     }
 

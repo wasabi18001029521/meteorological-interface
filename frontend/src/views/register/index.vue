@@ -36,7 +36,7 @@
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请输入邮箱'));
-                } if(this.ruleForm2.checkPass !== ''){
+                } if(value !== ''){
                     var reg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
                     if(!reg.test(value)){
                         callback(new Error('请输入有效的邮箱'));
@@ -80,8 +80,6 @@
                 this.$router.push({path: '/api/service'})
             },
             submitForm(){
-                console.log(this.ruleForm2.pass)
-
                 this.$axios.post('http://localhost:8080/weather/register', {
                      username: this.ruleForm2.pass,
                       password: this.ruleForm2.checkPass

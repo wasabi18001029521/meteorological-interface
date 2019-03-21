@@ -7,7 +7,7 @@ import Register from './views/register/index.vue'
 import Service from './views/register/protocol.vue'
 import Login from './views/login/index.vue'
 import myMessage from './views/account/index.vue'
-
+import Retrieve from './views/retrieve/index'
 
 Vue.use(Router)
 
@@ -49,6 +49,10 @@ export default new Router({
             name: 'myMessage',
             component: myMessage
         },
-
+        {
+            path:'/api/retrieve',
+            name:'retrieve',
+            component:Retrieve
+        },
     ]
 })

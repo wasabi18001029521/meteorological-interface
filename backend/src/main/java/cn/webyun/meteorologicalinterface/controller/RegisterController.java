@@ -23,12 +23,12 @@ public class RegisterController {
     @CrossOrigin
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public Result login(@Valid @RequestBody UserDo userDo, BindingResult bindingResult) {
+    public Result register(@Valid @RequestBody UserDo userDo, BindingResult bindingResult) {
 
 
         // 用户注册
         if (userDo.getUsername().equals("")||userDo.getPassword().equals("")){
-            String message = String.format("请输入用户名或者密码");
+            String message = String.format("请输入邮箱或者密码");
             return ResultFactory.buildFailResult(message);
         }
 

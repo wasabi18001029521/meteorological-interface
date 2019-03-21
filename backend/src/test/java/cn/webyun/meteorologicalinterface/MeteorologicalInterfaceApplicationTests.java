@@ -1,7 +1,9 @@
 package cn.webyun.meteorologicalinterface;
 
+import cn.webyun.meteorologicalinterface.entity.UserDo;
 import cn.webyun.meteorologicalinterface.mapper.UserMapper;
 import cn.webyun.meteorologicalinterface.service.UserService;
+import org.assertj.core.internal.Integers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +29,20 @@ UserService userService;
             }
             System.out.println(attribute);
         }
+    }
+    @Test
+    public void findUserById(){
+       Integer id=74;
+    UserDo user = userMapper.selectUserId(id);
+    user.getId();
+    System.out.println(user.getId());
+
+}
+    @Test
+    public void selectPassword(){
+        String usernmae="956901244@qq.com";
+        String s = userMapper.selectUserPassword(usernmae);
+        System.out.println(s);
     }
 
 

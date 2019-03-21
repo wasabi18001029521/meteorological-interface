@@ -32,8 +32,13 @@ retrieve">找回密码</el-button>
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请输入邮箱'));
-                } else {
-                    if (this.ruleForm2.checkPass !== '') {
+                } if(this.ruleForm2.pass !== ''){
+                    var reg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+                    if(!reg.test(value)){
+                        callback(new Error('请输入有效的邮箱'));
+                    }
+                }else {
+                    if (this.ruleForm2.pass !== '') {
                         this.$refs.ruleForm2.validateField('checkPass');
                     }
                     callback();
@@ -70,11 +75,34 @@ retrieve">找回密码</el-button>
                 this.$router.push({path: '/api/register'})
             },
             zh(){
-                console.log("这里写找回")
+                this.$router.push({path: '/api/retrieve'})
             },
             submitForm(){
-                console.log("这里写登录事件")
+                this.$axios.post('http://localhost:8080/weather/login', {
+                    username: this.ruleForm2.pass,
+                    password: this.ruleForm2.checkPass
+
+                })
+                    .then(successResponse => {
+                        this.responseResult = JSON.stringify(successResponse.data)
+                        if (successResponse.data.code === 200) {
+                            this.$message({
+                                message: successResponse.data.message,
+                                //"登录成功",
+                                type: 'success'
+                            }),this.$Headers({
+                            });
+                        }if (successResponse.data.code !== 200) {
+                            //  alert(JSON.stringify(successResponse.data.message))
+                            this.$message({
+                                message: successResponse.data.message,
+                                type: 'warning'
+                            });
+
+
+                        }}).catch(failResponse => {})
             },
+
         }
     }
 </script>

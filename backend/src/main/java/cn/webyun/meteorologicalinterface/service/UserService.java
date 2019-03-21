@@ -11,8 +11,6 @@ import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class UserService {
@@ -39,13 +37,20 @@ public class UserService {
         List<String> findusername1 = userMapper.selectUsername();
         for(String attribute : findusername1) {
         if (attribute.equals(key)){
-            System.out.println(attribute);
             username = true;
-
-        }
+            }
         }
         return username;
     }
 
+    // 查询用户ID
+    public UserDo findUserById(Integer id){
+        UserDo user = userMapper.selectUserId(id);
+        return user;
+    }
 
+    // 根据用户名查询用户
+    public UserDo selectUsername(String username){
+        return userMapper.selectFindUsername(username);
+    }
 }
