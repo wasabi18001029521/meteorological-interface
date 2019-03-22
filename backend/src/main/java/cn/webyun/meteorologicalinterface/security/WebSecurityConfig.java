@@ -1,4 +1,5 @@
 package cn.webyun.meteorologicalinterface.security;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -35,8 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      http.authorizeRequests()
-              .antMatchers(HttpMethod.GET,"/weather/login","weather/hello").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/", "/weather/login", "/weather/hello").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 //.formLogin().loginProcessingUrl("weather/hello")
@@ -65,9 +66,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        JwtUser jwtUser=new JwtUser();
+        JwtUser jwtUser = new JwtUser();
         String username1 = jwtUser.getUsername();
-        String password=jwtUser.getPassword();
+        String password = jwtUser.getPassword();
         InMemoryUserDetailsManager iud = new InMemoryUserDetailsManager();
         Collection<GrantedAuthority> adminAuth = new ArrayList<>();
         adminAuth.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
