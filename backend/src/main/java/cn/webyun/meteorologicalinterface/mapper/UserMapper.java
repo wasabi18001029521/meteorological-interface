@@ -1,44 +1,138 @@
 package cn.webyun.meteorologicalinterface.mapper;
 
-import cn.webyun.meteorologicalinterface.entity.UserDo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import cn.webyun.meteorologicalinterface.entity.User;
+import cn.webyun.meteorologicalinterface.entity.UserCriteria;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.type.JdbcType;
 
 import java.util.List;
 
-@Mapper
 public interface UserMapper {
-    // 用户注册
-    @Insert("insert into user(username,password) values(#{username},#{password})")
-    public int insertRegister(String username, String password);
+    @SelectProvider(type=UserSqlProvider.class, method="countByExample")
+    long countByExample(UserCriteria example);
 
-    // 查询用户名
-    @Select("select username from user")
-    public List<String> selectUsername();
+    @DeleteProvider(type=UserSqlProvider.class, method="deleteByExample")
+    int deleteByExample(UserCriteria example);
 
-    // 根据ID查询用户所有信息
-    @Select("select * from user where id = #{id}")
-    public UserDo selectUserId(Integer id);
+    @Delete({
+        "delete from sys_users",
+        "where id = #{id,jdbcType=INTEGER}"
+    })
+    int deleteByPrimaryKey(Integer id);
 
-    // 用户登录密码效验
-    @Select("select password from user where username = #{username}")
-    public String selectUserPassword(String username);
+    @Insert({
+        "insert into sys_users (user_name, user_full_name, ",
+        "user_password, unit_id, ",
+        "unit_name, unit_full_name, ",
+        "account_expired, account_locked, ",
+        "password_expired, account_enabled, ",
+        "email, address, ",
+        "phone)",
+        "values (#{userName,jdbcType=VARCHAR}, #{userFullName,jdbcType=VARCHAR}, ",
+        "#{userPassword,jdbcType=VARCHAR}, #{unitId,jdbcType=INTEGER}, ",
+        "#{unitName,jdbcType=VARCHAR}, #{unitFullName,jdbcType=VARCHAR}, ",
+        "#{accountExpired,jdbcType=INTEGER}, #{accountLocked,jdbcType=INTEGER}, ",
+        "#{passwordExpired,jdbcType=INTEGER}, #{accountEnabled,jdbcType=INTEGER}, ",
+        "#{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, ",
+        "#{phone,jdbcType=VARCHAR})"
+    })
+    @Options(useGeneratedKeys=true,keyProperty="id")
+    int insert(User record);
 
-    // 根据用户名查询用户id
-    @Select("select id from user where username = #{username}")
-    public Integer selectUser(String username);
+    @InsertProvider(type=UserSqlProvider.class, method="insertSelective")
+    @Options(useGeneratedKeys=true,keyProperty="id")
+    int insertSelective(User record);
 
-    // 通过用户名查找用户
-    @Select("select username from user where username = #{username}")
-    public UserDo selectFindUsername(String username);
+    @SelectProvider(type=UserSqlProvider.class, method="selectByExample")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="user_name", property="userName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_full_name", property="userFullName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_password", property="userPassword", jdbcType=JdbcType.VARCHAR),
+        @Result(column="unit_id", property="unitId", jdbcType=JdbcType.INTEGER),
+        @Result(column="unit_name", property="unitName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="unit_full_name", property="unitFullName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="account_expired", property="accountExpired", jdbcType=JdbcType.INTEGER),
+        @Result(column="account_locked", property="accountLocked", jdbcType=JdbcType.INTEGER),
+        @Result(column="password_expired", property="passwordExpired", jdbcType=JdbcType.INTEGER),
+        @Result(column="account_enabled", property="accountEnabled", jdbcType=JdbcType.INTEGER),
+        @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
+        @Result(column="address", property="address", jdbcType=JdbcType.VARCHAR),
+        @Result(column="phone", property="phone", jdbcType=JdbcType.VARCHAR)
+    })
+    List<User> selectByExampleWithRowbounds(UserCriteria example, RowBounds rowBounds);
 
-    // 用户修改密码
-    @Update("update user set password = #{password} where username = #{username};")
-    public Integer updatePassword(String password,String username);
+    @SelectProvider(type=UserSqlProvider.class, method="selectByExample")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="user_name", property="userName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_full_name", property="userFullName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_password", property="userPassword", jdbcType=JdbcType.VARCHAR),
+        @Result(column="unit_id", property="unitId", jdbcType=JdbcType.INTEGER),
+        @Result(column="unit_name", property="unitName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="unit_full_name", property="unitFullName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="account_expired", property="accountExpired", jdbcType=JdbcType.INTEGER),
+        @Result(column="account_locked", property="accountLocked", jdbcType=JdbcType.INTEGER),
+        @Result(column="password_expired", property="passwordExpired", jdbcType=JdbcType.INTEGER),
+        @Result(column="account_enabled", property="accountEnabled", jdbcType=JdbcType.INTEGER),
+        @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
+        @Result(column="address", property="address", jdbcType=JdbcType.VARCHAR),
+        @Result(column="phone", property="phone", jdbcType=JdbcType.VARCHAR)
+    })
+    List<User> selectByExample(UserCriteria example);
 
-    // 用户名查询密码
-    @Select("select password from user where username = #{username}")
-    public String selectPassword(String username);
+    @Select({
+        "select",
+        "id, user_name, user_full_name, user_password, unit_id, unit_name, unit_full_name, ",
+        "account_expired, account_locked, password_expired, account_enabled, email, address, ",
+        "phone",
+        "from sys_users",
+        "where id = #{id,jdbcType=INTEGER}"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.INTEGER, id=true),
+        @Result(column="user_name", property="userName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_full_name", property="userFullName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="user_password", property="userPassword", jdbcType=JdbcType.VARCHAR),
+        @Result(column="unit_id", property="unitId", jdbcType=JdbcType.INTEGER),
+        @Result(column="unit_name", property="unitName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="unit_full_name", property="unitFullName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="account_expired", property="accountExpired", jdbcType=JdbcType.INTEGER),
+        @Result(column="account_locked", property="accountLocked", jdbcType=JdbcType.INTEGER),
+        @Result(column="password_expired", property="passwordExpired", jdbcType=JdbcType.INTEGER),
+        @Result(column="account_enabled", property="accountEnabled", jdbcType=JdbcType.INTEGER),
+        @Result(column="email", property="email", jdbcType=JdbcType.VARCHAR),
+        @Result(column="address", property="address", jdbcType=JdbcType.VARCHAR),
+        @Result(column="phone", property="phone", jdbcType=JdbcType.VARCHAR)
+    })
+    User selectByPrimaryKey(Integer id);
+
+    @UpdateProvider(type=UserSqlProvider.class, method="updateByExampleSelective")
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserCriteria example);
+
+    @UpdateProvider(type=UserSqlProvider.class, method="updateByExample")
+    int updateByExample(@Param("record") User record, @Param("example") UserCriteria example);
+
+    @UpdateProvider(type=UserSqlProvider.class, method="updateByPrimaryKeySelective")
+    int updateByPrimaryKeySelective(User record);
+
+    @Update({
+        "update sys_users",
+        "set user_name = #{userName,jdbcType=VARCHAR},",
+          "user_full_name = #{userFullName,jdbcType=VARCHAR},",
+          "user_password = #{userPassword,jdbcType=VARCHAR},",
+          "unit_id = #{unitId,jdbcType=INTEGER},",
+          "unit_name = #{unitName,jdbcType=VARCHAR},",
+          "unit_full_name = #{unitFullName,jdbcType=VARCHAR},",
+          "account_expired = #{accountExpired,jdbcType=INTEGER},",
+          "account_locked = #{accountLocked,jdbcType=INTEGER},",
+          "password_expired = #{passwordExpired,jdbcType=INTEGER},",
+          "account_enabled = #{accountEnabled,jdbcType=INTEGER},",
+          "email = #{email,jdbcType=VARCHAR},",
+          "address = #{address,jdbcType=VARCHAR},",
+          "phone = #{phone,jdbcType=VARCHAR}",
+        "where id = #{id,jdbcType=INTEGER}"
+    })
+    int updateByPrimaryKey(User record);
 }

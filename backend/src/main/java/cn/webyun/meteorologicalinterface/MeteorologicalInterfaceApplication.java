@@ -4,9 +4,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 @SpringBootApplication
-//@EnableWebSecurity
+@MapperScan("cn.webyun.meteorologicalinterface")
 public class MeteorologicalInterfaceApplication {
 
     public static void main(String[] args) {

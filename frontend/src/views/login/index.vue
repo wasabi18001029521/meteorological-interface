@@ -1,106 +1,74 @@
 <template>
-<el-main>
-    <div class="login u-banner-box">
+    <el-main>
+        <div class="login u-banner-box">
             <div class="form2" style="background: #fefff3">
-                <div class="context1" >
-                    <h1 class="account" align="center"  >登录账号</h1>
+                <div class="context1">
+                    <h1 class="account" align="center">登录账号</h1>
                 </div>
                 <br/>
-                <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-                    <el-form-item    label="邮箱 :" prop="pass">
-                        <el-input type="username" v-model="ruleForm2.pass" autocomplete="off" style="width:250px;height:0px" placeholder="注册邮箱"></el-input>
+                <el-form :model="login_form" status-icon label-width="100px" ref="login_form"
+                         class="demo-ruleForm">
+                    <el-form-item label="邮箱 :" prop="login_email"
+                                  :rules="[
+                    { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                    { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }]">
+                        <el-input v-model="login_form.login_email" autocomplete="off"
+                                  style="width:250px;height:0px" placeholder="注册邮箱"></el-input>
                     </el-form-item>
-                    <el-form-item label="密码 :" prop="checkPass">
-                        <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off" style="width:250px;height:0px"  placeholder="6位以上字母和数字密码"></el-input>
+                    <el-form-item label="密码 :" prop="login_pass" :rules="[
+                    {required: true, message: '请输入密码', trigger: 'blur'},
+                    { min: 6, message: '6位以上字母和数字密码', trigger: 'blur' }
+                    ]">
+                        <el-input type="password" v-model="login_form.login_pass" autocomplete="off"
+                                  style="width:250px;height:0px" placeholder="6位以上字母和数字密码"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm2')" class="sign">登   录</el-button>
+                        <el-button type="primary" @click="submitForm('login_form')" class="sign">登 录</el-button>
                     </el-form-item>
-                        <el-button type="text" @click="zh" class="
-retrieve">找回密码</el-button>
-                        <el-button type="text" @click="zc"  class="asd">注册新用户</el-button>
+                    <el-button type="text" @click="zh" class="retrieve">找回密码</el-button>
+                    <el-button type="text" @click="zc" class="asd">注册新用户</el-button>
                 </el-form>
             </div>
-    </div>
-</el-main>
+        </div>
+    </el-main>
 </template>
 <script>
     export default {
         name: 'login',
         data() {
-            var checkAge = (rule, value, callback) => {};
-            var validatePass = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入邮箱'));
-                } if(this.ruleForm2.pass !== ''){
-                    var reg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-                    if(!reg.test(value)){
-                        callback(new Error('请输入有效的邮箱'));
-                    }
-                }else {
-                    if (this.ruleForm2.pass !== '') {
-                        this.$refs.ruleForm2.validateField('checkPass');
-                    }
-                    callback();
-                }
-            };
-            var validatePass2 = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入密码'));
-                } else if (value.length<6) {
-                    callback(new Error('用户名或密码错误，请重试'));
-                } else {
-                    callback();
-                }
-            };
-
             return {
-                ruleForm2: {
-                    pass: '',
-                    checkPass: '',
-                    age: ''
-                },
-                rules2: {
-                    pass: [
-                        { validator: validatePass, trigger: 'blur' }
-                    ],
-                    checkPass: [
-                        { validator: validatePass2, trigger: 'blur' }
-                    ],
+                login_form: {
+                    login_email: '',
+                    login_pass: '',
                 }
             };
         },
         methods: {
-            zc(){
+            zc() {
                 this.$router.push({path: '/api/register'})
             },
-            zh(){
+            zh() {
                 this.$router.push({path: '/api/retrieve'})
             },
-            submitForm(){
-                this.$axios.post('http://localhost:8080/weather/login', {
-                    username: this.ruleForm2.pass,
-                    password: this.ruleForm2.checkPass
+            submitForm(login_form) {
 
-                })
-                    .then(successResponse => {
-                        this.responseResult = JSON.stringify(successResponse.data)
-                        if (successResponse.data.code === 200) {
-                            this.$message({
-                                message: successResponse.data.message,
-                                //"登录成功",
-                                type: 'success'
-                            }),this.$Headers({
+                this.$refs[login_form].validate(valid => {
+                    if (valid) {
+                        this.$store
+                            .dispatch("Login", this.login_form)
+                            .then(() => {
+                                // this.loading = false;
+                                this.$router.push({ path: "/" });
+                            })
+                            .catch(() => {
+                                this.loading = false;
                             });
-                        }if (successResponse.data.code !== 200) {
-                            //  alert(JSON.stringify(successResponse.data.message))
-                            this.$message({
-                                message: successResponse.data.message,
-                                type: 'warning'
-                            });
-
-
-                        }}).catch(failResponse => {})
+                        // console.log("success")
+                    } else {
+                        // console.log("error submit!!");
+                        return false;
+                    }
+                });
             },
 
         }
@@ -109,40 +77,45 @@ retrieve">找回密码</el-button>
 <style lang="less">
     .account {
         color: #ffebef;
-        width:150px;
+        width: 150px;
         margin: 0 auto;
-        font-size:20px;
-        width:150px;
-        height:100px;
-        text-align:center;
-        line-height:50px;
+        font-size: 20px;
+        width: 150px;
+        height: 100px;
+        text-align: center;
+        line-height: 50px;
 
     }
+
     .context1 {
         background: #4585ff;
-        width:440px;
+        width: 440px;
         height: 50px;
         background: url('../../assets/img/bg-login.png');
     }
-    .form2{
+
+    .form2 {
         margin: 0 auto;
         position: absolute;
-        width:440px;
-        height:300px;
-        left:50%;
-        top:35%;
-        margin-left:-200px;
-        margin-top:-100px;
+        width: 440px;
+        height: 300px;
+        left: 50%;
+        top: 35%;
+        margin-left: -200px;
+        margin-top: -100px;
         background-color: #fff !important
     }
+
     .retrieve {
-        width:250px;
+        width: 250px;
         margin: 0 auto;
         height: 65px;
     }
+
     .sign {
-        width:300px;
-        position:absolute;left:-50px;
+        width: 300px;
+        position: absolute;
+        left: -50px;
         height: 40px;
     }
 </style>

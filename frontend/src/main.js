@@ -10,14 +10,8 @@ import highcharts from 'highcharts'
 import VueHighCharts from 'vue-highcharts'
 
 
-/*引入资源请求插件*/
-import axios from 'axios';
-
-/*使用axios插件*/
-Vue.prototype.$axios = axios;
-
 Vue.config.productionTip = false
-Vue.use(ElementUI,axios);
+Vue.use(ElementUI);
 new Vue({
     router,
     store,
