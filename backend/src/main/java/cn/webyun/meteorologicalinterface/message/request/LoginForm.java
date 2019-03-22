@@ -6,25 +6,34 @@ import javax.validation.constraints.Size;
 public class LoginForm {
     @NotBlank
     @Size(min = 3, max = 64)
-    private String loginEmail;
+    private String username;
 
     @NotBlank
     @Size(min = 3, max = 128)
-    private String loginPass;
+    private String password;
 
-    public String getLoginPass() {
-        return loginPass;
+
+
+    public String getUsername() {
+
+        return username;
     }
 
-    public void setLoginPass(String loginPass) {
-        this.loginPass = loginPass;
+    public void setUsername(String username) {
+
+        this.username = username;
     }
 
-    public String getLoginEmail() {
-        return loginEmail;
+    public String getPassword() {
+
+        return password;
     }
 
-    public void setLoginEmail(String loginEmail) {
-        this.loginEmail = loginEmail;
+    public void setPassword(String password) {
+
+        this.password = password;
     }
+
+
+
 }
