@@ -15,7 +15,8 @@ public class PasswordService {
     public Integer updatePassword(PasswordDo passwordDo){
         String username = passwordDo.getUsername();
         String password = passwordDo.getNewpassword();
-        return  userMapper.updatePassword(username,password);
+
+        return  userMapper.updatePassword(password,username);
     }
 
     // 查询当前密码

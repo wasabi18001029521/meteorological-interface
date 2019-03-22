@@ -31,7 +31,7 @@
                                 修改密码
                                 <br/>
                                 <el-col :span="7" :offset="2"><div class="current">当前密码</div></el-col>
-                                <input type="text" v-model="Currentpassword" >
+                                <input type="text" v-model="password" >
                                 <br/>
                                 <el-col :span="7" :offset="2"><div class="new">新密码</div></el-col>
                                 <input type="text" v-model="Newpassword" >
@@ -96,12 +96,12 @@
                 this.show=!this.show;
             },
             open1() {
-                alert(this.Currentpassword)
+
                 this.$axios.post('http://localhost:8080/passworddo/password', {
                     username: '956901244@qq.com',
-                    Currentpassword: this.Currentpassword,
-                    Newpassword:this.Newpassword,
-                    Confirmthenewpassword:this.Confirmthenewpassword
+                    password: this.password,
+                    newpassword:this.Newpassword,
+                    confirmthenewpassword:this.Confirmthenewpassword
 
                 })
                     .then(successResponse => {

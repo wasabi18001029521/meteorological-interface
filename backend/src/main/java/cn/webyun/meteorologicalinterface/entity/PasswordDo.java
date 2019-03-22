@@ -4,35 +4,11 @@ public class PasswordDo {
     // 用户账号
     private String username;
     // 当前密码
-    private String Currentpassword;
+    private String password;
     // 新密码
-    private String Newpassword;
+    private String newpassword;
     // 确认新密码
-    private String Confirmthenewpassword;
-
-    public String getCurrentpassword() {
-        return Currentpassword;
-    }
-
-    public void setCurrentpassword(String currentpassword) {
-        Currentpassword = currentpassword;
-    }
-
-    public String getNewpassword() {
-        return Newpassword;
-    }
-
-    public void setNewpassword(String newpassword) {
-        Newpassword = newpassword;
-    }
-
-    public String getConfirmthenewpassword() {
-        return Confirmthenewpassword;
-    }
-
-    public void setConfirmthenewpassword(String confirmthenewpassword) {
-        Confirmthenewpassword = confirmthenewpassword;
-    }
+    private String confirmthenewpassword;
 
     public String getUsername() {
         return username;
@@ -40,5 +16,29 @@ public class PasswordDo {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getNewpassword() {
+        return newpassword;
+    }
+
+    public void setNewpassword(String newpassword) {
+        this.newpassword = newpassword;
+    }
+
+    public String getConfirmthenewpassword() {
+        return confirmthenewpassword;
+    }
+
+    public void setConfirmthenewpassword(String confirmthenewpassword) {
+        this.confirmthenewpassword = confirmthenewpassword;
     }
 }

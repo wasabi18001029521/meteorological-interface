@@ -25,14 +25,15 @@ PasswordService passwordService;
     public Result password1(@Valid @RequestBody PasswordDo passwordDo, BindingResult bindingResult) {
         //  修改密码后台
         //判断当前密码是否正确
+
         try{
-        System.out.println(passwordDo.getCurrentpassword());
         String password = passwordService.selectPassword(passwordDo);
-        if(!passwordDo.getCurrentpassword().equals(password)){
+        if(!passwordDo.getPassword().equals(password)){
             String message = String.format("请输入正确的密码");
             return ResultFactory.buildFailResult(message);
         }
         Integer row = passwordService.updatePassword(passwordDo);
+
         if(row!=1){
             String message = String.format("修改密码失败");
             return ResultFactory.buildFailResult(message);
@@ -40,7 +41,7 @@ PasswordService passwordService;
         return ResultFactory.buildSuccessResult("修改密码成功。");
     }catch (Exception e){
         e.printStackTrace();
-        String message = String.format("注册失败]");
+        String message = String.format("失败]");
         return ResultFactory.buildFailResult(message);
     }
 
