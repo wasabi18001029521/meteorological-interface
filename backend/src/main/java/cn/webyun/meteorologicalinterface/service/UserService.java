@@ -70,7 +70,7 @@ public class UserService {
 
         List<Integer> idList = new ArrayList<>();
 
-        for( UserRole i : list) {
+        for (UserRole i : list) {
             idList.add(i.getUserId());
         }
 
@@ -87,15 +87,15 @@ public class UserService {
             criterion.andUserFullNameLike(StringUtils.escapeSQL(search.trim()));
         }
 
-        return userMapper.selectByExampleWithRowbounds(criteria, new RowBounds((pageNum - 1) * pageSize,pageSize));
+        return userMapper.selectByExampleWithRowbounds(criteria, new RowBounds((pageNum - 1) * pageSize, pageSize));
     }
 
     public List<UserWithRoles> getListWithRoles(Integer pageNum, Integer pageSize, String search, String category) {
 
-        List<User>  infoList = getList(pageNum, pageSize, search, category);
+        List<User> infoList = getList(pageNum, pageSize, search, category);
 
         List<UserWithRoles> resList = new ArrayList<UserWithRoles>();
-        for(User i : infoList) {
+        for (User i : infoList) {
             resList.add(new UserWithRoles(i,
                     roleService.getList(userRoleService.getUserRolebyUserId(i.getId()))));
         }
@@ -129,7 +129,8 @@ public class UserService {
         UserCriteria critera = new UserCriteria();
         critera.createCriteria().andUserNameEqualTo(userName);
         List<User> userList = userMapper.selectByExample(critera);
-        if ((userList != null) && (userList.size() == 1)) return userList.get(0); else return null;
+        if ((userList != null) && (userList.size() == 1)) return userList.get(0);
+        else return null;
     }
 
     @Transactional
@@ -195,7 +196,7 @@ public class UserService {
     })
     public void updateInfo(User user) {
         User u = getInfo(user.getId());
-        if (! u.getUserPassword().equals(user.getUserPassword())) {
+        if (!u.getUserPassword().equals(user.getUserPassword())) {
             user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
         }
         userMapper.updateByPrimaryKeySelective(user);
