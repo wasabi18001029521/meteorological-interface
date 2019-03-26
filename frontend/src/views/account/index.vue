@@ -26,21 +26,9 @@
                             <el-col :span="15"><div class="grid-content bg-purple-light">sdk39kehldfdd</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
-                            <el-col :span="15" :offset="9"><el-button type="primary"  @click="showPage" >修改密码</el-button></el-col>
+                            <el-col :span="15" :offset="9"><el-button type="primary" @click="dialogVisible = true" >修改密码</el-button></el-col>
 
-                                修改密码
-                                <br/>
-                                <el-col :span="7" :offset="2"><div class="current">当前密码</div></el-col>
-                                <input type="text" v-model="password" >
-                                <br/>
-                                <el-col :span="7" :offset="2"><div class="new">新密码</div></el-col>
-                                <input type="text" v-model="Newpassword" >
-                                <br/>
-                                <el-col :span="7" :offset="2"><div class="confirm">确认新密码</div></el-col>
-                                <input type="text" v-model="Confirmthenewpassword">
-                                <el-col :span="15" :offset="9">
-                                    <el-button type="primary" @click="open1" class="change">修改密码</el-button>
-                                </el-col>
+
 
                         </el-row>
                     </el-tab-pane>
@@ -70,6 +58,23 @@
                     </el-tab-pane>
                 </el-tabs>
             </div>
+            <el-dialog title="修改密码" :visible.sync="dialogVisible" width="30%" >
+              <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+                <el-form-item label="当前密码" prop="currentPassword">
+                  <el-input type="text" v-model.number="ruleForm2.currentPassword" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="新密码" prop="pass">
+                  <el-input ttype="text" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="确认新密码" prop="checkPass">
+                  <el-input type="text" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
+                </el-form-item>
+              </el-form>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">确 认</el-button>
+              </span>
+            </el-dialog>
         </el-main>
     </el-container>
 </template>
@@ -83,18 +88,65 @@
         name: 'myMessage',
         data() {
             let option = options.bar
+            var checkCurrentPassword = (rule, value, callback) => {
+                    if (!value) {
+                      return callback(new Error('当前密码不能为空'));
+                    }
+                    setTimeout(() => {
+                      if (value) {
+                        if (value < 18) {
+                          callback(new Error('必须满18的数字'));
+                        } else {
+                          callback();
+                        }
+                      }
+                    }, 1000);
+                  };
+             var validatePass = (rule, value, callback) => {
+                    if (value === '') {
+                      callback(new Error('请输入密码'));
+                    }else if(value == this.ruleForm2.currentPassword){
+                        callback(new Error('密码不能与当前密码相同'));
+                    } else if (this.ruleForm2.checkPass !== '') {
+                        this.$refs.ruleForm2.validateField('checkPass');
+                      }
+                      callback();
+                  };
+             var validatePass2 = (rule, value, callback) => {
+                    if (value === '') {
+                      callback(new Error('请再次输入密码'));
+                    } else if (value !== this.ruleForm2.pass) {
+                      callback(new Error('两次输入密码不一致!'));
+                    } else {
+                      callback();
+                    }
+                  };
             return {
                 tabPosition: 'left',
+                 dialogVisible: false,
                 // chart
                 id: 'test',
                 option: option,
                 show:'false',
+                 ruleForm2: {
+                    pass: '',
+                    checkPass: '',
+                    currentPassword: ''
+                 },
+                 rules2: {
+                   pass: [
+                        { validator: validatePass, trigger: 'blur' }
+                   ],
+                   checkPass: [
+                        { validator: validatePass2, trigger: 'blur' }
+                   ],
+                   currentPassword: [
+                        { validator: checkCurrentPassword, trigger: 'blur' }
+                   ]
+                 },
             };
         },
         methods: {
-            showPage(){
-                this.show=!this.show;
-            },
             open1() {
 
                 this.$axios.post('http://localhost:8080/passworddo/password', {

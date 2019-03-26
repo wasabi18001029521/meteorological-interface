@@ -18,12 +18,15 @@
                                 <!--<el-menu-item index="2-3">选项3</el-menu-item>-->
                             </el-submenu>
                             <el-menu-item index="3" @click='toPrice'>价格</el-menu-item>
-                            <el-menu-item index="4">
-                                <el-button type="info" v-if="!isAuthenticated" @click="deng">登录</el-button>
-                            </el-menu-item>
-                            <el-menu-item v-if="isAuthenticated" index="5" @click='myMessage'>我的账号</el-menu-item>
-                            <el-menu-item index="6" v-if="!isAuthenticated">
+                            <el-menu-item index="4" v-if="!isAuthenticated">
                                 <el-button type="primary" @click="register">注册</el-button>
+                            </el-menu-item>
+                            <el-menu-item index="5" v-if="!isAuthenticated" >
+                                <el-button type="info" @click="deng">登录</el-button>
+                            </el-menu-item>
+                            <el-menu-item v-if="isAuthenticated" index="4" @click='myMessage'>我的账号</el-menu-item>
+                            <el-menu-item index="5">
+                                <el-button type="info" v-if="isAuthenticated">退出</el-button>
                             </el-menu-item>
 
                         </el-menu>
