@@ -17,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -276,5 +278,40 @@ public class UserService {
         }
         return false;
     }
+    //查询用户名是否重复
+    public String selectUsername(String username) {
+        return userMapper.selectUsername(username);
+    }
+    //用户注册添加数据
+    public int insertUser(String username, String password,String md5username) {
+        return userMapper.insertUser(username,password,md5username);
+    }
 
+    //MD5加密方法
+    public   String MD5(String sourceStr) throws NoSuchAlgorithmException {
+        String result = "";
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(sourceStr.getBytes());
+        byte b[] = md.digest();
+        int i;
+        StringBuffer buf = new StringBuffer("");
+        for (int offset = 0; offset < b.length; offset++) {
+            i = b[offset];
+            if (i < 0)
+                i += 256;
+            if (i < 16)
+                buf.append("0");
+            buf.append(Integer.toHexString(i));
+        }
+        result = buf.toString();
+        return result;
+    }
+
+    public void insertUser(String usernmae){
+        // 根据用户名查询ID
+        int id = userMapper.selectId(usernmae);
+        // 新注册的用户默认可以访问接口表ID为1的接口
+        int interfaceId=1;
+        userMapper.insertId(id,interfaceId);
+    }
 }

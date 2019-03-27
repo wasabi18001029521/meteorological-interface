@@ -80,27 +80,27 @@
                 this.$router.push({path: '/api/service'})
             },
             submitForm(){
-                this.$axios.post('http://localhost:8080/weather/register', {
-                     username: this.ruleForm2.pass,
-                      password: this.ruleForm2.checkPass
+                this.$axios.post('http://localhost:8081/api/auth/register', {
+                    username: this.ruleForm2.pass,
+                    password: this.ruleForm2.checkPass
 
                 })
-                .then(successResponse => {
-                    this.responseResult = JSON.stringify(successResponse.data)
-                    if (successResponse.data.code === 200) {
-                        this.$message({
-                            message: successResponse.data.message,
-                            type: 'success'
-                        });
-                    }if (successResponse.data.code !== 200) {
-                        //  alert(JSON.stringify(successResponse.data.message))
-                        this.$message({
-                            message: successResponse.data.message,
-                            type: 'warning'
-                        });
+                    .then(successResponse => {
+                        this.responseResult = JSON.stringify(successResponse.data)
+                        if (successResponse.data.code === 200) {
+                            this.$message({
+                                message: successResponse.data.message,
+                                type: 'success'
+                            });
+                        }if (successResponse.data.code !== 200) {
+                            //  alert(JSON.stringify(successResponse.data.message))
+                            this.$message({
+                                message: successResponse.data.message,
+                                type: 'warning'
+                            });
 
 
-                }}).catch(failResponse => {})
+                        }}).catch(failResponse => {})
             }
         },
 

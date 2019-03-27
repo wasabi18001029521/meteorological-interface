@@ -9,6 +9,11 @@ import './assets/iconfont/iconfont.css'
 import highcharts from 'highcharts'
 import VueHighCharts from 'vue-highcharts'
 
+import axios from 'axios';
+
+/!*使用axios插件*!/
+Vue.prototype.$axios = axios;
+
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);

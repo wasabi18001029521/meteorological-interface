@@ -135,4 +135,19 @@ public interface UserMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(User record);
+
+    @Select("select user_name from sys_users where user_name = #{username}")
+    String selectUsername(String username);
+
+
+    @Insert("insert into sys_users (user_name,user_password,user_key) values(#{username,jdbcType=VARCHAR}," +
+            "#{password,jdbcType=VARCHAR},#{md5username,jdbcType=VARCHAR})")
+    int insertUser(String username, String password,String md5username);
+
+    @Select("select id from sys_users where user_name = #{username}")
+    int selectId(String username);
+
+    @Insert("insert into sys_user_interface (user_id,interface_id) values (#{id},#{interfaceId})")
+    int insertId(int id,int interfaceId);
+
 }

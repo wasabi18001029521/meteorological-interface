@@ -31,6 +31,8 @@ public class User implements Serializable {
 
     private String phone;
 
+    private String user_key;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -143,6 +145,14 @@ public class User implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public String getUser_key() {
+        return user_key;
+    }
+
+    public void setUser_key(String user_key) {
+        this.user_key = user_key;
     }
 
     @Override
