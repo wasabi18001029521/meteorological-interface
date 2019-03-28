@@ -25,8 +25,8 @@
                                 <el-button type="info" @click="deng">登录</el-button>
                             </el-menu-item>
                             <el-menu-item v-if="isAuthenticated" index="4" @click='myMessage'>我的账号</el-menu-item>
-                            <el-menu-item index="5">
-                                <el-button type="info" v-if="isAuthenticated">退出</el-button>
+                            <el-menu-item index="5"  v-if="isAuthenticated">
+                                <el-button type="info">退出</el-button>
                             </el-menu-item>
 
                         </el-menu>
