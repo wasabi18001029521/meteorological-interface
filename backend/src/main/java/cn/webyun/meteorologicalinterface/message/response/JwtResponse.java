@@ -15,6 +15,8 @@ public class JwtResponse extends ResponseBase {
     private String address;
     private String phone;
     private List<String> authorities;
+    private Boolean success = true;
+    private String msg = "";
 
     public JwtResponse(String accessToken) {
         this.token = accessToken;
@@ -41,6 +43,8 @@ public class JwtResponse extends ResponseBase {
         this.address = user.getAddress();
         this.phone = user.getPhone();
         this.authorities = authorities;
+
+
     }
 
     public JwtResponse(String accessToken, Boolean authenticated, String username, String userfullname, List<String> authorities) {
@@ -49,6 +53,41 @@ public class JwtResponse extends ResponseBase {
         this.username = username;
         this.userfullname = userfullname;
         this.authorities = authorities;
+
+    }
+   public JwtResponse(String accessToken, Boolean authenticated, User user, List<String> authorities,Boolean success,String msg) {
+        this.token = accessToken;
+        this.authenticated = authenticated;
+        this.username = user.getUserName();
+        this.userfullname = user.getUserFullName();
+        this.unitfullname = user.getUnitFullName();
+        this.email = user.getEmail();
+        this.address = user.getAddress();
+        this.phone = user.getPhone();
+        this.authorities = authorities;
+        this.success=success;
+        this.msg=msg;
+
+    }
+
+    @Override
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    @Override
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    @Override
+    public String getMsg() {
+        return msg;
+    }
+
+    @Override
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public Boolean getAuthenticated() {

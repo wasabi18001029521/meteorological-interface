@@ -63,9 +63,9 @@ public class AuthController {
 
         } catch (AuthenticationException e) {
             status = false;
-            return ResponseEntity.ok(new ResponseBase(false, "authentication error."));
+            return ResponseEntity.ok(new ResponseBase(false, "邮箱或者密码不正确"));
         }
-        return ResponseEntity.ok(new JwtResponse(jwt, status, user, authorities));
+        return ResponseEntity.ok(new JwtResponse(jwt, status, user, authorities,true,"登录成功"));
 
     }
 
