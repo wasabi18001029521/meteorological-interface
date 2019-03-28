@@ -75,18 +75,21 @@
     }
 </script>
 <style lang="less">
+    .login.u-banner-box{
+        height: 90%;
+        width: 100%;
+        position: absolute;
+    }
     .account {
         color: #ffebef;
         width: 150px;
         margin: 0 auto;
         font-size: 20px;
-        width: 150px;
         height: 100px;
         text-align: center;
         line-height: 50px;
 
     }
-
     .context1 {
         background: #4585ff;
         width: 440px;

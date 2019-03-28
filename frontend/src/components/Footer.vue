@@ -26,11 +26,13 @@
         text-align: center;
          background-color: #2d3236;
          color: #9b9b9b;
+         width: 100%;
          height: auto !important;
          line-height: 35px;
          padding-top: 20px !important;
          padding-bottom: 20px !important;
-
+         position:absolute;
+         bottom: 0px;
         .u-footer-logo {
             text-align: right;
         }

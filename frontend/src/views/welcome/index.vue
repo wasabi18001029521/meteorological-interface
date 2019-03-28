@@ -45,6 +45,9 @@
         }
 }
 .u-index-banner{
+    height: 90%;
+    width: 100%;
+    position: absolute;
     background: url('../../assets/img/banner.jpg');
 }
 </style>

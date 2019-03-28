@@ -94,6 +94,11 @@
     }
 </script>
 <style lang="less">
+    .register.u-banner-box{
+        height: 90%;
+        width: 100%;
+        position: absolute;
+    }
     .u-banner-text {
         color: #ffffff;
         width:150px;
