@@ -30,7 +30,7 @@ export default new Router({
         },
         {
             path: '/api/register',
-            name: 'register',
+            name: 'userregister',
             component: Register
         },
         {

@@ -49,7 +49,13 @@ service.interceptors.response.use(
                 })
             }
             return Promise.reject('error')
-        } else {
+        }  if (res.success == true) {
+            Message({
+                message: res.msg,
+                type: 'success',
+                duration: 5 * 1000
+            })}
+            else {
             return response.data
         }
     },

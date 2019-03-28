@@ -1,4 +1,5 @@
 import {login, logout, getInfo} from '@/api/login'
+import {userregister} from '@/api/register'
 import {getToken, setToken, removeToken} from '@/utils/auth'
 
 const user = {
@@ -37,6 +38,21 @@ const user = {
                     resolve()
                 }).catch(error => {
                     console.log(error)
+                    reject(error)
+                })
+            })
+        },
+        //注册
+        Register({commit}, registerForm) {
+
+            return new Promise((resolve, reject) => {
+                userregister(registerForm.register_email, registerForm.register_pass).then(response =>  {
+                    //resolve()
+                    //debugger;
+                   //alert(response.data.msg)
+
+                }).catch(error => {
+                    //console.log(error)
                     reject(error)
                 })
             })
