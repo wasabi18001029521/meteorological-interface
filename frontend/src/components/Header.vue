@@ -24,9 +24,9 @@
                             <el-menu-item index="5" v-if="!isAuthenticated" >
                                 <el-button type="info" @click="deng">登录</el-button>
                             </el-menu-item>
-                            <el-menu-item v-if="isAuthenticated" index="4" @click="myMessage('my')">我的账号</el-menu-item>
-                            <el-menu-item index="5">
-                                <el-button type="info" v-if="isAuthenticated">退出</el-button>
+                            <el-menu-item v-if="isAuthenticated" index="4" @click='myMessage'>我的账号</el-menu-item>
+                            <el-menu-item index="5"  v-if="isAuthenticated">
+                                <el-button type="info">退出</el-button>
                             </el-menu-item>
 
                         </el-menu>
@@ -68,12 +68,16 @@
             deng() {
                 this.$router.push({path: '/api/login'})
             },
-            myMessage(my) {
-                this.$router.push({path: '/myMessage'})
-                //this.$axios.get('http://localhost:8081/api/auth/hello')
-            }
-        }}
+            myMessage() {
 
+                this.$router.push({path: '/myMessage'})
+
+
+            },
+
+
+        },
+    }
 
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class='u-box'>
         <nav-header/>
         <router-view></router-view>
         <nav-footer/>
@@ -25,6 +25,7 @@
         font-size: 14px;
         -webkit-font-smoothing: antialiased;
     }
+    html,body{ height: 100%; }
     .u-size40{ font-size: 40px; }
     .u-size18{ font-size: 18px; }
     .u-size42{ font-size: 42px; }
@@ -33,5 +34,6 @@
     .u-line-height2{ line-height: 1em;}
     .u-line-height2{ line-height: 2em; }
     .u-line-height4{ line-height: 4em;}
-    .el-main{ padding: 0px !important;}
+    .el-main{ padding: 0px 0px 100px 0px !important;}
+    .u-box{ position: relative; min-height: 100%; }
 </style>
