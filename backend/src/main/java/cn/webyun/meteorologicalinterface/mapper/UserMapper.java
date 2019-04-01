@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.type.JdbcType;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public interface UserMapper {
@@ -140,9 +142,9 @@ public interface UserMapper {
     String selectUsername(String username);
 
 
-    @Insert("insert into sys_users (user_name,user_password,user_key) values(#{username,jdbcType=VARCHAR}," +
-            "#{password,jdbcType=VARCHAR},#{md5username,jdbcType=VARCHAR})")
-    int insertUser(String username, String password,String md5username);
+    @Insert("insert into sys_users (user_name,user_password,user_key,user_register) values(#{username,jdbcType=VARCHAR}," +
+            "#{password,jdbcType=VARCHAR},#{md5username,jdbcType=VARCHAR},#{dateFormat,jdbcType=VARCHAR})")
+    int insertUser(String username, String password,String md5username,String dateFormat);
 
     @Select("select id from sys_users where user_name = #{username}")
     int selectId(String username);
@@ -150,4 +152,9 @@ public interface UserMapper {
     @Insert("insert into sys_user_interface (user_id,interface_id) values (#{id},#{interfaceId})")
     int insertId(int id,int interfaceId);
 
+    @Insert("update sys_users set user_login=(#{dateFormat}) where user_name = #{username}")
+    int updateTime(String dateFormat,String username);
+
+    @Select("select id,user_name,user_register,user_login,user_key from sys_users where user_name = #{userNameFromJwtToken}")
+    User selectUser(String userNameFromJwtToken);
 }

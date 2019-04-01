@@ -1,15 +1,23 @@
 import {login, logout, getInfo} from '@/api/login'
 import {userregister} from '@/api/register'
 import {getToken, setToken, removeToken} from '@/utils/auth'
+import {myusername} from '@/api/mymessage'
+import store from "../../store";
 
 const user = {
     state: {
         token: getToken(),
         name: '',
         roles: [],
-        authenticated: false
+        authenticated: false,
+        userid:'',
+        myname:'',
+        userregister:'',
+        userlogin:'',
+        userkey:''
     },
 
+    // 修改共享数据
     mutations: {
         SET_TOKEN: (state, token) => {
             state.token = token
@@ -23,6 +31,25 @@ const user = {
         SET_AUTHENTICATED: (state, authenticated) => {
             state.authenticated = authenticated
         },
+        SET_USERID: (state, value) => {
+            state.userid = value
+        },
+        SET_USERNAME: (state, value) => {
+            state.username = value
+        },
+        SET_MYNAME: (state, value) => {
+            state.myname = value
+        },
+        SET_USERREGISTER: (state, value) => {
+            state.userregister = value
+        },
+        SET_USERLOGIN: (state, value) => {
+            state.userlogin = value
+        },
+        SET_USERKEY: (state, value) => {
+            state.userkey = value
+        },
+
     },
 
     actions: {
@@ -35,6 +62,11 @@ const user = {
                     setToken(response.token)
                     commit('SET_TOKEN', response.token);
                     commit('SET_AUTHENTICATED', response.success);
+                    //commit('username', response.success);
+             /*       console.log("123")
+                    console.log(getToken(response.token))*/
+                    console.log(response.username)
+
                     resolve()
                 }).catch(error => {
                     console.log(error)
@@ -43,13 +75,14 @@ const user = {
             })
         },
         //注册
-        Register({commit}, registerForm) {
+        register({commit}, registerForm) {
 
             return new Promise((resolve, reject) => {
                 userregister(registerForm.register_email, registerForm.register_pass).then(response =>  {
                     //resolve()
                     //debugger;
                    //alert(response.data.msg)
+               //console.log(response.username)
 
                 }).catch(error => {
                     //console.log(error)
@@ -57,6 +90,26 @@ const user = {
                 })
             })
         },
+        // 我的账号钩子函数调用
+        my({commit}) {
+            return new Promise((resolve, reject) => {
+                myusername().then(response =>  {
+                   //console.log(response.id) //resolve()
+                    commit('SET_USERID', response.id);
+                    commit('SET_MYNAME', response.username);
+                    commit('SET_USERREGISTER', response.user_register);
+                    commit('SET_USERLOGIN', response.user_login);
+                    commit('SET_USERKEY', response.user_key);
+                    console.log(store.getters.userid)
+                    /*console.log("123")
+                    console.log(store.getters.userid)*/
+                }).catch(error => {
+                    //console.log(error)
+                    reject(error)
+                })
+            })
+        },
+
 
         // 获取用户信息
         GetInfo({commit, state}) {

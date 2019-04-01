@@ -1,6 +1,7 @@
 package cn.webyun.meteorologicalinterface.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
     private Integer id;
@@ -32,6 +33,10 @@ public class User implements Serializable {
     private String phone;
 
     private String user_key;
+
+    private String user_register;
+
+    private String user_login;
 
     private static final long serialVersionUID = 1L;
 
@@ -154,6 +159,24 @@ public class User implements Serializable {
     public void setUser_key(String user_key) {
         this.user_key = user_key;
     }
+
+    public String getUser_register() {
+        return user_register;
+    }
+
+    public void setUser_register(String user_register) {
+        this.user_register = user_register;
+    }
+
+    public String getUser_login() {
+        return user_login;
+    }
+
+    public void setUser_login(String user_login) {
+        this.user_login = user_login;
+    }
+
+
 
     @Override
     public String toString() {

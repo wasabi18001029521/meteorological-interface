@@ -17,9 +17,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -60,11 +62,15 @@ public class AuthController {
             userName = authentication.getName();
             user = userService.getUserByName(userName);
             authorities = getAuthoritiesListString(authentication.getAuthorities());
+            //解析Token中的用户名
+      /*      System.out.println("123");
+            System.out.println(jwtProvider.getUserNameFromJwtToken(jwt));*/
 
         } catch (AuthenticationException e) {
             status = false;
             return ResponseEntity.ok(new ResponseBase(false, "邮箱或者密码不正确"));
         }
+        userService.loginTime(loginRequest.getUsername());
         return ResponseEntity.ok(new JwtResponse(jwt, status, user, authorities,true,"登录成功"));
 
     }
@@ -78,6 +84,18 @@ public class AuthController {
 
         }
         return list;
+    }
+
+
+    @RequestMapping("/hello")
+    public void hello( HttpServletRequest request){
+        Enumeration e = request.getParameterNames();
+        while (e.hasMoreElements()) {
+            String paramName = (String) e.nextElement();
+            String value2 = request.getParameter(paramName);
+            System.out.println("123");
+            System.out.println(paramName + "=" + value2);
+        }
     }
 
 

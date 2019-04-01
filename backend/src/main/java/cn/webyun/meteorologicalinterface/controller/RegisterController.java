@@ -1,5 +1,6 @@
 package cn.webyun.meteorologicalinterface.controller;
 
+import cn.webyun.meteorologicalinterface.entity.User;
 import cn.webyun.meteorologicalinterface.message.request.LoginForm;
 import cn.webyun.meteorologicalinterface.message.response.JwtResponse;
 import cn.webyun.meteorologicalinterface.message.response.ResponseBase;
@@ -27,6 +28,7 @@ public class RegisterController {
         try {
             // 获取用户输入邮箱
             String username = loginRequest.getUsername();
+
             if(userService.selectUsername(username)!=null){
                 return ResponseEntity.ok(new ResponseBase(false, "邮箱已被注册"));
             }

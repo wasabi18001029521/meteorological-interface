@@ -17,15 +17,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Autowired
@@ -284,7 +287,11 @@ public class UserService {
     }
     //用户注册添加数据
     public int insertUser(String username, String password,String md5username) {
-        return userMapper.insertUser(username,password,md5username);
+        Date  date=new java.util.Date();
+        java.sql.Date  data1=new java.sql.Date(date.getTime());
+        SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateFormat=sy1.format(data1);
+        return userMapper.insertUser(username,password,md5username,dateFormat);
     }
 
     //MD5加密方法
@@ -313,5 +320,20 @@ public class UserService {
         // 新注册的用户默认可以访问接口表ID为1的接口
         int interfaceId=1;
         userMapper.insertId(id,interfaceId);
+    }
+
+    // 获取当前时间 插入数据库
+    public void loginTime(String username){
+        Date  date=new java.util.Date();
+        java.sql.Date  data1=new java.sql.Date(date.getTime());
+        SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateFormat=sy1.format(data1);
+        userMapper.updateTime(dateFormat,username);
+    }
+
+
+    // 查询用户信息
+    public User selectInformation(String userNameFromJwtToken) {
+        return userMapper.selectUser(userNameFromJwtToken);
     }
 }

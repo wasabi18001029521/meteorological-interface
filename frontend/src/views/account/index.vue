@@ -3,27 +3,27 @@
         <el-main>
             <div class='u-message-box'>
                 <el-tabs :tab-position="tabPosition" style="height: 465px;">
-                    <el-tab-pane label="账号信息">
+                    <el-tab-pane label="账号信息" >
                         <div class='u-account-title'>账号信息<span class='u-line'></span></div>
                         <el-row class='u-account-item'>
                             <el-col :span="7" :offset="2"><div class="grid-content bg-purple">用户ID</div></el-col>
-                            <el-col :span="15"><div class="grid-content bg-purple-light">1122112211</div></el-col>
+                            <el-col :span="15"><div class="grid-content bg-purple-light">{{userid}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
                             <el-col :span="7" :offset="2"><div class="grid-content bg-purple">用户邮箱</div></el-col>
-                            <el-col :span="15"><div class="grid-content bg-purple-light">112211221122@qq.com</div></el-col>
+                            <el-col :span="15"><div class="grid-content bg-purple-light">{{myusername}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
                             <el-col :span="7" :offset="2"><div class="grid-content bg-purple">注册时间</div></el-col>
-                            <el-col :span="15"><div class="grid-content bg-purple-light">2018-12-19 14:22:39</div></el-col>
+                            <el-col :span="15"><div class="grid-content bg-purple-light">{{userregister}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
                             <el-col :span="7" :offset="2"><div class="grid-content bg-purple">上次登录时间</div></el-col>
-                            <el-col :span="15"><div class="grid-content bg-purple-light">2018-12-19 14:22:39</div></el-col>
+                            <el-col :span="15"><div class="grid-content bg-purple-light">{{userlogin}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
                             <el-col :span="7" :offset="2"><div class="grid-content bg-purple">API密钥</div></el-col>
-                            <el-col :span="15"><div class="grid-content bg-purple-light">sdk39kehldfdd</div></el-col>
+                            <el-col :span="15"><div class="grid-content bg-purple-light">{{userkey}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
                             <el-col :span="15" :offset="9"><el-button type="primary" @click="dialogVisible = true" >修改密码</el-button></el-col>
@@ -84,9 +84,25 @@
     import XChart from '../../components/chart.vue'
     // 导入chart组件模拟数据
     import options from '../../chart-options/options'
+    import {mapState,mapActions} from "vuex";
+    import {getToken} from '@/utils/auth'
+    import getters from '../../store/getters'
+    import store from "../../store";
     export default {
+
+        created:function f() {
+            //console.log("页面未渲染之前就发送请求 ")
+            this.$store
+                .dispatch("my")
+                .then(() => {
+                })
+                .catch(() => {
+                })
+        },
+
         name: 'myMessage',
         data() {
+
             let option = options.bar
             var checkCurrentPassword = (rule, value, callback) => {
                     if (!value) {
@@ -122,6 +138,13 @@
                     }
                   };
             return {
+
+                userid:store.getters.userid,
+                //store.getters.userid
+                myusername:store.getters.myname,
+                userregister:store.getters.userregister,
+                userlogin:store.getters.userlogin,
+                userkey:store.getters.userkey,
                 tabPosition: 'left',
                  dialogVisible: false,
                 // chart
@@ -145,6 +168,15 @@
                    ]
                  },
             };
+         /*   computed:{
+                mapState({
+                    hrinfo:state => state.currentData
+
+
+                })
+            }*/
+
+
         },
         methods: {
             open1() {

@@ -73,7 +73,7 @@
                 this.$refs[register_from].validate(valid => {
                     if (valid) {
                         this.$store
-                            .dispatch("Register", this.register_from)
+                            .dispatch("register", this.register_from)
                             .then(() => {
 
                             })
