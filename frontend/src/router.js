@@ -46,7 +46,7 @@ export default new Router({
         },
         {
             path: '/myMessage',
-            name: 'myMessage',
+            name: 'Message',
             component: myMessage
         },
         {

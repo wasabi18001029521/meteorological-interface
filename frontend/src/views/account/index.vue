@@ -100,7 +100,7 @@
                 })
         },
 
-        name: 'myMessage',
+        name: 'Message',
         data() {
 
             let option = options.bar

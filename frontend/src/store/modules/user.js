@@ -1,7 +1,7 @@
 import {login, logout, getInfo} from '@/api/login'
 import {userregister} from '@/api/register'
 import {getToken, setToken, removeToken} from '@/utils/auth'
-import {myusername} from '@/api/mymessage'
+import {Message} from '@/api/mymessage'
 import store from "../../store";
 
 const user = {
@@ -93,14 +93,14 @@ const user = {
         // 我的账号钩子函数调用
         my({commit}) {
             return new Promise((resolve, reject) => {
-                myusername().then(response =>  {
+                Message().then(response =>  {
                    //console.log(response.id) //resolve()
                     commit('SET_USERID', response.id);
                     commit('SET_MYNAME', response.username);
                     commit('SET_USERREGISTER', response.user_register);
                     commit('SET_USERLOGIN', response.user_login);
                     commit('SET_USERKEY', response.user_key);
-                    console.log(store.getters.userid)
+                    console.log(response.id)
                     /*console.log("123")
                     console.log(store.getters.userid)*/
                 }).catch(error => {
