@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
-public class informationController {
+public class InformationController {
     @Autowired
     JwtProvider jwtProvider;
     @Autowired
@@ -34,11 +34,11 @@ public class informationController {
             // String token="";
             String userNameFromJwtToken = jwtProvider.getUserNameFromJwtToken(token);
             // 根据用户名查找相应的用户信息
-            System.out.println(userNameFromJwtToken);
+            // System.out.println(userNameFromJwtToken);
             User user = userService.selectInformation(userNameFromJwtToken);
-            //不晓得为什么查出来的用户名存不到User对象中只能手动先放进去了
+            // 不晓得为什么查出来的用户名存不到User对象中只能手动先放进去了
             user.setUserName(userNameFromJwtToken);
-            return ResponseEntity.ok(new JwtResponse( user,true,"账号信息"));
+            return ResponseEntity.ok(new ResponseBase(user,true, "账号信息"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseBase(false, "请重新登录"));
