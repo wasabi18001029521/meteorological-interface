@@ -13,11 +13,14 @@ service.interceptors.request.use(config => {
     //   if (store.getters.token) {
     //     config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     //   };
-    console.log("request.js")
+
     //判断是否存在存在token 如果存在token 则设置每个请求头的Token
-    if (store.getters.token) {
-        console.log("token")
+    if (store.getters.usertoken) {
+        /*console.log("token")
+        console.log("token="+store.getters.usertoken)
+        console.log("VUEX保存的TOKEN="+store.getters.token)*/
         config.headers.Authorization = `Bearer ${getToken()}`;
+
     }
     return config
 }, error => {

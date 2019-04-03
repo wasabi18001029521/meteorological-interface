@@ -8,7 +8,8 @@ const getters = {
     myname: state => state.user.myname,
     userregister: state => state.user.userregister,
     userlogin: state => state.user.userlogin,
-    userkey: state => state.user.userkey
+    userkey: state => state.user.userkey,
+    usertoken: (state) => state.user.usertoken
 
 }
 export default getters

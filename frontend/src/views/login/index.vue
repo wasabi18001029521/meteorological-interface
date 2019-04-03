@@ -53,13 +53,15 @@
             submitForm(login_form) {
 
                 this.$refs[login_form].validate(valid => {
+
                     if (valid) {
                         this.$store
                             .dispatch("Login", this.login_form)
                             .then(() => {
+
                                 // this.loading = false;
-                                this.$router.push({ path: "/" });
-                            })
+                                this.$router.push({ path: "/price" });
+                    })
                             .catch(() => {
                                 this.loading = false;
                             });

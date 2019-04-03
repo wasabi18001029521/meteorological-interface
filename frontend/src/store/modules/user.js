@@ -14,7 +14,8 @@ const user = {
         myname:'',
         userregister:'',
         userlogin:'',
-        userkey:''
+        userkey:'',
+        usertoken:''|| localStorage.getItem('usertoken'),
     },
 
     // 修改共享数据
@@ -29,7 +30,10 @@ const user = {
             state.roles = roles
         },
         SET_AUTHENTICATED: (state, authenticated) => {
+
             state.authenticated = authenticated
+
+            localStorage.setItem('authenticated', authenticated)
         },
         SET_USERID: (state, value) => {
             state.userid = value
@@ -49,6 +53,11 @@ const user = {
         SET_USERKEY: (state, value) => {
             state.userkey = value
         },
+        SET_USERTOKEN: (state, value) => {
+            state.usertoken = value
+            // 把登录的用户的名保存到localStorage中，防止页面刷新，导致vuex重新启动，用户名就成为初始值（初始值为空）的情况
+            localStorage.setItem('usertoken', value)
+        }
 
     },
 
@@ -58,9 +67,10 @@ const user = {
 
             return new Promise((resolve, reject) => {
                 login(loginForm.login_email, loginForm.login_pass).then(response => {
-                    console.log(response.token)
+                    //console.log(response.token)
                     setToken(response.token)
                     commit('SET_TOKEN', response.token);
+                    commit('SET_USERTOKEN', response.token);
                     commit('SET_AUTHENTICATED', response.success);
                     //commit('username', response.success);
              /*       console.log("123")
@@ -94,6 +104,7 @@ const user = {
         my({commit}) {
             return new Promise((resolve, reject) => {
                 Message().then(response =>  {
+
                    //console.log(response.id) //resolve()
                     commit('SET_USERID', response.id);
                     commit('SET_MYNAME', response.username);
@@ -101,6 +112,8 @@ const user = {
                     commit('SET_USERLOGIN', response.user_login);
                     commit('SET_USERKEY', response.user_key);
                     console.log(response.id)
+                    console.log("账号ID="+store.getters.userid)
+                    commit('SET_AUTHENTICATED', response.success);
                     /*console.log("123")
                     console.log(store.getters.userid)*/
                 }).catch(error => {

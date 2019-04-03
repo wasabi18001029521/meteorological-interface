@@ -90,15 +90,7 @@
     import store from "../../store";
     export default {
 
-        created:function f() {
-            //console.log("页面未渲染之前就发送请求 ")
-            this.$store
-                .dispatch("my")
-                .then(() => {
-                })
-                .catch(() => {
-                })
-        },
+
 
         name: 'Message',
         data() {
@@ -178,7 +170,37 @@
 
 
         },
+      /*  created() {
+            //console.log("页面未渲染之前就发送请求 ")
+            /!*      this.$store
+                      .dispatch("my")
+                      .then(() => {
+                      })
+                      .catch(() => {
+                      })*!/
+
+
+            this.fetchData()
+            console.log("页面显示的ID="+store.getters.userid)
+            console.log()
+            /!*   console.log(123)
+               console.log(store.getters.userid)*!/
+        },
+        watch: {
+            // 如果路由有变化，会再次执行该方法
+            '$route': 'fetchData'
+        },*/
         methods: {
+      /*      fetchData(){
+                this.$store
+                    .dispatch("my")
+                    .then(() => {
+                    })
+                    .catch(() => {
+                    })
+            },
+*/
+
             open1() {
 
                 this.$axios.post('http://localhost:8080/passworddo/password', {

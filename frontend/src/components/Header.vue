@@ -52,7 +52,9 @@
                 activeIndex2: '1'
             }
         },
+
         methods: {
+
             toIndex() {
                 this.$router.push('/');
             },

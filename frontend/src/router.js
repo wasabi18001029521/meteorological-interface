@@ -8,6 +8,13 @@ import Service from './views/register/protocol.vue'
 import Login from './views/login/index.vue'
 import myMessage from './views/account/index.vue'
 import Retrieve from './views/retrieve/index'
+import VueRouter from 'vue-router'
+import store from "./store";
+import {Message} from "element-ui";
+import { getToken } from '@/utils/auth' // getToken from cookie
+import router from './router'
+
+
 
 Vue.use(Router)
 
@@ -55,4 +62,6 @@ export default new Router({
             component:Retrieve
         },
     ]
-})
+
+});
+
