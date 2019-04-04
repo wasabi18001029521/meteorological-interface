@@ -8,19 +8,15 @@ const service = axios.create({
     timeout: 100000000000 // 请求超时时间
 })
 
-// request拦截器
+    //  request拦截器
 service.interceptors.request.use(config => {
     //   if (store.getters.token) {
     //     config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     //   };
 
     //判断是否存在存在token 如果存在token 则设置每个请求头的Token
-    if (store.getters.usertoken) {
-        /*console.log("token")
-        console.log("token="+store.getters.usertoken)
-        console.log("VUEX保存的TOKEN="+store.getters.token)*/
+    if (getToken()) {
         config.headers.Authorization = `Bearer ${getToken()}`;
-
     }
     return config
 }, error => {
@@ -32,7 +28,7 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
     response => {
         const res = response.data
-        console.log(response.data)
+        //console.log(response.data)
         if (res.success == true) {
             Message({
                 message: res.msg,
@@ -44,7 +40,9 @@ service.interceptors.response.use(
                 message: res.msg,
                 type: 'error',
                 duration: 1 * 1000
-            })
+            }
+            )
+
 
             // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
             if (res.code === 50008 || res.code === 50012 || res.code === 50014) {

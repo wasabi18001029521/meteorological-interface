@@ -11,6 +11,11 @@
     import NavFooter from "./components/Footer";
 
     export default {
+        provide(){
+            return{
+                reload:this.reload
+            }
+        },
         components: {NavHeader, NavFooter},
     }
 </script>

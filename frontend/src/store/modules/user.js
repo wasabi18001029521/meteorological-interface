@@ -2,6 +2,7 @@ import {login, logout, getInfo} from '@/api/login'
 import {userregister} from '@/api/register'
 import {getToken, setToken, removeToken} from '@/utils/auth'
 import {Message} from '@/api/mymessage'
+import {quit} from '@/api/quit'
 import store from "../../store";
 
 const user = {
@@ -15,7 +16,7 @@ const user = {
         userregister:'',
         userlogin:'',
         userkey:'',
-        usertoken:''|| localStorage.getItem('usertoken'),
+        //usertoken:''|| localStorage.getItem('usertoken'),
     },
 
     // 修改共享数据
@@ -30,10 +31,8 @@ const user = {
             state.roles = roles
         },
         SET_AUTHENTICATED: (state, authenticated) => {
-
             state.authenticated = authenticated
-
-            localStorage.setItem('authenticated', authenticated)
+            //localStorage.setItem('authenticated', authenticated)
         },
         SET_USERID: (state, value) => {
             state.userid = value
@@ -53,30 +52,20 @@ const user = {
         SET_USERKEY: (state, value) => {
             state.userkey = value
         },
-        SET_USERTOKEN: (state, value) => {
+     /*   SET_USERTOKEN: (state, value) => {
             state.usertoken = value
             // 把登录的用户的名保存到localStorage中，防止页面刷新，导致vuex重新启动，用户名就成为初始值（初始值为空）的情况
             localStorage.setItem('usertoken', value)
         }
-
+*/
     },
 
     actions: {
         // 登录
         Login({commit}, loginForm) {
-
             return new Promise((resolve, reject) => {
                 login(loginForm.login_email, loginForm.login_pass).then(response => {
-                    //console.log(response.token)
                     setToken(response.token)
-                    commit('SET_TOKEN', response.token);
-                    commit('SET_USERTOKEN', response.token);
-                    commit('SET_AUTHENTICATED', response.success);
-                    //commit('username', response.success);
-             /*       console.log("123")
-                    console.log(getToken(response.token))*/
-                    console.log(response.username)
-
                     resolve()
                 }).catch(error => {
                     console.log(error)
@@ -86,38 +75,25 @@ const user = {
         },
         //注册
         register({commit}, registerForm) {
-
             return new Promise((resolve, reject) => {
                 userregister(registerForm.register_email, registerForm.register_pass).then(response =>  {
-                    //resolve()
-                    //debugger;
-                   //alert(response.data.msg)
-               //console.log(response.username)
-
                 }).catch(error => {
-                    //console.log(error)
                     reject(error)
                 })
             })
         },
-        // 我的账号钩子函数调用
+        // 获取用户信息
         my({commit}) {
             return new Promise((resolve, reject) => {
                 Message().then(response =>  {
-
-                   //console.log(response.id) //resolve()
                     commit('SET_USERID', response.id);
                     commit('SET_MYNAME', response.username);
                     commit('SET_USERREGISTER', response.user_register);
                     commit('SET_USERLOGIN', response.user_login);
                     commit('SET_USERKEY', response.user_key);
-                    console.log(response.id)
-                    console.log("账号ID="+store.getters.userid)
                     commit('SET_AUTHENTICATED', response.success);
-                    /*console.log("123")
-                    console.log(store.getters.userid)*/
+                    resolve(response)
                 }).catch(error => {
-                    //console.log(error)
                     reject(error)
                 })
             })
@@ -147,8 +123,7 @@ const user = {
         LogOut({commit, state}) {
             return new Promise((resolve, reject) => {
                 logout(state.token).then(() => {
-                    commit('SET_TOKEN', '')
-                    commit('SET_ROLES', [])
+                    setToken("123")
                     removeToken()
                     resolve()
                 }).catch(error => {
@@ -160,11 +135,18 @@ const user = {
         // 前端 登出
         FedLogOut({commit}) {
             return new Promise(resolve => {
-                commit('SET_TOKEN', '')
                 removeToken()
                 resolve()
+              quit().then(response =>  {
+                    commit('SET_AUTHENTICATED',);
+                    resolve(response)
+                }).catch(error => {
+                    reject(error)
+                }
+                )
             })
-        }
+        },
+
     }
 }
 

@@ -8,9 +8,13 @@ import cn.webyun.meteorologicalinterface.security.JwtProvider;
 import cn.webyun.meteorologicalinterface.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -26,7 +30,6 @@ public class InformationController {
     @PostMapping("/information")
     @ResponseBody
     public ResponseEntity<?> user(@Valid  HttpServletRequest request) {
-        
         try {
             // 获取请求头信息 从请求头中获取Token
             String token = request.getHeader("Authorization").split("\\s+")[1];
@@ -44,5 +47,19 @@ public class InformationController {
             return ResponseEntity.ok(new ResponseBase(false, "请重新登录"));
         }
 
+    }
+    //退出登录
+    @PostMapping("/quit")
+    @ResponseBody
+    public ResponseEntity<?> quitUser(@Valid  HttpServletRequest request, HttpServletResponse response){
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null){
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(new ResponseBase(false, "退出成功"));
     }
 }

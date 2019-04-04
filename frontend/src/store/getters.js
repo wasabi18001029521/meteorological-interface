@@ -9,7 +9,6 @@ const getters = {
     userregister: state => state.user.userregister,
     userlogin: state => state.user.userlogin,
     userkey: state => state.user.userkey,
-    usertoken: (state) => state.user.usertoken
-
+    //usertoken: (state) => state.user.usertoken
 }
 export default getters

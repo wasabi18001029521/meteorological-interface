@@ -65,7 +65,8 @@ public class AuthController {
             //解析Token中的用户名
       /*      System.out.println("123");
             System.out.println(jwtProvider.getUserNameFromJwtToken(jwt));*/
-
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            System.out.println(auth);
         } catch (AuthenticationException e) {
             status = false;
             return ResponseEntity.ok(new ResponseBase(false, "邮箱或者密码不正确"));
@@ -87,16 +88,7 @@ public class AuthController {
     }
 
 
-    @RequestMapping("/hello")
-    public void hello( HttpServletRequest request){
-        Enumeration e = request.getParameterNames();
-        while (e.hasMoreElements()) {
-            String paramName = (String) e.nextElement();
-            String value2 = request.getParameter(paramName);
-            System.out.println("123");
-            System.out.println(paramName + "=" + value2);
-        }
-    }
+
 
 
 }

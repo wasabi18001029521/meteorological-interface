@@ -26,9 +26,8 @@
                             </el-menu-item>
                             <el-menu-item v-if="isAuthenticated" index="4" @click='myMessage'>我的账号</el-menu-item>
                             <el-menu-item index="5"  v-if="isAuthenticated">
-                                <el-button type="info">退出</el-button>
+                                <el-button type="info" @click='quit'>退出</el-button>
                             </el-menu-item>
-
                         </el-menu>
                     </div>
                 </el-col>
@@ -39,7 +38,9 @@
 
 <script>
     export default {
+        inject: ['reload'],
         name: 'NavHeader',
+
         components: {},
         computed: {
             isAuthenticated() {
@@ -47,9 +48,11 @@
             }
         },
         data() {
+
             return {
                 activeIndex: '1',
-                activeIndex2: '1'
+                activeIndex2: '1',
+
             }
         },
 
@@ -71,11 +74,19 @@
                 this.$router.push({path: '/api/login'})
             },
             myMessage() {
-
                 this.$router.push({path: '/myMessage'})
-
-
             },
+            quit(){
+                this.$store
+                    .dispatch("FedLogOut").then(() => {
+                    /*this.$router.push(NewPage);
+                    this.$router.go(-1);*/
+                    this.$router.go(0)
+                    //this.reload();
+                    this.$router.push({ path: "/api/login" });
+
+                    })
+            }
 
 
         },

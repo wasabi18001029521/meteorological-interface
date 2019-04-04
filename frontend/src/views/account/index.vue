@@ -89,12 +89,8 @@
     import getters from '../../store/getters'
     import store from "../../store";
     export default {
-
-
-
         name: 'Message',
         data() {
-
             let option = options.bar
             var checkCurrentPassword = (rule, value, callback) => {
                     if (!value) {
@@ -130,15 +126,13 @@
                     }
                   };
             return {
-
                 userid:store.getters.userid,
-                //store.getters.userid
                 myusername:store.getters.myname,
                 userregister:store.getters.userregister,
                 userlogin:store.getters.userlogin,
                 userkey:store.getters.userkey,
                 tabPosition: 'left',
-                 dialogVisible: false,
+                dialogVisible: false,
                 // chart
                 id: 'test',
                 option: option,
@@ -160,15 +154,6 @@
                    ]
                  },
             };
-         /*   computed:{
-                mapState({
-                    hrinfo:state => state.currentData
-
-
-                })
-            }*/
-
-
         },
       /*  created() {
             //console.log("页面未渲染之前就发送请求 ")
@@ -178,8 +163,6 @@
                       })
                       .catch(() => {
                       })*!/
-
-
             this.fetchData()
             console.log("页面显示的ID="+store.getters.userid)
             console.log()
@@ -200,7 +183,6 @@
                     })
             },
 */
-
             open1() {
 
                 this.$axios.post('http://localhost:8080/passworddo/password', {
