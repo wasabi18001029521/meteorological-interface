@@ -55,11 +55,12 @@ public class InformationController {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (auth != null){
+                // System.out.println("退出执行了");
                 new SecurityContextLogoutHandler().logout(request, response, auth);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ResponseEntity.ok(new ResponseBase(false, "退出成功"));
+        return ResponseEntity.ok(new ResponseBase(true, "退出成功"));
     }
 }
