@@ -13,6 +13,7 @@ import store from "./store";
 import {Message} from "element-ui";
 import { getToken } from '@/utils/auth' // getToken from cookie
 import router from './router'
+import documents from './views/documents/index.vue'
 
 
 
@@ -60,6 +61,12 @@ export default new Router({
             path:'/api/retrieve',
             name:'retrieve',
             component:Retrieve
+        },
+        ,
+        {
+            path:'/api/documents',
+            name:'documents',
+            component:documents
         },
     ]
 
