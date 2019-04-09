@@ -49,14 +49,55 @@
             </el-menu>
         </el-aside>
         <el-col>
-            <div v-if="loginType === 'autoarea'">中国地面自动站区域查询数据获取接口</div>
+            <div v-if="loginType === 'autoarea'">
+                <div>中国地面自动站区域查询数据获取接口</div>
+                <div>----------------------------------------------------------</div>
+                <div>GET /station/auto/area/</div>
+                <br/>
+                <div>根据输入的矩形区域范围，查找区域内全部的站点在某一时刻的中国地面气象站逐小时观测数据，并提供分级抽希功能。</div>
+                <br/>
+                <div>请求地址试例</div>
+                <div>矩形区域范围内,中国地面气象站逐小时观测数据  https://localhost:8080/station/auto/area?key=your_api_key&level=1&maxLon=22.22&maxLat=22.22
+                    &minLon=22.22&minLat=22.22&var=[1,2]&datatime=2019-04-03 10:13:55&format=2019-04-09 02:01:58
+                </div>
+                <div>参数</div>
+                <div>
+                    <el-table
+                            :data="tableDataautoarea"
+                            style="width: 100%">
+                        <el-table-column
+                                prop="name"
+                                label="参数名"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                prop="type"
+                                label="类型"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                prop="must"
+                                label="必须"
+                                width="180">
+                        </el-table-column>
+                        <el-table-column
+                                prop="remarks"
+                                label="备注">
+                        </el-table-column>
+                    </el-table>
+                </div>
+
+            </div>
             <div v-if="loginType === 'autoone'">中国地面自动站单站查询数据获取接口</div>
+
             <div v-if="loginType === 'autonearest'">中国地面自动站最近站数据获取接口</div>
+
         <div v-if="loginType === 'cityarea'">
             　<div>精细化城市预报矩形区域查询数据获取接口</div>
                 <div>----------------------------------------------------------</div>
                 <div>GET localhost</div>
         </div>
+
             <div v-if="loginType === 'cityone'">精细化城市预报单站查询数据获取接口</div>
         </el-col>
     </el-container>
@@ -64,10 +105,51 @@
 
 <script>
     export default {
-        name: "documents",
+        name: "autoarea",
        data(){
         return {
             loginType:'indexImg',
+            tableDataautoarea: [{
+                name: 'level',
+                type: 'integer',
+                must: '是',
+                remarks:'抽稀级别 [1,2,3,4]'
+            }, {
+                name: 'maxLon',
+                type: 'number',
+                must: '是',
+                remarks:'最大经度'
+            }, {
+                name: 'maxLat',
+                type: 'number',
+                must: '是',
+                remarks:'最大纬度'
+            }, {
+                name: 'minLon',
+                type: 'number',
+                must: '是',
+                remarks:'最小经度'
+            }, {
+                name: 'minLat',
+                type: 'number',
+                must: '是',
+                remarks:'最小纬度'
+            }, {
+                name: 'var',
+                type: 'array',
+                must: '是',
+                remarks:'查询的字段数组'
+            }, {
+                name: 'datatime',
+                type: 'string',
+                must: '是',
+                remarks:'数据时间，格式 yyyyMMddHH，如果不传默认取最新的'
+            }, {
+                name: 'var',
+                type: 'string',
+                must: '否',
+                remarks:'时间格式，默认yyyyMMddHHmmss'
+            }]
        }
     },
         methods: {

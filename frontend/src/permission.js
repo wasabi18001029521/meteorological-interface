@@ -9,7 +9,7 @@ import VueRouter from 'vue-router'
 
 //NProgress.configure({ showSpinner: false })// NProgress configuration
 
-const whiteList = ['/api/login','/','/api/register','/price','/dataTab'] // 不重定向白名单
+const whiteList = ['/api/login','/','/api/register','/price','/dataTab','/api/service'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
 
   //NProgress.start()
