@@ -1,5 +1,7 @@
 package cn.webyun.meteorologicalinterface.sysresult;
 
+
+//基本数据类型：枚举类型
 public enum ResultCode {
     /**
      * 成功
