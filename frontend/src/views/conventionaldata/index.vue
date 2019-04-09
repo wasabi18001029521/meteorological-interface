@@ -16,7 +16,7 @@
                         <el-col :span="24"><div class="grid-content bg-purple-dark">APP、网站或智能硬件，展示给C端用户。</div></el-col>
                      </el-row>
                     <el-row class='u-size16 u-line-height4'>
-                        <el-col :span="24"><div class="grid-content bg-purple-dark"><el-button type="warning">查看 API 文档</el-button></div></el-col>
+                        <el-col :span="24"><div class="grid-content bg-purple-dark"><el-button type="warning" @click='see'>查看 API 文档</el-button></div></el-col>
                     </el-row>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                      <p class='u-size20 u-line-height2 '>数据通过 API 接口调用</p>
                      <p class='u-size16 u-line-height2 '>通过标准 Restful API 协议访问海量天气和环境数据，</p>
                      <p class='u-size16 u-line-height2 '>高稳定性，随需随调。</p>
-                     <el-button type="warning">查看 API 文档</el-button>
+                     <el-button type="warning" @click='see'>查看 API 文档</el-button>
                   </el-col>
                 </el-row>
             </div>
@@ -121,6 +121,11 @@
  export default {
         name: 'dataTab',
         components: {},
+     methods: {
+         see() {
+             this.$router.push({path: '/api/documents'})
+         },
+     }
     }
 </script>
 <style lang="less">

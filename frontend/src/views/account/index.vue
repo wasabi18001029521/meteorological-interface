@@ -59,20 +59,20 @@
                 </el-tabs>
             </div>
             <el-dialog title="修改密码" :visible.sync="dialogVisible" width="30%" >
-              <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="当前密码" prop="currentPassword">
-                  <el-input type="text" v-model.number="ruleForm2.currentPassword" autocomplete="off"></el-input>
+              <el-form :model="ruleFormtwo" status-icon :rules="rulestwo" ref="ruleFormtwo" label-width="100px" class="demo-ruleForm">
+                <el-form-item label="当前密码" prop="currentPassword" >
+                  <el-input type="text" v-model.number="ruleFormtwo.currentPassword" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="新密码" prop="pass">
-                  <el-input ttype="text" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+                  <el-input ttype="text" v-model="ruleFormtwo.pass" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="确认新密码" prop="checkPass">
-                  <el-input type="text" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
+                  <el-input type="text" v-model="ruleFormtwo.checkPass" autocomplete="off"></el-input>
                 </el-form-item>
               </el-form>
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 认</el-button>
+                <el-button type="primary" @click="dialogVisible['ruleFormtwo'] = true">确 认</el-button>
               </span>
             </el-dialog>
         </el-main>
@@ -92,34 +92,38 @@
         name: 'Message',
         data() {
             let option = options.bar
-            var checkCurrentPassword = (rule, value, callback) => {
-                    if (!value) {
-                      return callback(new Error('当前密码不能为空'));
-                    }
-                    setTimeout(() => {
-                      if (value) {
-                        if (value < 18) {
-                          callback(new Error('必须满18的数字'));
-                        } else {
-                          callback();
-                        }
-                      }
-                    }, 1000);
-                  };
+            // 当前密码
+            var pass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('请输入密码'));
+                } else if (value <= 6) {
+                    callback(new Error('请输入6位以上的密码'));
+                } else if (this.ruleFormtwo.checkPass !== '') {
+                    this.$refs.ruleFormtwo.validateField('checkPass');
+                }
+                callback();
+            };
+
+            // 新密码
              var validatePass = (rule, value, callback) => {
                     if (value === '') {
                       callback(new Error('请输入密码'));
-                    }else if(value == this.ruleForm2.currentPassword){
+                    }else if (value <= 6 ) {
+                        callback(new Error('请输入6位以上的密码'));}
+                    else if(value == this.ruleFormtwo.currentPassword){
                         callback(new Error('密码不能与当前密码相同'));
-                    } else if (this.ruleForm2.checkPass !== '') {
-                        this.$refs.ruleForm2.validateField('checkPass');
+                    } else if (this.ruleFormtwo.checkPass !== '') {
+                        this.$refs.ruleFormtwo.validateField('checkPass');
                       }
                       callback();
                   };
+            // 确认新密码
              var validatePass2 = (rule, value, callback) => {
                     if (value === '') {
                       callback(new Error('请再次输入密码'));
-                    } else if (value !== this.ruleForm2.pass) {
+                    } else if (value <= 6) {
+                        callback(new Error('请输入6位以上的密码'));}
+                    else if (value !== this.ruleFormtwo.pass) {
                       callback(new Error('两次输入密码不一致!'));
                     } else {
                       callback();
@@ -137,20 +141,21 @@
                 id: 'test',
                 option: option,
                 show:'false',
-                 ruleForm2: {
+                ruleFormtwo: {
+                    currentPassword: '',
                     pass: '',
-                    checkPass: '',
-                    currentPassword: ''
+                    checkPass: ''
+
                  },
-                 rules2: {
+                rulestwo: {
+                    currentPassword: [
+                        { validator: pass, trigger: 'blur' }
+                    ],
                    pass: [
                         { validator: validatePass, trigger: 'blur' }
                    ],
                    checkPass: [
                         { validator: validatePass2, trigger: 'blur' }
-                   ],
-                   currentPassword: [
-                        { validator: checkCurrentPassword, trigger: 'blur' }
                    ]
                  },
             };
@@ -182,36 +187,29 @@
                     .catch(() => {
                     })
             },
-*/
-            open1() {
+      */
+            dialogVisible(ruleFormtwo){
+                this.$refs[ruleFormtwo].validate(valid => {
+                    if (valid) {
+                        this.$store
+                            .dispatch("register", this.register_from)
+                            .then(() => {
 
-                this.$axios.post('http://localhost:8080/passworddo/password', {
-                    username: '956901244@qq.com',
-                    password: this.password,
-                    newpassword:this.Newpassword,
-                    confirmthenewpassword:this.Confirmthenewpassword
-
+                            })
+                            .catch(() => {
+                                this.loading = false;
+                            });
+                        // console.log("success")
+                    } else {
+                        // console.log("error submit!!");
+                        return false;
+                    }
                 })
-                    .then(successResponse => {
-                        this.responseResult = JSON.stringify(successResponse.data)
-                        if (successResponse.data.code === 200) {
-                            this.$message({
-                                message: successResponse.data.message,
-                                type: 'success'
-                            });
-                        }if (successResponse.data.code !== 200) {
-                            //  alert(JSON.stringify(successResponse.data.message))
-                            this.$message({
-                                message: successResponse.data.message,
-                                type: 'warning'
-                            });
-                        }}).catch(failResponse => {})
-            },
         },
         components: {
             XChart
         }
-    }
+    }}
 </script>
 <style lang="less">
     .el-main{
