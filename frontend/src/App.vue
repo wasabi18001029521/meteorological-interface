@@ -20,7 +20,7 @@
     }
 </script>
 <style lang="less">
-    body {
+    body,ul,li {
         margin: 0px;
         padding: 0px;
         /*background: url(assets/bg1.jpg) center !important;

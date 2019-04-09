@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Welcome from './views/welcome'
 import DataTab from './views/conventionaldata/index.vue'
 import Price from './views/price/index.vue'
+import Purchase from './views/purchase/index.vue'
 import Register from './views/register/index.vue'
 import Service from './views/register/protocol.vue'
 import Login from './views/login/index.vue'
@@ -35,6 +36,11 @@ export default new Router({
             path: '/price',
             name: 'price',
             component: Price,
+        },
+         {
+            path: '/purchase',
+            name: 'purchase',
+            component: Purchase,
         },
         {
             path: '/api/register',

@@ -9,13 +9,13 @@
                     <p class='u-size20 u-line-height2 '>个人免费版</p>
                     <p class='u-size16 u-line-height2 '>通过标准 Restful API 协议访问海量天气和环境数据，</p>
                     <p class='u-size16 u-line-height2 '>高稳定性，随需随调。</p>
-                    <el-button type="primary">立即注册</el-button>
+                    <el-button type="primary"><span @click="toRegister">立即注册</span></el-button>
                 </el-col>
                 <el-col :span="12" class='u-to-api'>
                     <p class='u-size20 u-line-height2 '>企业付费版</p>
                     <p class='u-size16 u-line-height2 '>通过标准 Restful API 协议访问海量天气和环境数据，</p>
                     <p class='u-size16 u-line-height2 '>高稳定性，随需随调。</p>
-                    <el-button type="warning">报价/购买</el-button>
+                    <el-button type="warning"><span @click="toPurchase">报价 / 购买</span></el-button>
                 </el-col>
             </el-row>
             <el-row  :gutter="20" class='u-api-box'>
@@ -101,6 +101,14 @@
  export default {
         name: 'price',
         components: {},
+        methods:{
+            toPurchase() {
+                this.$router.push('/purchase');
+            },
+            toRegister() {
+                this.$router.push({path: '/api/register'});
+            },
+        }
     }
 </script>
 <style lang="less">
