@@ -95,10 +95,20 @@
                     <div><i>11</i><span class="u-padding20">   }]</span></div>
                     <div><i>12</i><span>   }</span></div>
                 </div>
+
             </div>
-          </el-col>
-        </el-row>
-     </el-main>
+            <div v-if="loginType === 'autoone'">中国地面自动站单站查询数据获取接口</div>
+
+            <div v-if="loginType === 'autonearest'">中国地面自动站最近站数据获取接口</div>
+
+        <div v-if="loginType === 'cityarea'">
+            　<div>精细化城市预报矩形区域查询数据获取接口</div>
+                <div>----------------------------------------------------------</div>
+                <div>GET localhost</div>
+        </div>
+
+            <div v-if="loginType === 'cityone'">精细化城市预报单站查询数据获取接口</div>
+        </el-col>
     </el-container>
 </template>
 
@@ -116,38 +126,20 @@
        }
     },
         methods: {
-            changeAPI(type){
-                if(type == "autoArea"){
-                    this.apiType='autoArea'
-                    this.tableData = [{name: 'level', type: 'integer', must: '是', remarks:'抽稀级别 [1,2,3,4]' },
-                     {name: 'maxLon', type: 'number',must: '是',remarks:'1'},
-                      {name: 'maxLat',type: 'number', must: '是',remarks:'1'},
-                      {name: 'minLon',type: 'number',must: '是',remarks:'1'}];
-                }else if(type == "autoOne"){
-                    this.apiType='autoOne'
-                     this.tableData = [{name: 'level', type: 'integer', must: '是', remarks:'抽稀级别 [1,2,3,4]' },
-                     {name: 'maxLon', type: 'number',must: '是',remarks:'2'},
-                     {name: 'maxLat',type: 'number', must: '是',remarks:'2'},
-                     {name: 'minLon',type: 'number',must: '是',remarks:'2'}];
-                }else if(type == "autoNearest"){
-                    this.apiType='autoNearest'
-                    this.tableData = [{name: 'level', type: 'integer', must: '是', remarks:'抽稀级别 [1,2,3,4]' },
-                    {name: 'maxLon', type: 'number',must: '是',remarks:'3'},
-                    {name: 'maxLat',type: 'number', must: '是',remarks:'3'},
-                    {name: 'minLon',type: 'number',must: '是',remarks:'3'}];
-                }else if(type == "cityArea"){
-                    this.apiType='cityArea'
-                     this.tableData = [{name: 'level', type: 'integer', must: '是', remarks:'抽稀级别 [1,2,3,4]' },
-                     {name: 'maxLon', type: 'number',must: '是',remarks:'4'},
-                     {name: 'maxLat',type: 'number', must: '是',remarks:'4'},
-                      {name: 'minLon',type: 'number',must: '是',remarks:'4'}];
-                }else if(type == "cityOne"){
-                    this.apiType='cityOne'
-                     this.tableData = [{name: 'level', type: 'integer', must: '是', remarks:'抽稀级别 [1,2,3,4]' },
-                     {name: 'maxLon', type: 'number',must: '是',remarks:'5'},
-                     {name: 'maxLat',type: 'number', must: '是',remarks:'5'},
-                     {name: 'minLon',type: 'number',must: '是',remarks:'5'}];
-                }
+            autoarea(){
+                  this.loginType='autoarea'
+            },
+            autoone(){
+                this.loginType='autoone'
+            },
+            autonearest(){
+                this.loginType='autonearest'
+            },
+            cityarea(){
+                this.loginType='cityarea'
+            },
+            cityone(){
+                this.loginType='cityone'
             },
 
 

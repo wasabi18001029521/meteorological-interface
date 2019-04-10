@@ -86,11 +86,11 @@ const user = {
         my({commit}) {
             return new Promise((resolve, reject) => {
                 Message().then(response =>  {
-                    commit('SET_USERID', response.id);
-                    commit('SET_MYNAME', response.username);
-                    commit('SET_USERREGISTER', response.user_register);
-                    commit('SET_USERLOGIN', response.user_login);
-                    commit('SET_USERKEY', response.user_key);
+                    commit('SET_USERID', response.data.id);
+                    commit('SET_MYNAME', response.data.userName);
+                    commit('SET_USERREGISTER', response.data.user_register);
+                    commit('SET_USERLOGIN', response.data.user_login);
+                    commit('SET_USERKEY', response.data.user_key);
                     commit('SET_AUTHENTICATED', response.success);
                     resolve(response)
                 }).catch(error => {
