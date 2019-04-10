@@ -1,5 +1,8 @@
 package cn.webyun.meteorologicalinterface.service;
 
+import cn.webyun.meteorologicalinterface.ServiceException.DataException;
+import cn.webyun.meteorologicalinterface.ServiceException.ParametersException;
+import cn.webyun.meteorologicalinterface.ServiceException.PrivilegeException;
 import cn.webyun.meteorologicalinterface.entity.InterfaceParame;
 import cn.webyun.meteorologicalinterface.entity.InterfaceReturnDataBase;
 import cn.webyun.meteorologicalinterface.mapper.RefinedUrbanForecastMapper;
@@ -27,29 +30,22 @@ public class RefinedUrbanForecastService {
      * @param interfaceParame
      * @return
      */
-    public InterfaceReturnDataBase getCityAreainfo(InterfaceParame interfaceParame) throws TimeoutException {
-       // InterfaceReturnDataBase data=  findByParame(interfaceParame);
-        /*if(data==null){
-           throw new
-        }*/
-        InterfaceReturnDataBase data=new InterfaceReturnDataBase();
-        //传入userkey和可用时间做验证，返回boolean
-        boolean flag= userKeyVaildService.volitUserKey(interfaceParame.getUserkey(),10);
-        if(flag){
-            //若返回的天数大于产品可使用天数，例如7，那么提示无权限，返回状态吗401
-            throw new TimeoutException();
-        }
+    public InterfaceReturnDataBase getCityAreainfo(InterfaceParame interfaceParame)
+            throws PrivilegeException, ParametersException {
+        InterfaceReturnDataBase data1=new InterfaceReturnDataBase();
+        //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
+        int date = userKeyVaildService.volitUserKey(interfaceParame.getUserkey(),1);
             ArrayList arr = new ArrayList();
-            arr.add("arr1");
-            arr.add("barr2");
-            if (data.getDatatime() == null) {
-                data.setDatatime(new Date().toString());
-
+            arr.add("arr111111111111111");
+            arr.add("barr22222222222222");
+            if (data1.getDatatime() == null) {
+                data1.setDatatime(new Date().toString());
             }
-            data.setLonlat(arr);
+            data1.setLonlat(arr);
+            return data1;
 
-            return data;
     }
+    //通过私有方法调用持久层获取数据
     private InterfaceReturnDataBase findByParame(InterfaceParame interfaceParame){
         return refinedUrbanForecastMapper.findByParam(interfaceParame);
     }
@@ -59,8 +55,13 @@ public class RefinedUrbanForecastService {
      * @param interfaceParame
      * @return
      */
-    public InterfaceReturnDataBase getCityOneinfo(InterfaceParame interfaceParame) {
+    public InterfaceReturnDataBase getCityOneinfo(InterfaceParame interfaceParame)
+    throws DataException{
         InterfaceReturnDataBase data=new InterfaceReturnDataBase();
-        return data;
+        if(data==null){
+            throw new DataException();
+        }else {
+            return data;
+        }
     }
 }
