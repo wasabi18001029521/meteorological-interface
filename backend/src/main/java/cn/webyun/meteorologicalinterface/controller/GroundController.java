@@ -25,34 +25,65 @@ public class GroundController {
 
     // 中国地面自动站区域查询数据获取接口
     @GetMapping("/area")
-    public AutoArea area(@Valid AutoArea autoArea) {
+    public ResponseEntity<?> area(@Valid AutoArea autoArea)  {
         try {
             String key = autoArea.getKey();
-            System.out.println(key);
-            // 查询当前时间
-            String effective = userKeyVaildService.selectEffective(key);
-            String s = userKeyVaildService.volitUserKey(effective);
-            System.out.println(s);
-            if (s.equals(true)) {
-                return autoArea;
+            // 查询使用开始时间
+
+            // 试用期内为true试用期外为false
+            int lagtime=userKeyVaildService.volitUserKey(key);
+            System.out.println("时间间隔:"+lagtime);
+            if(lagtime<2){
+                return ResponseEntity.ok(new ResponseBase(true, "200",autoArea));
+            }else {
+                return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
             }
-            return null;
         } catch (ParseException e) {
             e.printStackTrace();
-            return null;
+            return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
         }
     }
 
 
     // 中国地面自动站单站查询数据获取接口s
     @GetMapping("/one")
-    public AutoOne one(@Valid AutoOne AutoOne){
-        return AutoOne;
+    public ResponseEntity<?> one(@Valid AutoOne autoOne){
+        try {
+            String key = autoOne.getKey();
+            // 查询使用开始时间
+
+            // 试用期内为true试用期外为false
+            int lagtime=userKeyVaildService.volitUserKey(key);
+            if(lagtime<2){
+                return ResponseEntity.ok(new ResponseBase(true, "200",autoOne));
+            }else {
+                return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
+        }
     }
 
     // 中国地面自动站最近站数据
     @GetMapping("/nearest")
-    public Nearest nearest(@Valid Nearest nearest){
-        return nearest;
+    public ResponseEntity<?> nearest(@Valid Nearest nearest){
+        try {
+            String key = nearest.getKey();
+            // 查询使用开始时间
+
+            // 试用期内为true试用期外为false
+      int lagtime=userKeyVaildService.volitUserKey(key);
+            if(lagtime<2){
+                return ResponseEntity.ok(new ResponseBase(true, "200",nearest));
+            }else {
+                return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
+        }
     }
 }

@@ -3,7 +3,7 @@ package cn.webyun.meteorologicalinterface.entity;
 import java.util.ArrayList;
 
 public class Nearest {
-
+    private String key;
     private Number lon;
     private Number lat;
     private String start;
@@ -48,5 +48,13 @@ public class Nearest {
 
     public void setArray(ArrayList<String> array) {
         this.array = array;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

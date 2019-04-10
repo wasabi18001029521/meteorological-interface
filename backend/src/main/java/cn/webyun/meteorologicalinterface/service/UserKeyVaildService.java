@@ -14,36 +14,20 @@ public class UserKeyVaildService {
     UserMapper userMapper;
 
     // userKey有限期验证
-    public String volitUserKey(String effective) throws ParseException {
-        // effective转换成毫秒值+7天时间转换的毫秒值
-        String have="fasle";
-        System.out.println("时间:"+effective);
-        Calendar c = Calendar.getInstance();
-        c.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(effective));
-
-        long timeInMillis = c.getTimeInMillis()+86400000*7;
-
-        // 当前时间转换成毫秒值
-        Date date=new java.util.Date();
-        java.sql.Date  data1=new java.sql.Date(date.getTime());
-        SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateFormat=sy1.format(data1);
-
-        Calendar d = Calendar.getInstance();
-        d.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateFormat));
-        long timeInMillis1 = d.getTimeInMillis();
-        System.out.println(timeInMillis1);
-
-        if(timeInMillis>timeInMillis1){
-           have="true";
-            return have;
-        }
-        return have;
+    public int volitUserKey(String key) throws ParseException {
+       SimpleDateFormat simpleDateFormat =new SimpleDateFormat("yyyy-MM-dd");
+        String starttime=selectEffective(key);
+        // 开始时间
+        Date sdate = simpleDateFormat.parse(starttime);
+        // 当前时间
+        Date ndate = new Date();
+        int lagtime = (int)(ndate.getTime()-sdate.getTime())/(24*60*60*1000);
+        return lagtime;
     }
 
 
     // 根据Key查询试用开始时间
-    public String selectEffective(String key) {
+    private String selectEffective(String key) {
         return userMapper.selectEffective(key);
     }
 }
