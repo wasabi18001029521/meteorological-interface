@@ -142,8 +142,8 @@ public interface UserMapper {
     String selectUsername(String username);
 
 
-    @Insert("insert into sys_users (user_name,user_password,user_key,user_register) values(#{username,jdbcType=VARCHAR}," +
-            "#{password,jdbcType=VARCHAR},#{md5username,jdbcType=VARCHAR},#{dateFormat,jdbcType=VARCHAR})")
+    @Insert("insert into sys_users (user_name,user_password,user_key,user_register,user_effective) values(#{username,jdbcType=VARCHAR}," +
+            "#{password,jdbcType=VARCHAR},#{md5username,jdbcType=VARCHAR},#{dateFormat,jdbcType=VARCHAR},#{dateFormat,jdbcType=VARCHAR})")
     int insertUser(String username, String password,String md5username,String dateFormat);
 
     @Select("select id from sys_users where user_name = #{username}")
@@ -157,4 +157,6 @@ public interface UserMapper {
 
     @Select("select id,user_name,user_register,user_login,user_key from sys_users where user_name = #{userNameFromJwtToken}")
     User selectUser(String userNameFromJwtToken);
+    @Select("select user_effective from sys_users where user_key = #{key}")
+    String selectEffective(String key);
 }

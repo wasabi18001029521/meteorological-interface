@@ -30,6 +30,7 @@ public class RefinedUrbanForecastController {
     @GetMapping("/area")
     public ResponseEntity<?> CityArea(@Valid InterfaceParame interfaceParame) {
        return ResponseEntity.ok(new ResponseBase(true,"成功",refinedUrbanForecastService.getinfo(interfaceParame).toString()));
+
     };
 
     /**
