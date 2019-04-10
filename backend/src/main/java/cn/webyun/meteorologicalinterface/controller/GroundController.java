@@ -28,19 +28,16 @@ public class GroundController {
     public ResponseEntity<?> area(@Valid AutoArea autoArea)  {
         try {
             String key = autoArea.getKey();
-            // 查询使用开始时间
-
-            // 试用期内为true试用期外为false
+            // 查询试用期时间
             int lagtime=userKeyVaildService.volitUserKey(key);
-            System.out.println("时间间隔:"+lagtime);
             if(lagtime<2){
                 return ResponseEntity.ok(new ResponseBase(true, "200",autoArea));
             }else {
                 return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
             }
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
+            return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
         }
     }
 
@@ -50,40 +47,34 @@ public class GroundController {
     public ResponseEntity<?> one(@Valid AutoOne autoOne){
         try {
             String key = autoOne.getKey();
-            // 查询使用开始时间
-
-            // 试用期内为true试用期外为false
+            // 查询试用期时间
             int lagtime=userKeyVaildService.volitUserKey(key);
             if(lagtime<2){
                 return ResponseEntity.ok(new ResponseBase(true, "200",autoOne));
             }else {
                 return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
             }
-
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
+            return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
         }
     }
 
     // 中国地面自动站最近站数据
     @GetMapping("/nearest")
-    public ResponseEntity<?> nearest(@Valid Nearest nearest){
+    public ResponseEntity<?> nearest(@Valid Nearest nearest) {
         try {
             String key = nearest.getKey();
-            // 查询使用开始时间
-
-            // 试用期内为true试用期外为false
-      int lagtime=userKeyVaildService.volitUserKey(key);
-            if(lagtime<2){
-                return ResponseEntity.ok(new ResponseBase(true, "200",nearest));
+            // 查询试用期时间
+            int lagtime = userKeyVaildService.volitUserKey(key);
+            if (lagtime < 2) {
+                return ResponseEntity.ok(new ResponseBase(true, "200", nearest));
             }else {
-                return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
-            }
-
-        } catch (ParseException e) {
-            e.printStackTrace();
             return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.ok(new ResponseBase(false, "服务异常", "500"));
         }
     }
 }

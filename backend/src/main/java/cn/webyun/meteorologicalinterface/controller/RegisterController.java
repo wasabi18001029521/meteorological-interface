@@ -42,7 +42,7 @@ public class RegisterController {
             // 用户名进行32位MD5加密生产key
             String md5username = userService.MD5(username);
             userService.insertUser(username,password,md5username);
-            //为新用户设置默认可以访问的接口
+            // 为新用户设置默认可以访问的接口
             userService.insertUser(username);
             return ResponseEntity.ok(new ResponseBase(true, "注册成功"));
         } catch (Exception e) {

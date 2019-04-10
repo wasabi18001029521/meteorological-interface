@@ -21,15 +21,15 @@ public class UserKeyVaildService {
     public int volitUserKey(String userkey) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String starttime = selectEffective(userkey);
-        Date sdate = null;//开始时间
+        Date sdate = null;// 开始时间
         try {
             sdate = df.parse(starttime);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Date ndate = new Date();//当前时间
+        Date ndate = new Date();// 当前时间
             int lagtime = (int) (ndate.getTime() - sdate.getTime()) / (24 * 60 * 60 * 1000);
-            System.out.println("天数差" + lagtime);
+           // System.out.println("天数差" + lagtime);
             return lagtime;
 
     }
