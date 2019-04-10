@@ -14,11 +14,11 @@ public class UserKeyVaildService {
     UserMapper userMapper;
 
     /**
-     * 通过密钥返回密钥已经生效的天数，不同产品根据天数自行判断逻辑
+     * 接收userkey和可用时间,做验证，若当前天数差>可用时间，返回false
      * @param userkey
      * @return
      */
-    public int volitUserKey(String userkey) {
+    public boolean volitUserKey(String userkey,int day) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String starttime = selectEffective(userkey);
         Date sdate = null;//开始时间
@@ -30,7 +30,7 @@ public class UserKeyVaildService {
         Date ndate = new Date();//当前时间
             int lagtime = (int) (ndate.getTime() - sdate.getTime()) / (24 * 60 * 60 * 1000);
             System.out.println("天数差" + lagtime);
-            return lagtime;
+            return lagtime>day;
 
     }
     // 根据userKey查询试用开始时间
