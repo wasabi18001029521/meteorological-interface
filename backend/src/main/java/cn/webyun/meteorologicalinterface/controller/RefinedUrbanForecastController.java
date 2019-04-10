@@ -2,6 +2,7 @@ package cn.webyun.meteorologicalinterface.controller;
 
 
 import cn.webyun.meteorologicalinterface.entity.InterfaceParame;
+import cn.webyun.meteorologicalinterface.entity.InterfaceReturnData;
 import cn.webyun.meteorologicalinterface.message.response.ResponseBase;
 import cn.webyun.meteorologicalinterface.service.RefinedUrbanForecastService;
 import cn.webyun.meteorologicalinterface.sysresult.Result;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.concurrent.TimeoutException;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -29,8 +31,12 @@ public class RefinedUrbanForecastController {
      */
     @GetMapping("/area")
     public ResponseEntity<?> CityArea(@Valid InterfaceParame interfaceParame) {
-       return ResponseEntity.ok(new ResponseBase(true,"成功",refinedUrbanForecastService.getinfo(interfaceParame).toString()));
-
+        try {
+            InterfaceReturnData interfaceReturnData= refinedUrbanForecastService.getinfo(interfaceParame);
+            return ResponseEntity.ok(new ResponseBase(true,interfaceReturnData.toString()));
+        } catch (TimeoutException e) {
+            return ResponseEntity.ok(new ResponseBase(true,"产品时间失效",401));
+        }
     };
 
     /**

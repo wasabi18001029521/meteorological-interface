@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeoutException;
 
 @Service
 public class RefinedUrbanForecastService {
@@ -26,14 +27,15 @@ public class RefinedUrbanForecastService {
      * @param interfaceParame
      * @return
      */
-    public InterfaceReturnData getinfo(InterfaceParame interfaceParame)  {
+    public InterfaceReturnData getinfo(InterfaceParame interfaceParame) throws TimeoutException {
        // InterfaceReturnData data=  findByParame(interfaceParame);
+
         InterfaceReturnData data=new InterfaceReturnData();
 
         int lagtime= userKeyVaildService.volitUserKey(interfaceParame.getUserkey());
-        if(lagtime>7){
+        if(lagtime>4){
             //若返回的天数大于产品可使用天数，例如7，那么提示无权限，返回状态吗401
-
+            throw new TimeoutException();
         }
             ArrayList arr = new ArrayList();
             arr.add("arr1");
