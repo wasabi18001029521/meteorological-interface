@@ -1,10 +1,8 @@
 package cn.webyun.meteorologicalinterface.controller;
 
-import cn.webyun.meteorologicalinterface.entity.AutoArea;
-import cn.webyun.meteorologicalinterface.entity.AutoOne;
-import cn.webyun.meteorologicalinterface.entity.InterfaceParame;
-import cn.webyun.meteorologicalinterface.entity.Nearest;
+import cn.webyun.meteorologicalinterface.entity.*;
 import cn.webyun.meteorologicalinterface.message.response.ResponseBase;
+import cn.webyun.meteorologicalinterface.service.GroundService;
 import cn.webyun.meteorologicalinterface.service.UserKeyVaildService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,19 +20,16 @@ import java.text.ParseException;
 public class GroundController {
     @Resource
     UserKeyVaildService userKeyVaildService;
-
+    @Resource
+    GroundService groundService;
     // 中国地面自动站区域查询数据获取接口
     @GetMapping("/area")
     public ResponseEntity<?> area(@Valid AutoArea autoArea)  {
+        ShareInterfaceReturnsData shareInterfaceReturnsData =new ShareInterfaceReturnsData();
         try {
-            String key = autoArea.getKey();
             // 查询试用期时间
-            int lagtime=userKeyVaildService.volitUserKey(key);
-            if(lagtime<2){
-                return ResponseEntity.ok(new ResponseBase(true, "200",autoArea));
-            }else {
-                return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
-            }
+            shareInterfaceReturnsData=groundService.getarea(autoArea);
+            return ResponseEntity.ok(new ResponseBase(false, "200",shareInterfaceReturnsData));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
@@ -42,18 +37,14 @@ public class GroundController {
     }
 
 
-    // 中国地面自动站单站查询数据获取接口s
+    // 中国地面自动站单站查询数据获取接口
     @GetMapping("/one")
     public ResponseEntity<?> one(@Valid AutoOne autoOne){
+        ShareInterfaceReturnsData shareInterfaceReturnsData =new ShareInterfaceReturnsData();
         try {
-            String key = autoOne.getKey();
             // 查询试用期时间
-            int lagtime=userKeyVaildService.volitUserKey(key);
-            if(lagtime<2){
-                return ResponseEntity.ok(new ResponseBase(true, "200",autoOne));
-            }else {
-                return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
-            }
+            shareInterfaceReturnsData=groundService.getone(autoOne);
+            return ResponseEntity.ok(new ResponseBase(false, "200",shareInterfaceReturnsData));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
@@ -63,18 +54,14 @@ public class GroundController {
     // 中国地面自动站最近站数据
     @GetMapping("/nearest")
     public ResponseEntity<?> nearest(@Valid Nearest nearest) {
+        ShareInterfaceReturnsData shareInterfaceReturnsData =new ShareInterfaceReturnsData();
         try {
-            String key = nearest.getKey();
             // 查询试用期时间
-            int lagtime = userKeyVaildService.volitUserKey(key);
-            if (lagtime < 2) {
-                return ResponseEntity.ok(new ResponseBase(true, "200", nearest));
-            }else {
-            return ResponseEntity.ok(new ResponseBase(false, "权限不足","401"));
-        }
+            shareInterfaceReturnsData=groundService.getone(nearest);
+            return ResponseEntity.ok(new ResponseBase(false, "200",shareInterfaceReturnsData));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.ok(new ResponseBase(false, "服务异常", "500"));
+            return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
         }
     }
 }

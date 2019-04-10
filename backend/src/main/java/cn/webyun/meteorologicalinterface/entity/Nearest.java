@@ -2,12 +2,10 @@ package cn.webyun.meteorologicalinterface.entity;
 
 import java.util.ArrayList;
 
-public class Nearest {
-    private String key;
+public class Nearest extends Auto{
     private Number lon;
     private Number lat;
-    private String start;
-    private  String end;
+
     private ArrayList<String> array;
 
     public Number getLon() {
@@ -26,35 +24,5 @@ public class Nearest {
         this.lat = lat;
     }
 
-    public String getStart() {
-        return start;
-    }
 
-    public void setStart(String start) {
-        this.start = start;
-    }
-
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
-
-    public ArrayList<String> getArray() {
-        return array;
-    }
-
-    public void setArray(ArrayList<String> array) {
-        this.array = array;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
 }

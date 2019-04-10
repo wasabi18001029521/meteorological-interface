@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class InterfaceParame implements Serializable {
     @NotBlank(message = "密钥必填")
     private String userkey;
-
     private String sid;
     private ArrayList elems;
     private String start;
