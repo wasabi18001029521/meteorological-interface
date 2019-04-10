@@ -29,7 +29,7 @@ public class GroundController {
         try {
             // 查询试用期时间
             shareInterfaceReturnsData=groundService.getarea(autoArea);
-            return ResponseEntity.ok(new ResponseBase(false, "200",shareInterfaceReturnsData));
+            return ResponseEntity.ok(new ResponseBase(true, "200",shareInterfaceReturnsData));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
@@ -44,7 +44,7 @@ public class GroundController {
         try {
             // 查询试用期时间
             shareInterfaceReturnsData=groundService.getone(autoOne);
-            return ResponseEntity.ok(new ResponseBase(false, "200",shareInterfaceReturnsData));
+            return ResponseEntity.ok(new ResponseBase(true, "200",shareInterfaceReturnsData));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
@@ -58,7 +58,7 @@ public class GroundController {
         try {
             // 查询试用期时间
             shareInterfaceReturnsData=groundService.getone(nearest);
-            return ResponseEntity.ok(new ResponseBase(false, "200",shareInterfaceReturnsData));
+            return ResponseEntity.ok(new ResponseBase(true, "200",shareInterfaceReturnsData));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
