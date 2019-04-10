@@ -13,37 +13,28 @@ public class UserKeyVaildService {
     @Resource
     UserMapper userMapper;
 
-    // userKey有限期验证
-    public String volitUserKey(String effective) throws ParseException {
-        // effective转换成毫秒值+7天时间转换的毫秒值
-        String have="fasle";
-        System.out.println("时间:"+effective);
-        Calendar c = Calendar.getInstance();
-        c.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(effective));
-
-        long timeInMillis = c.getTimeInMillis()+86400000*7;
-
-        // 当前时间转换成毫秒值
-        Date date=new java.util.Date();
-        java.sql.Date  data1=new java.sql.Date(date.getTime());
-        SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateFormat=sy1.format(data1);
-
-        Calendar d = Calendar.getInstance();
-        d.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateFormat));
-        long timeInMillis1 = d.getTimeInMillis();
-        System.out.println(timeInMillis1);
-
-        if(timeInMillis>timeInMillis1){
-           have="true";
-            return have;
+    /**
+     * 通过密钥返回密钥已经生效的天数，不同产品根据天数自行判断逻辑
+     * @param userkey
+     * @return
+     */
+    public int volitUserKey(String userkey) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String starttime = selectEffective(userkey);
+        Date sdate = null;//开始时间
+        try {
+            sdate = df.parse(starttime);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        return have;
+        Date ndate = new Date();//当前时间
+            int lagtime = (int) (ndate.getTime() - sdate.getTime()) / (24 * 60 * 60 * 1000);
+            System.out.println("天数差" + lagtime);
+            return lagtime;
+
     }
-
-
-    // 根据Key查询试用开始时间
-    public String selectEffective(String key) {
-        return userMapper.selectEffective(key);
+    // 根据userKey查询试用开始时间
+    private String selectEffective(String userkey) {
+        return userMapper.selectEffective(userkey);
     }
 }
