@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -32,7 +33,7 @@ public class RefinedUrbanForecastController extends BaseController{
      * @return
      */
     @GetMapping("/area")
-    public ResponseEntity<?> CityArea(@Valid  InterfaceParame interfaceParame) throws PrivilegeException{
+    public ResponseEntity<?> CityArea(@Valid  InterfaceParame interfaceParame) {
             InterfaceReturnData interfaceReturnDataBase = refinedUrbanForecastService.getCityAreainfo(interfaceParame);
             return ResponseEntity.ok(new ResponseBase(true,SUCCESS, interfaceReturnDataBase));
     };

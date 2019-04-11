@@ -3,11 +3,14 @@ package cn.webyun.meteorologicalinterface.controller;
 
 import cn.webyun.meteorologicalinterface.ServiceException.*;
 import cn.webyun.meteorologicalinterface.message.response.ResponseBase;
+import cn.webyun.meteorologicalinterface.message.response.ResponseError;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.ParseException;
 
 /**
  * 这个类的作用是
@@ -26,21 +29,24 @@ public abstract class  BaseController {
         Integer state=null;
         String msg=null;
         if(e instanceof ParametersException){
-            msg="参数异常";
+            //msg="参数异常";
             state=400;
         }else if(e instanceof PrivilegeException){
-            msg="权限异常";
+            //msg="权限异常";
             state=401;
         }else if(e instanceof ForbiddenException){
-            msg="Forbidden";
+            //msg="Forbidden";
             state=403;
         }else if(e instanceof DataException){
-            msg="数据异常";
+            //msg="数据异常";
             state=404;
         }else if(e instanceof ServerException){
-            msg="数据异常";
+            //msg="服务异常";
             state=500;
+        }else if(e instanceof ParseException){
+            //msg="服务异常";
+            state=800;
         }
-        return ResponseEntity.ok(new ResponseBase(true,msg, state));
+        return ResponseEntity.ok(new ResponseError(state.toString(),e.getMessage()));
     }
 }

@@ -91,7 +91,7 @@ const user = {
                     commit('SET_USERREGISTER', response.data.user_register);
                     commit('SET_USERLOGIN', response.data.user_login);
                     commit('SET_USERKEY', response.data.user_key);
-                    commit('SET_AUTHENTICATED', response.success);
+                    commit('SET_AUTHENTICATED',true);
                     resolve(response)
                 }).catch(error => {
                     reject(error)

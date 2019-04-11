@@ -9,7 +9,6 @@ import cn.webyun.meteorologicalinterface.mapper.RefinedUrbanForecastMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +16,7 @@ import java.util.concurrent.TimeoutException;
 
 @Service
 public class RefinedUrbanForecastService {
-    @Resource
+    @Autowired
     RefinedUrbanForecastMapper refinedUrbanForecastMapper;
     @Autowired
     UserKeyVaildService userKeyVaildService;
@@ -32,7 +31,7 @@ public class RefinedUrbanForecastService {
      * @return
      */
     public InterfaceReturnData getCityAreainfo(InterfaceParame interfaceParame)
-            throws PrivilegeException, ParametersException {
+            throws PrivilegeException, ParametersException{
         InterfaceReturnData data1=new InterfaceReturnData();
         //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
         int date = userKeyVaildService.volitUserKey(interfaceParame.getKey(),1);

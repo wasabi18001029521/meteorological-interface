@@ -1,11 +1,14 @@
 package cn.webyun.meteorologicalinterface.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * 返回的实体类数据类型
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class InterfaceReturnData implements Serializable {
     private String datatime;
     private Double dt;

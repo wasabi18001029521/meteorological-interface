@@ -12,57 +12,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.text.ParseException;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/station/auto")
-public class GroundController {
+public class GroundController extends BaseController{
     @Resource
     UserKeyVaildService userKeyVaildService;
     @Resource
     GroundService groundService;
+
     // 中国地面自动站区域查询数据获取接口
     @GetMapping("/area")
     public ResponseEntity<?> area(@Valid AutoArea autoArea)  {
+        ShareInterfaceReturnsData shareInterfaceReturnsData=groundService.getarea(autoArea);
+            return ResponseEntity.ok(new ResponseBase(true,SUCCESS,shareInterfaceReturnsData));
 
-        ShareInterfaceReturnsData shareInterfaceReturnsData =new ShareInterfaceReturnsData();
-        try {
-            // 查询试用期时间
-            shareInterfaceReturnsData=groundService.getarea(autoArea);
-            return ResponseEntity.ok(new ResponseBase(true, "200",shareInterfaceReturnsData));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
-        }
     }
 
 
     // 中国地面自动站单站查询数据获取接口
     @GetMapping("/one")
     public ResponseEntity<?> one(@Valid AutoOne autoOne){
-        ShareInterfaceReturnsData shareInterfaceReturnsData =new ShareInterfaceReturnsData();
-        try {
-            // 查询试用期时间
-            shareInterfaceReturnsData=groundService.getone(autoOne);
-            return ResponseEntity.ok(new ResponseBase(true, "200",shareInterfaceReturnsData));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
-        }
+            ShareInterfaceReturnsData shareInterfaceReturnsData=groundService.getone(autoOne);
+        return ResponseEntity.ok(new ResponseBase(true,SUCCESS,shareInterfaceReturnsData));
+
     }
 
     // 中国地面自动站最近站数据
     @GetMapping("/nearest")
     public ResponseEntity<?> nearest(@Valid Nearest nearest) {
-        ShareInterfaceReturnsData shareInterfaceReturnsData =new ShareInterfaceReturnsData();
-        try {
-            // 查询试用期时间
-            shareInterfaceReturnsData=groundService.getone(nearest);
-            return ResponseEntity.ok(new ResponseBase(true, "200",shareInterfaceReturnsData));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.ok(new ResponseBase(false, "服务异常","500"));
-        }
+        ShareInterfaceReturnsData shareInterfaceReturnsData = groundService.getone(nearest);
+        return ResponseEntity.ok(new ResponseBase(true,SUCCESS,shareInterfaceReturnsData));
+
     }
 }
