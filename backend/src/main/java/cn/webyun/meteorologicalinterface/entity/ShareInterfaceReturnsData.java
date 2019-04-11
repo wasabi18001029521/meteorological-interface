@@ -3,7 +3,7 @@ package cn.webyun.meteorologicalinterface.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 /**
- * 返回的公共实体类数据类型
+ * 返回的实体类数据类型
  */
 public class ShareInterfaceReturnsData implements Serializable {
     private String datatime;

@@ -337,5 +337,12 @@ public class UserService {
         return userMapper.selectUser(userNameFromJwtToken);
     }
 
-
+    // 获取当前时间方法
+    public String dataTime(){
+        Date  date=new java.util.Date();
+        java.sql.Date  data1=new java.sql.Date(date.getTime());
+        SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateFormat=sy1.format(data1);
+        return dateFormat;
+    }
 }

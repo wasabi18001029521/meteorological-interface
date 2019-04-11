@@ -22,10 +22,9 @@ public class UserKeyVaildService {
     public int volitUserKey(String userkey,int day) throws PrivilegeException{
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String starttime = selectEffective(userkey);
-        Date sdate = null;//开始时间
+        Date sdate = null;// 开始时间
         try {
             sdate = df.parse(starttime);
-
         } catch (ParseException e) {
 
             e.printStackTrace();
@@ -33,8 +32,8 @@ public class UserKeyVaildService {
         }
         Date ndate = new Date();//当前时间
             int lagtime = (int) (ndate.getTime() - sdate.getTime()) / (24 * 60 * 60 * 1000);
-            System.out.println("天数差" + lagtime);
-            //返回产品使用至今天数是否大于有效期天数，若大于，权限异常，否则
+            // System.out.println("天数差" + lagtime);
+            // 返回产品使用至今天数是否大于有效期天数，若大于，权限异常，否则
         if(lagtime>day){
             throw new PrivilegeException();
         }else{

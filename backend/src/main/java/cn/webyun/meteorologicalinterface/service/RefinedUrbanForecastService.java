@@ -9,19 +9,20 @@ import cn.webyun.meteorologicalinterface.mapper.RefinedUrbanForecastMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeoutException;
 
 @Service
 public class RefinedUrbanForecastService {
-    @Autowired
+    @Resource
     RefinedUrbanForecastMapper refinedUrbanForecastMapper;
     @Autowired
     UserKeyVaildService userKeyVaildService;
 
     /**
-     *  输入的矩形区域范围，查找区域内全部的站点在某一时刻的中国精细化城镇预报数据。
      * 通过密钥获取信息
      * 1.判断是否为空
      * 2.判断密钥是否有效---------调用密钥的方法，判断是否超出有效期，
@@ -34,7 +35,7 @@ public class RefinedUrbanForecastService {
             throws PrivilegeException, ParametersException {
         InterfaceReturnData data1=new InterfaceReturnData();
         //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
-        int date = userKeyVaildService.volitUserKey(interfaceParame.getUserkey(),1);
+        int date = userKeyVaildService.volitUserKey(interfaceParame.getKey(),1);
             ArrayList arr = new ArrayList();
             arr.add("arr111111111111111");
             arr.add("barr22222222222222");
@@ -56,7 +57,7 @@ public class RefinedUrbanForecastService {
      * @return
      */
     public InterfaceReturnData getCityOneinfo(InterfaceParame interfaceParame)
-    throws DataException{
+    throws DataException {
         InterfaceReturnData data=new InterfaceReturnData();
         if(data==null){
             throw new DataException();
