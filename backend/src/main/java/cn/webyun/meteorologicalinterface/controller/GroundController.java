@@ -25,6 +25,7 @@ public class GroundController {
     // 中国地面自动站区域查询数据获取接口
     @GetMapping("/area")
     public ResponseEntity<?> area(@Valid AutoArea autoArea)  {
+
         ShareInterfaceReturnsData shareInterfaceReturnsData =new ShareInterfaceReturnsData();
         try {
             // 查询试用期时间

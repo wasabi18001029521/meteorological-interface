@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class InterfaceParame implements Serializable {
     @NotBlank(message = "密钥必填")
-    private String userkey;
+    private String key;
     private String sid;
     private ArrayList elems;
     private String start;
@@ -30,7 +30,7 @@ public class InterfaceParame implements Serializable {
     @Override
     public String toString() {
         return "InterfaceParame{" +
-                "userkey='" + userkey + '\'' +
+                "userkey='" + key + '\'' +
                 ", sid='" + sid + '\'' +
                 ", elems=" + elems +
                 ", start='" + start + '\'' +
@@ -49,12 +49,12 @@ public class InterfaceParame implements Serializable {
                 '}';
     }
 
-    public String getUserkey() {
-        return userkey;
+    public String getKey() {
+        return key;
     }
 
-    public void setUserkey(String userkey) {
-        this.userkey = userkey;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getSid() {

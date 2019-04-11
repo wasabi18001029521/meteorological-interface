@@ -4,7 +4,8 @@ package cn.webyun.meteorologicalinterface.controller;
 import cn.webyun.meteorologicalinterface.ServiceException.ParametersException;
 import cn.webyun.meteorologicalinterface.ServiceException.PrivilegeException;
 import cn.webyun.meteorologicalinterface.entity.InterfaceParame;
-import cn.webyun.meteorologicalinterface.entity.InterfaceReturnDataBase;
+import cn.webyun.meteorologicalinterface.entity.InterfaceReturnData;
+
 import cn.webyun.meteorologicalinterface.message.response.ResponseBase;
 import cn.webyun.meteorologicalinterface.service.RefinedUrbanForecastService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class RefinedUrbanForecastController extends BaseController{
      */
     @GetMapping("/area")
     public ResponseEntity<?> CityArea(@Valid  InterfaceParame interfaceParame) throws PrivilegeException{
-            InterfaceReturnDataBase interfaceReturnDataBase = refinedUrbanForecastService.getCityAreainfo(interfaceParame);
+            InterfaceReturnData interfaceReturnDataBase = refinedUrbanForecastService.getCityAreainfo(interfaceParame);
             return ResponseEntity.ok(new ResponseBase(true,SUCCESS, interfaceReturnDataBase));
     };
     /**
@@ -42,7 +43,7 @@ public class RefinedUrbanForecastController extends BaseController{
      */
     @GetMapping("/one")
     public ResponseEntity<?> CityOne(@Valid  InterfaceParame interfaceParame) {
-            InterfaceReturnDataBase interfaceReturnDataBase = refinedUrbanForecastService.getCityOneinfo(interfaceParame);
+            InterfaceReturnData interfaceReturnDataBase = refinedUrbanForecastService.getCityOneinfo(interfaceParame);
             return ResponseEntity.ok(new ResponseBase(true,SUCCESS, interfaceReturnDataBase));
 
     }
