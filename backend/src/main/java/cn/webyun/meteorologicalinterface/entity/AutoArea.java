@@ -4,10 +4,8 @@ import javax.validation.constraints.NotBlank;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class AutoArea {
+public class AutoArea extends Auto{
     // 中国地面自动站区域查询数据获取接口实体类
-    @NotBlank(message = "密钥必填")
-    private String key;
     private Integer level;
     private Number maxLon;
     private Number maxLat;
@@ -81,11 +79,4 @@ public class AutoArea {
         this.format = format;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
 }

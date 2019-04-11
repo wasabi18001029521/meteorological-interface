@@ -43,7 +43,7 @@ public class UserKeyVaildService {
 
     }
     // 根据userKey查询试用开始时间
-    private String selectEffective(String userkey) {
+    public String selectEffective(String userkey) {
         return userMapper.selectEffective(userkey);
     }
 }
