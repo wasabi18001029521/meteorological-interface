@@ -4,7 +4,7 @@ import cn.webyun.meteorologicalinterface.ServiceException.DataException;
 import cn.webyun.meteorologicalinterface.ServiceException.ParametersException;
 import cn.webyun.meteorologicalinterface.ServiceException.PrivilegeException;
 import cn.webyun.meteorologicalinterface.entity.InterfaceParame;
-import cn.webyun.meteorologicalinterface.entity.InterfaceReturnDataBase;
+import cn.webyun.meteorologicalinterface.entity.InterfaceReturnData;
 import cn.webyun.meteorologicalinterface.mapper.RefinedUrbanForecastMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,9 +30,9 @@ public class RefinedUrbanForecastService {
      * @param interfaceParame
      * @return
      */
-    public InterfaceReturnDataBase getCityAreainfo(InterfaceParame interfaceParame)
+    public InterfaceReturnData getCityAreainfo(InterfaceParame interfaceParame)
             throws PrivilegeException, ParametersException {
-        InterfaceReturnDataBase data1=new InterfaceReturnDataBase();
+        InterfaceReturnData data1=new InterfaceReturnData();
         //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
         int date = userKeyVaildService.volitUserKey(interfaceParame.getUserkey(),1);
             ArrayList arr = new ArrayList();
@@ -46,7 +46,7 @@ public class RefinedUrbanForecastService {
 
     }
     //通过私有方法调用持久层获取数据
-    private InterfaceReturnDataBase findByParame(InterfaceParame interfaceParame){
+    private InterfaceReturnData findByParame(InterfaceParame interfaceParame){
         return refinedUrbanForecastMapper.findByParam(interfaceParame);
     }
 
@@ -55,9 +55,9 @@ public class RefinedUrbanForecastService {
      * @param interfaceParame
      * @return
      */
-    public InterfaceReturnDataBase getCityOneinfo(InterfaceParame interfaceParame)
+    public InterfaceReturnData getCityOneinfo(InterfaceParame interfaceParame)
     throws DataException{
-        InterfaceReturnDataBase data=new InterfaceReturnDataBase();
+        InterfaceReturnData data=new InterfaceReturnData();
         if(data==null){
             throw new DataException();
         }else {
