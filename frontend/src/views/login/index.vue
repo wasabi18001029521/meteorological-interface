@@ -1,8 +1,8 @@
 <template>
     <el-main>
         <div class="login u-banner-box">
-            <div class="form2" style="background: #fefff3">
-                <div class="context1">
+            <div class="u-login-form" style="background: #fefff3">
+                <div class="u-login-context">
                     <h1 class="account" align="center">登录账号</h1>
                 </div>
                 <br/>
@@ -25,8 +25,8 @@
                     <el-form-item>
                         <el-button type="primary" @click="submitForm('login_form')" class="sign">登 录</el-button>
                     </el-form-item>
-                    <el-button type="text" @click="zh" class="retrieve">找回密码</el-button>
-                    <el-button type="text" @click="zc" class="asd">注册新用户</el-button>
+                    <el-button type="text" @click="get" class="retrieve">找回密码</el-button>
+                    <el-button type="text" @click="enroll" class="asd">注册新用户</el-button>
                 </el-form>
             </div>
         </div>
@@ -44,10 +44,10 @@
             };
         },
         methods: {
-            zc() {
+            enroll() {
                 this.$router.push({path: '/api/register'})
             },
-            zh() {
+            get() {
                 this.$router.push({path: '/api/retrieve'})
             },
             submitForm(login_form) {
@@ -93,14 +93,14 @@
         line-height: 50px;
 
     }
-    .context1 {
+    .u-login-context {
         background: #4585ff;
         width: 440px;
         height: 50px;
         background: url('../../assets/img/bg-login.png');
     }
 
-    .form2 {
+    .u-login-form {
         margin: 0 auto;
         position: absolute;
         width: 440px;

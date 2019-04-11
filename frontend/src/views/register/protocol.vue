@@ -87,8 +87,9 @@
         background-color: #fbfbfb;
         .u-serve-text{
             background-color: #fff;
-            padding: 40px 20px;
-            margin: 0 100px;
+            padding: 100px 100px;
+            margin: 0px 170px;
+            width:800px;
             .u-blue{
                 color: #0093fb;
             }

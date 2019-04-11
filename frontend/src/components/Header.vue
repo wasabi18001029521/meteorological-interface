@@ -22,7 +22,7 @@
                                 <el-button type="primary" @click="register">注册</el-button>
                             </el-menu-item>
                             <el-menu-item index="5" v-if="!isAuthenticated" >
-                                <el-button type="info" @click="deng">登录</el-button>
+                                <el-button type="info" @click="entry">登录</el-button>
                             </el-menu-item>
                             <el-menu-item v-if="isAuthenticated" index="4" @click='myMessage'>我的账号</el-menu-item>
                             <el-menu-item index="5"  v-if="isAuthenticated">
@@ -70,7 +70,7 @@
             register() {
                 this.$router.push({path: '/api/register'})
             },
-            deng() {
+            entry() {
                 this.$router.push({path: '/api/login'})
             },
             myMessage() {
