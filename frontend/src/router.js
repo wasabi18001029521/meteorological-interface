@@ -8,6 +8,8 @@ import Register from './views/register/index.vue'
 import Service from './views/register/protocol.vue'
 import Login from './views/login/index.vue'
 import myMessage from './views/account/index.vue'
+import payment from './views/account/payment.vue'
+import remittance from './views/account/remittance.vue'
 import Retrieve from './views/retrieve/index'
 import VueRouter from 'vue-router'
 import store from "./store";
@@ -62,6 +64,16 @@ export default new Router({
             path: '/myMessage',
             name: 'Message',
             component: myMessage
+        },
+        {
+            path: '/payment',
+            name: 'payment',
+            component: payment
+        },
+        {
+            path: '/remittance',
+            name: 'remittance',
+            component: remittance
         },
         {
             path:'/api/retrieve',

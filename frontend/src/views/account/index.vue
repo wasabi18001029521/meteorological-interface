@@ -45,7 +45,7 @@
                                         <div v-for="o in 3" :key="o" class="text item" >
                                             {{'列表内容 ' + o }}
                                         </div>
-                                        <el-button style="position: absolute; right: 10px; top: 10px; " type="warning">操作按钮</el-button>
+                                        <el-button class="u-operation-btn" type="warning" @click="toPayment">立即支付</el-button>
                                     </div>
                                 </el-card>
                             </div>
@@ -82,7 +82,7 @@
     // 导入chart组件
     import XChart from '../../components/chart.vue'
     // 导入chart组件模拟数据
-    import options from '../../chart-options/options'
+    import options from '@/assets/js/chart-options/options'
     import {mapState,mapActions} from "vuex";
     import {getToken} from '@/utils/auth'
     import getters from '../../store/getters'
@@ -206,6 +206,9 @@
                             });
                         }}).catch(failResponse => {})
             },
+            toPayment(){
+                this.$router.push("/payment")
+            }
         },
         components: {
             XChart
@@ -258,6 +261,10 @@
                 .u-state{
                     display: block;
                 }
+            }
+            .u-operation-btn{
+                position: absolute;
+                right: 10px; top: 10px;
             }
         }
     }
