@@ -14,7 +14,7 @@ export default {
   name: 'CodeMirror',
   /* eslint-disable vue/require-prop-types */
   props: {
-    newList: {
+    resultData: {
       type: Object,
     }
   },
@@ -24,10 +24,10 @@ export default {
     }
   },
   watch: {
-    newList (value) {
+    resultData (value) {
       const editorValue = this.jsonShow.getValue()
       if (value !== editorValue) {
-        this.jsonShow.setValue(JSON.stringify(this.newList, null, 2))
+        this.jsonShow.setValue(JSON.stringify(this.resultData, null, 2))
       }
     }
   },
@@ -42,7 +42,7 @@ export default {
       smartIndent: true, // 自动缩进
       lint: false
     })
-    this.jsonShow.setValue(JSON.stringify(this.value, null, 2))
+    this.jsonShow.setValue(JSON.stringify(this.resultData, null, 2))
     this.jsonShow.on('change', cm => {
       this.$emit('changed', cm.getValue())
       this.$emit('input', cm.getValue())
