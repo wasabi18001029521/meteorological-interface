@@ -27,25 +27,25 @@
                         </el-row>
                         <el-row class='u-account-item'>
                             <el-col :span="15" :offset="9"><el-button type="primary" @click="dialogVisible = true" >修改密码</el-button></el-col>
-
-
                         </el-row>
                     </el-tab-pane>
                     <el-tab-pane label="我的订单">
                         <div class='u-account-title'>我的订单<span class='u-line'></span></div>
-                        <div v-for="o in 2" :key="o" class='u-order-box'>
+                        <div v-for="item in myOrder" class='u-order-box'>
                             <div  class='u-order-item'>
                                 <el-card class="box-card">
-                                    <div slot="header" class="clearfix">
-                                        <span class='u-state'>等待付款</span>
-                                        <span>订单号： 123234983248136241982091375</span>
-                                        <span style="float: right; padding: 3px 0" type="text">订单金额：<span class='u-size18'>1200</span>元</span>
+                                    <div slot="header" class="clearfix" :class="item.state">
+                                        <span class='u-state u-payment' v-if="item.state=='payment'">等待付款</span>
+                                        <span class='u-state u-invalid' v-if="item.state=='invalid'">已失效</span>
+                                        <span>订单号： {{item.id}}</span> <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><span>下单时间： {{item.time}}</span>
+                                        <span style="float: right; padding: 3px 0" type="text">订单金额：<span class='u-size18'>{{item.price}}</span>元</span>
                                     </div>
                                     <div  style="position: relative;">
-                                        <div v-for="o in 3" :key="o" class="text item" >
-                                            {{'列表内容 ' + o }}
-                                        </div>
-                                        <el-button class="u-operation-btn" type="warning" @click="toPayment">立即支付</el-button>
+                                        <ul>
+                                            <li v-for="i in item.details" class="text item" >{{ i }}</li>
+                                        </ul>
+                                        <el-button v-if="item.state=='payment'" class="u-operation-btn" type="warning" @click="toPayment">立即支付</el-button>
+                                        <el-button v-if="item.state=='invalid'" disabled class="u-operation-btn" type="info" >已失效</el-button>
                                     </div>
                                 </el-card>
                             </div>
@@ -59,8 +59,7 @@
             </div>
             <el-form status-icon :model="ruleForm2" ref="ruleForm2"  >
             <el-dialog title="修改密码" :visible.sync="dialogVisible" width="30%" >
-             <!-- <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">-->
-                <el-form  status-icon :rules="rules2"  label-width="100px" class="demo-ruleForm">
+              <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="当前密码" prop="currentPassword">
                   <el-input type="text" v-model="ruleForm2.currentPassword" autocomplete="off"></el-input>
                 </el-form-item>
@@ -73,7 +72,7 @@
               </el-form>
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="confirm('ruleForm2')" >确 认</el-button>
+                <el-button type="primary"  @click="confirm('ruleForm2')" >确 认</el-button>
               </span>
             </el-dialog>
             </el-form>
@@ -131,13 +130,13 @@
                 id: 'test',
                 option: option,
                 show:'false',
-                 ruleForm2: {
+                ruleForm2: {
                     currentPassword: '',
                     pass: '',
                     checkPass: '',
 
-                 },
-                 rules2: {
+                },
+                rules2: {
                    pass: [
                         { validator: validatePass, trigger: 'blur' }
                    ],
@@ -147,14 +146,16 @@
                    currentPassword: [
                         { validator: checkCurrentPassword, trigger: 'blur' }
                    ]
-                 },
+                },
+                myOrder:[{id:'123234983248136241982091375',time:'2019-3-2 14:22:50',price:'1200',details:['中国全部和国家主要三千城市','日出日落时间'],state:'payment'},
+                {id:'5555549832481362419855555',time:'2019-4-2 11:11:50',price:'500',details:['中国全部城市','天气实况'],state:'invalid'},]
             };
         },
         methods: {
             confirm(ruleForm2){
                 this.$refs[ruleForm2].validate(valid => {
                     if (valid) {
-                        this.$store
+                                                    this.$store
                             .dispatch("updatePassword",this.ruleForm2)
                             .then(() => {
                             })
@@ -220,6 +221,30 @@
                 padding: 10px 20px;
                 .u-state{
                     display: block;
+                    padding-bottom: 10px;
+                }
+                .payment{
+                    background-color:#FFF4E6;
+                    padding: 18px 20px;
+                    color: #6B6D6C;
+                }
+                .u-payment{
+                    color:#FFA425;
+                }
+                .invalid{
+                    background-color:#F3F3F3;
+                    padding: 18px 20px;
+                    color: #878787;
+                }
+                .el-card__header{
+                    padding: 0;
+                }
+                ul{
+                    padding-left: 20px;
+                    color: #464646;
+                    li{
+                        line-height: 24px;
+                    }
                 }
             }
             .u-operation-btn{

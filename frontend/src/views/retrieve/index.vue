@@ -116,7 +116,6 @@
         width:400px;
         positon: absolute;
         left: -40px;
-        height: 25px;
         text-align: center;
 
 

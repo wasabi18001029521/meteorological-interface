@@ -137,7 +137,6 @@
                 this.tableData = apiData.tableData(type)
             },
 
-
     }}
 
 </script>
@@ -186,7 +185,6 @@
 .u-result{
     background-color: #FCFDFE;
     border: 1px solid #E7EDF4;
-    padding: 10px;
     color: #282E32;
 }
 .u-result>div{
