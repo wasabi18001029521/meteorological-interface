@@ -24,7 +24,8 @@ public class PrivilegeService {
         PrivilegeCriteria critera = new PrivilegeCriteria();
         critera.createCriteria().andPrivNameEqualTo(privName);
         List<Privilege> privList = privilegeMapper.selectByExample(critera);
-        if ((privList != null) && (privList.size() == 1)) return privList.get(0); else return null;
+        if ((privList != null) && (privList.size() == 1)) return privList.get(0);
+        else return null;
     }
 
     @Cacheable(value = "privListCache", unless = "#result == null")
@@ -54,7 +55,7 @@ public class PrivilegeService {
 
         List<Integer> idList = new ArrayList<>();
 
-        for( RolePrivilege i : list) {
+        for (RolePrivilege i : list) {
             idList.add(i.getPrivId());
         }
         return getListFromIds(idList);
@@ -70,7 +71,7 @@ public class PrivilegeService {
             criterion.andPrivDescLike(StringUtils.escapeSQL(search.trim()));
         }
 
-        return privilegeMapper.selectByExampleWithRowbounds(criteria, new RowBounds((pageNum - 1) * pageSize,pageSize));
+        return privilegeMapper.selectByExampleWithRowbounds(criteria, new RowBounds((pageNum - 1) * pageSize, pageSize));
     }
 
     @Cacheable(value = "privListSizeCache", unless = "#result == null")

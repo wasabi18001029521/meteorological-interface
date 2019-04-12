@@ -19,34 +19,34 @@ import java.text.ParseException;
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-public abstract class  BaseController {
+public abstract class BaseController {
     public static final String SUCCESS = "200";
 
     @ResponseBody
     @ExceptionHandler
     public ResponseEntity<?> handlerException(
-            Exception e){
-        Integer state=null;
-        String msg=null;
-        if(e instanceof ParametersException){
+            Exception e) {
+        Integer state = null;
+        String msg = null;
+        if (e instanceof ParametersException) {
             //msg="参数异常";
-            state=400;
-        }else if(e instanceof PrivilegeException){
+            state = 400;
+        } else if (e instanceof PrivilegeException) {
             //msg="权限异常";
-            state=401;
-        }else if(e instanceof ForbiddenException){
+            state = 401;
+        } else if (e instanceof ForbiddenException) {
             //msg="Forbidden";
-            state=403;
-        }else if(e instanceof DataException){
+            state = 403;
+        } else if (e instanceof DataException) {
             //msg="数据异常";
-            state=404;
-        }else if(e instanceof ServerException){
+            state = 404;
+        } else if (e instanceof ServerException) {
             //msg="服务异常";
-            state=500;
-        }else if(e instanceof ParseException){
+            state = 500;
+        } else if (e instanceof ParseException) {
             //msg="服务异常";
-            state=800;
+            state = 800;
         }
-        return ResponseEntity.ok(new ResponseError(state.toString(),e.getMessage()));
+        return ResponseEntity.ok(new ResponseError(state.toString(), e.getMessage()));
     }
 }

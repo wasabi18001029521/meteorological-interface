@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/station/auto")
-public class GroundController extends BaseController{
+public class GroundController extends BaseController {
     @Resource
     UserKeyVaildService userKeyVaildService;
     @Resource
@@ -24,18 +24,18 @@ public class GroundController extends BaseController{
 
     // 中国地面自动站区域查询数据获取接口
     @GetMapping("/area")
-    public ResponseEntity<?> area(@Valid AutoArea autoArea)  {
-        ShareInterfaceReturnsData shareInterfaceReturnsData=groundService.getarea(autoArea);
-            return ResponseEntity.ok(new ResponseBase(true,SUCCESS,shareInterfaceReturnsData));
+    public ResponseEntity<?> area(@Valid AutoArea autoArea) {
+        ShareInterfaceReturnsData shareInterfaceReturnsData = groundService.getarea(autoArea);
+        return ResponseEntity.ok(new ResponseBase(true, SUCCESS, shareInterfaceReturnsData));
 
     }
 
 
     // 中国地面自动站单站查询数据获取接口
     @GetMapping("/one")
-    public ResponseEntity<?> one(@Valid AutoOne autoOne){
-            ShareInterfaceReturnsData shareInterfaceReturnsData=groundService.getone(autoOne);
-        return ResponseEntity.ok(new ResponseBase(true,SUCCESS,shareInterfaceReturnsData));
+    public ResponseEntity<?> one(@Valid AutoOne autoOne) {
+        ShareInterfaceReturnsData shareInterfaceReturnsData = groundService.getone(autoOne);
+        return ResponseEntity.ok(new ResponseBase(true, SUCCESS, shareInterfaceReturnsData));
 
     }
 
@@ -43,7 +43,7 @@ public class GroundController extends BaseController{
     @GetMapping("/nearest")
     public ResponseEntity<?> nearest(@Valid Nearest nearest) {
         ShareInterfaceReturnsData shareInterfaceReturnsData = groundService.getone(nearest);
-        return ResponseEntity.ok(new ResponseBase(true,SUCCESS,shareInterfaceReturnsData));
+        return ResponseEntity.ok(new ResponseBase(true, SUCCESS, shareInterfaceReturnsData));
 
     }
 }

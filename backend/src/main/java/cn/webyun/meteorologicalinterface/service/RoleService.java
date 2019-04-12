@@ -61,7 +61,7 @@ public class RoleService {
 
         List<Integer> idList = new ArrayList<>();
 
-        for( UserRole i : list) {
+        for (UserRole i : list) {
             idList.add(i.getRoleId());
         }
 
@@ -78,16 +78,16 @@ public class RoleService {
             criterion.andRoleDescLike(StringUtils.escapeSQL(search.trim()));
         }
 
-        return roleMapper.selectByExampleWithRowbounds(criteria, new RowBounds((pageNum - 1) * pageSize,pageSize));
+        return roleMapper.selectByExampleWithRowbounds(criteria, new RowBounds((pageNum - 1) * pageSize, pageSize));
     }
 
     public List<RoleWithInfos> getListWithInfos(Integer pageNum, Integer pageSize, String search, String category) {
 
-        List<Role>  infoList = getList(pageNum, pageSize, search, category);
+        List<Role> infoList = getList(pageNum, pageSize, search, category);
 
         List<RoleWithInfos> resList = new ArrayList<RoleWithInfos>();
-        for(Role i : infoList) {
-            resList.add(new RoleWithInfos(i,userService.getList(userRoleService.getUserRolebyRoleId(i.getId())),
+        for (Role i : infoList) {
+            resList.add(new RoleWithInfos(i, userService.getList(userRoleService.getUserRolebyRoleId(i.getId())),
                     privilegeService.getList(rolePrivilegeService.getRolePrivilegebyRoleId(i.getId()))));
         }
 
@@ -118,7 +118,8 @@ public class RoleService {
         RoleCriteria critera = new RoleCriteria();
         critera.createCriteria().andRoleNameEqualTo(roleName);
         List<Role> roleList = roleMapper.selectByExample(critera);
-        if ((roleList != null) && (roleList.size() == 1)) return roleList.get(0); else return null;
+        if ((roleList != null) && (roleList.size() == 1)) return roleList.get(0);
+        else return null;
     }
 
     @Transactional

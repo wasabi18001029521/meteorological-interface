@@ -33,7 +33,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
         try {
 
             String jwt = getJwt(request);
-            if (jwt!=null && tokenProvider.validateJwtToken(jwt)) {
+            if (jwt != null && tokenProvider.validateJwtToken(jwt)) {
                 String username = tokenProvider.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -54,7 +54,7 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            return authHeader.replace("Bearer ","");
+            return authHeader.replace("Bearer ", "");
         }
 
         return null;

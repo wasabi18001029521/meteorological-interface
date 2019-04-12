@@ -47,9 +47,9 @@ public class UserPrivilegeDetailsService implements UserDetailsService {
                     user.getUserName(),
                     user.getUserPassword(),
                     user.getAccountEnabled(),
-                    ! user.getAccountExpired(),
-                    ! user.getPasswordExpired(),
-                    ! user.getAccountLocked(),
+                    !user.getAccountExpired(),
+                    !user.getPasswordExpired(),
+                    !user.getAccountLocked(),
                     getAuthorities(user));
         } catch (Exception e) {
             throw new UsernameNotFoundException("User: " + username + " query exception.");

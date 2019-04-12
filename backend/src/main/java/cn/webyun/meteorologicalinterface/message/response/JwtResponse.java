@@ -60,7 +60,8 @@ public class JwtResponse extends ResponseBase {
         this.authorities = authorities;
 
     }
-   public JwtResponse(String accessToken, Boolean authenticated, User user, List<String> authorities,Boolean success,String msg) {
+
+    public JwtResponse(String accessToken, Boolean authenticated, User user, List<String> authorities, Boolean success, String msg) {
         this.token = accessToken;
         this.authenticated = authenticated;
         this.username = user.getUserName();
@@ -70,21 +71,21 @@ public class JwtResponse extends ResponseBase {
         this.address = user.getAddress();
         this.phone = user.getPhone();
         this.authorities = authorities;
-        this.success=success;
-        this.msg=msg;
-
-    }
-    public JwtResponse(User user,Boolean success,String msg) {
-        this.id=user.getId();
-        this.username=user.getUserName();
-        this.user_key=user.getUser_key();
-        this.user_register=user.getUser_register();
-        this.user_login=user.getUser_login();
-        this.success=success;
-        this.msg=msg;
+        this.success = success;
+        this.msg = msg;
 
     }
 
+    public JwtResponse(User user, Boolean success, String msg) {
+        this.id = user.getId();
+        this.username = user.getUserName();
+        this.user_key = user.getUser_key();
+        this.user_register = user.getUser_register();
+        this.user_login = user.getUser_login();
+        this.success = success;
+        this.msg = msg;
+
+    }
 
 
     @Override

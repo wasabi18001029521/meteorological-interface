@@ -15,27 +15,27 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/change")
-public class ModifyInformation {
+public class ModifyController {
     @Resource
     UserService userService;
 
 
     @PostMapping("/password")
-    public ResponseEntity<?> updatePassword(@Valid @RequestBody ChangePassword changePassword ,HttpServletRequest request){
+    public ResponseEntity<?> updatePassword(@Valid @RequestBody ChangePassword changePassword, HttpServletRequest request) {
         try {
             // 获取用户输入密码
-            String currentpassword=changePassword.getCurrentPassword();
+            String currentpassword = changePassword.getCurrentPassword();
             // 获取新密码
-            String CheckPass=changePassword.getCheckPass();
+            String CheckPass = changePassword.getCheckPass();
             // 获取Tokne解析用户名
             String username = userService.getUsername(request);
             // 根据用户名查询原密码 进行匹配
             Boolean mistake = userService.getPassword(username, currentpassword);
-            if(mistake ==false){
+            if (mistake == false) {
                 return ResponseEntity.ok(new ResponseBase(false, "密码不正确"));
             }
             // 修改密码
-            userService.modifyPassword(CheckPass,username);
+            userService.modifyPassword(CheckPass, username);
             return ResponseEntity.ok(new ResponseBase(true, "修改密码成功"));
         } catch (Exception e) {
             e.printStackTrace();
