@@ -82,7 +82,7 @@
         position: absolute;
     }
     .account {
-        color: #ffebef;
+        color:  #ffffff;
         width: 150px;
         margin: 0 auto;
         font-size: 20px;
