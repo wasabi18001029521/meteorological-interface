@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class AutoArea extends Auto{
+public class AutoArea extends Auto {
     // 中国地面自动站区域查询数据获取接口实体类
     private Integer level;
     private Number maxLon;

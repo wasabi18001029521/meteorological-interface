@@ -288,21 +288,23 @@ public class UserService {
         }
         return false;
     }
+
     //查询用户名是否重复
     public String selectUsername(String username) {
         return userMapper.selectUsername(username);
     }
+
     //用户注册添加数据
-    public int insertUser(String username, String password,String md5username) {
-        Date  date=new java.util.Date();
-        java.sql.Date  data1=new java.sql.Date(date.getTime());
-        SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateFormat=sy1.format(data1);
-        return userMapper.insertUser(username,password,md5username,dateFormat);
+    public int insertUser(String username, String password, String md5username) {
+        Date date = new java.util.Date();
+        java.sql.Date data1 = new java.sql.Date(date.getTime());
+        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateFormat = sy1.format(data1);
+        return userMapper.insertUser(username, password, md5username, dateFormat);
     }
 
     //MD5加密方法
-    public   String MD5(String sourceStr) throws NoSuchAlgorithmException {
+    public String MD5(String sourceStr) throws NoSuchAlgorithmException {
         String result = "";
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(sourceStr.getBytes());
@@ -321,21 +323,21 @@ public class UserService {
         return result;
     }
 
-    public void insertUser(String usernmae){
+    public void insertUser(String usernmae) {
         // 根据用户名查询ID
         int id = userMapper.selectId(usernmae);
         // 新注册的用户默认可以访问接口表ID为1的接口
-        int interfaceId=1;
-        userMapper.insertId(id,interfaceId);
+        int interfaceId = 1;
+        userMapper.insertId(id, interfaceId);
     }
 
     // 获取当前时间 插入数据库
-    public void loginTime(String username){
-        Date  date=new java.util.Date();
-        java.sql.Date  data1=new java.sql.Date(date.getTime());
-        SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateFormat=sy1.format(data1);
-        userMapper.updateTime(dateFormat,username);
+    public void loginTime(String username) {
+        Date date = new java.util.Date();
+        java.sql.Date data1 = new java.sql.Date(date.getTime());
+        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateFormat = sy1.format(data1);
+        userMapper.updateTime(dateFormat, username);
     }
 
 
@@ -345,11 +347,11 @@ public class UserService {
     }
 
     // 获取当前时间方法
-    public String dataTime(){
-        Date  date=new java.util.Date();
-        java.sql.Date  data1=new java.sql.Date(date.getTime());
-        SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateFormat=sy1.format(data1);
+    public String dataTime() {
+        Date date = new java.util.Date();
+        java.sql.Date data1 = new java.sql.Date(date.getTime());
+        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String dateFormat = sy1.format(data1);
         return dateFormat;
     }
 
@@ -365,30 +367,30 @@ public class UserService {
     // 根据用户名查询原密码 解密 进行判断
 
     /**
-     * @param username 用户名
+     * @param username        用户名
      * @param currentpassword 原密码
      * @return
      */
-    public Boolean getPassword(String username,String currentpassword) {
-        Boolean correct  = false;
+    public Boolean getPassword(String username, String currentpassword) {
+        Boolean correct = false;
         // 查询原密码
         String password = userMapper.selectPassword(username);
         // 进行密码匹配判断
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         // 新密码/数据库加密的原密码
-        if(!bCryptPasswordEncoder.matches(currentpassword,password)){
+        if (!bCryptPasswordEncoder.matches(currentpassword, password)) {
             return correct;
         }
         correct = true;
-            return correct;
+        return correct;
     }
 
     // 修改密码
-    public void modifyPassword(String CheckPass,String username){
+    public void modifyPassword(String CheckPass, String username) {
         // 密码加密
-        String password=new BCryptPasswordEncoder().encode(CheckPass);
+        String password = new BCryptPasswordEncoder().encode(CheckPass);
         // 修改密码
-         userMapper.updatePassword(password,username);
+        userMapper.updatePassword(password, username);
         // System.out.println("密码修改"+number);
     }
 }

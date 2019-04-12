@@ -13,7 +13,6 @@ public class LoginForm {
     private String password;
 
 
-
     public String getUsername() {
 
         return username;

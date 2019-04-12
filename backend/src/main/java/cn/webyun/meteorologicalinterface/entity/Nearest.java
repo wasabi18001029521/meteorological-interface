@@ -2,7 +2,7 @@ package cn.webyun.meteorologicalinterface.entity;
 
 import java.util.ArrayList;
 
-public class Nearest extends Auto{
+public class Nearest extends Auto {
     private Number lon;
     private Number lat;
 

@@ -10,8 +10,6 @@ public class AutoOne extends Auto {
     private ArrayList<String> elems;
 
 
-
-
     public String getSid() {
         return sid;
     }

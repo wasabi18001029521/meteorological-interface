@@ -29,7 +29,7 @@ public class InformationController {
 
     @PostMapping("/information")
     @ResponseBody
-    public ResponseEntity<?> user(@Valid  HttpServletRequest request) {
+    public ResponseEntity<?> user(@Valid HttpServletRequest request) {
         try {
             // 获取请求头信息 从请求头中获取Token
             String token = request.getHeader("Authorization").split("\\s+")[1];
@@ -48,13 +48,14 @@ public class InformationController {
         }
 
     }
+
     //退出登录
     @PostMapping("/quit")
     @ResponseBody
-    public ResponseEntity<?> quitUser(@Valid  HttpServletRequest request, HttpServletResponse response){
+    public ResponseEntity<?> quitUser(@Valid HttpServletRequest request, HttpServletResponse response) {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (auth != null){
+            if (auth != null) {
                 // System.out.println("退出执行了");
                 new SecurityContextLogoutHandler().logout(request, response, auth);
             }

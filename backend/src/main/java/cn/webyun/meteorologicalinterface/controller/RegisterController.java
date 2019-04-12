@@ -30,20 +30,20 @@ public class RegisterController {
     UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody LoginForm loginRequest){
+    public ResponseEntity<?> register(@Valid @RequestBody LoginForm loginRequest) {
         try {
             // 获取用户输入邮箱
             String username = loginRequest.getUsername();
 
-            if(userService.selectUsername(username)!=null){
+            if (userService.selectUsername(username) != null) {
                 return ResponseEntity.ok(new ResponseBase(false, "邮箱已被注册"));
             }
             // 对密码进行加密
-            String password=new BCryptPasswordEncoder().encode(loginRequest.getPassword());
+            String password = new BCryptPasswordEncoder().encode(loginRequest.getPassword());
             // 用户名进行32位MD5加密生产key
             String time = userService.dataTime();
             String md5username = userService.MD5(time);
-            userService.insertUser(username,password,md5username);
+            userService.insertUser(username, password, md5username);
             // 为新用户设置默认可以访问的接口
             userService.insertUser(username);
             return ResponseEntity.ok(new ResponseBase(true, "注册成功"));
@@ -53,7 +53,6 @@ public class RegisterController {
         }
 
     }
-
 
 
 }

@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 /**
  * 传入的参数类型
- *  @NotBlank添加不为空注解,没有密匙报400错
+ *
+ * @NotBlank添加不为空注解,没有密匙报400错
  */
 public class InterfaceParame implements Serializable {
     @NotBlank(message = "密钥必填")

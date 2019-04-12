@@ -1,8 +1,8 @@
 package cn.webyun.meteorologicalinterface.message.response;
 
 public class ResponseError {
-    private String errorCode="";
-    private String errorInfo="";
+    private String errorCode = "";
+    private String errorInfo = "";
 
     public ResponseError() {
     }
@@ -20,7 +20,6 @@ public class ResponseError {
     public String getErrorCode() {
         return errorCode;
     }
-
 
 
     public void setErrorCode(String errorCode) {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 /**
  * 返回的实体类数据类型
  */
@@ -20,8 +21,6 @@ public class ShareInterfaceReturnsData implements Serializable {
     private Double t;
     private Double wd;
     private Double ws;
-
-
 
 
     public String getDatatime() {

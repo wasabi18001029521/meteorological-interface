@@ -13,20 +13,20 @@ public class InterfaceReturnData implements Serializable {
     private String datatime;
     private Double dt;
     private ArrayList lonlat;
-    private Double p ;
+    private Double p;
     private Double prec_1h;
     private Double rh;
     private Double slp;
-    private String  staCode;
+    private String staCode;
     private Double t;
-    private Double wd ;
-    private Double ws ;
-    private String  basetime ;
+    private Double wd;
+    private Double ws;
+    private String basetime;
     private Double lcc;
-    private Double tcc ;
-    private Double vis ;
-    private String  wp ;
-    private Double prec ;
+    private Double tcc;
+    private Double vis;
+    private String wp;
+    private Double prec;
 
     public String getDatatime() {
         return datatime;
