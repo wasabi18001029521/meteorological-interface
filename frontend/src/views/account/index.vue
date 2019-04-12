@@ -57,10 +57,12 @@
                     </el-tab-pane>
                 </el-tabs>
             </div>
+            <el-form status-icon :model="ruleForm2" ref="ruleForm2"  >
             <el-dialog title="修改密码" :visible.sync="dialogVisible" width="30%" >
-              <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+             <!-- <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">-->
+                <el-form  status-icon :rules="rules2"  label-width="100px" class="demo-ruleForm">
                 <el-form-item label="当前密码" prop="currentPassword">
-                  <el-input type="text" v-model.number="ruleForm2.currentPassword" autocomplete="off"></el-input>
+                  <el-input type="text" v-model="ruleForm2.currentPassword" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="新密码" prop="pass">
                   <el-input ttype="text" v-model="ruleForm2.pass" autocomplete="off"></el-input>
@@ -71,9 +73,10 @@
               </el-form>
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 认</el-button>
+                <el-button type="primary" @click="confirm('ruleForm2')" >确 认</el-button>
               </span>
             </el-dialog>
+            </el-form>
         </el-main>
     </el-container>
 </template>
@@ -92,32 +95,24 @@
         data() {
             let option = options.bar
             var checkCurrentPassword = (rule, value, callback) => {
-                    if (!value) {
-                      return callback(new Error('当前密码不能为空'));
+                    if (value === '') {
+                         callback(new Error('当前密码不能为空'));
+                    }else {
+                        callback();
                     }
-                    setTimeout(() => {
-                      if (value) {
-                        if (value < 18) {
-                          callback(new Error('必须满18的数字'));
-                        } else {
-                          callback();
-                        }
-                      }
-                    }, 1000);
                   };
              var validatePass = (rule, value, callback) => {
-                    if (value === '') {
-                      callback(new Error('请输入密码'));
-                    }else if(value == this.ruleForm2.currentPassword){
+                   if (value === '') {
+                        return callback(new Error('请输入密码'));
+                    }else if(this.ruleForm2.pass === this.ruleForm2.currentPassword){
                         callback(new Error('密码不能与当前密码相同'));
-                    } else if (this.ruleForm2.checkPass !== '') {
-                        this.$refs.ruleForm2.validateField('checkPass');
-                      }
+                    } else{
                       callback();
+                      }
                   };
              var validatePass2 = (rule, value, callback) => {
-                    if (value === '') {
-                      callback(new Error('请再次输入密码'));
+                  if (value === '') {
+                    return  callback(new Error('请再次输入密码'));
                     } else if (value !== this.ruleForm2.pass) {
                       callback(new Error('两次输入密码不一致!'));
                     } else {
@@ -137,9 +132,10 @@
                 option: option,
                 show:'false',
                  ruleForm2: {
+                    currentPassword: '',
                     pass: '',
                     checkPass: '',
-                    currentPassword: ''
+
                  },
                  rules2: {
                    pass: [
@@ -154,57 +150,21 @@
                  },
             };
         },
-      /*  created() {
-            //console.log("页面未渲染之前就发送请求 ")
-            /!*      this.$store
-                      .dispatch("my")
-                      .then(() => {
-                      })
-                      .catch(() => {
-                      })*!/
-            this.fetchData()
-            console.log("页面显示的ID="+store.getters.userid)
-            console.log()
-            /!*   console.log(123)
-               console.log(store.getters.userid)*!/
-        },
-        watch: {
-            // 如果路由有变化，会再次执行该方法
-            '$route': 'fetchData'
-        },*/
         methods: {
-      /*      fetchData(){
-                this.$store
-                    .dispatch("my")
-                    .then(() => {
-                    })
-                    .catch(() => {
-                    })
-            },
-*/
-            open1() {
-
-                this.$axios.post('http://localhost:8080/passworddo/password', {
-                    username: '956901244@qq.com',
-                    password: this.password,
-                    newpassword:this.Newpassword,
-                    confirmthenewpassword:this.Confirmthenewpassword
-
-                })
-                    .then(successResponse => {
-                        this.responseResult = JSON.stringify(successResponse.data)
-                        if (successResponse.data.code === 200) {
-                            this.$message({
-                                message: successResponse.data.message,
-                                type: 'success'
+            confirm(ruleForm2){
+                this.$refs[ruleForm2].validate(valid => {
+                    if (valid) {
+                        this.$store
+                            .dispatch("updatePassword",this.ruleForm2)
+                            .then(() => {
+                            })
+                            .catch(() => {
+                                this.loading = false;
                             });
-                        }if (successResponse.data.code !== 200) {
-                            //  alert(JSON.stringify(successResponse.data.message))
-                            this.$message({
-                                message: successResponse.data.message,
-                                type: 'warning'
-                            });
-                        }}).catch(failResponse => {})
+                    } else {
+                        return false;
+                    }
+                });
             },
         },
         components: {

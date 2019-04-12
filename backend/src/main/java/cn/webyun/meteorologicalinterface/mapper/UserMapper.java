@@ -159,4 +159,8 @@ public interface UserMapper {
     User selectUser(String userNameFromJwtToken);
     @Select("select user_effective from sys_users where user_key = #{key}")
     String selectEffective(String key);
+    @Select("select user_password from sys_users where user_name = #{username}")
+    String  selectPassword(String username);
+    @Update("update sys_users set user_password = #{checkPass} where user_name = #{usernmae} ")
+    int updatePassword(String checkPass,String usernmae);
 }

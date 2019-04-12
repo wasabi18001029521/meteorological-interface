@@ -1,9 +1,10 @@
 import {login, logout, getInfo} from '@/api/login'
 import {userregister} from '@/api/register'
 import {getToken, setToken, removeToken} from '@/utils/auth'
-import {Message} from '@/api/mymessage'
+import {Message,changepass} from '@/api/mymessage'
 import {quit} from '@/api/quit'
 import store from "../../store";
+
 
 const user = {
     state: {
@@ -82,10 +83,25 @@ const user = {
                 })
             })
         },
+        // 修改密码Message
+        /*  currentPassword,
+            pass,
+            checkPass
+        */
+        updatePassword({commit},ruleForm2) {
+            return new Promise((resolve, reject) => {
+                Message(ruleForm2.currentPassword,ruleForm2.pass,ruleForm2.checkPass).then(response =>  {
+                }).catch(error => {
+                    reject(error)
+                })
+            })
+        },
+
+        //ruleForm2.currentPassword, ruleForm2.pass,ruleForm2.checkPass
         // 获取用户信息
         my({commit}) {
             return new Promise((resolve, reject) => {
-                Message().then(response =>  {
+                changepass().then(response =>  {
                     commit('SET_USERID', response.data.id);
                     commit('SET_MYNAME', response.data.userName);
                     commit('SET_USERREGISTER', response.data.user_register);

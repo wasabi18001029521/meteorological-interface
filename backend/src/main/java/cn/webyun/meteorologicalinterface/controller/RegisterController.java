@@ -1,5 +1,6 @@
 package cn.webyun.meteorologicalinterface.controller;
 
+import cn.webyun.meteorologicalinterface.entity.ChangePassword;
 import cn.webyun.meteorologicalinterface.entity.User;
 import cn.webyun.meteorologicalinterface.message.request.LoginForm;
 import cn.webyun.meteorologicalinterface.message.response.JwtResponse;
@@ -40,7 +41,8 @@ public class RegisterController {
             // 对密码进行加密
             String password=new BCryptPasswordEncoder().encode(loginRequest.getPassword());
             // 用户名进行32位MD5加密生产key
-            String md5username = userService.MD5(username);
+            String time = userService.dataTime();
+            String md5username = userService.MD5(time);
             userService.insertUser(username,password,md5username);
             // 为新用户设置默认可以访问的接口
             userService.insertUser(username);
@@ -51,6 +53,7 @@ public class RegisterController {
         }
 
     }
+
 
 
 }

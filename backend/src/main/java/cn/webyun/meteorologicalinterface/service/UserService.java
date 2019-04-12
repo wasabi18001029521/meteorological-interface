@@ -1,5 +1,6 @@
 package cn.webyun.meteorologicalinterface.service;
 
+import cn.webyun.meteorologicalinterface.ServiceException.ParametersException;
 import cn.webyun.meteorologicalinterface.entity.Role;
 import cn.webyun.meteorologicalinterface.entity.User;
 import cn.webyun.meteorologicalinterface.entity.UserCriteria;
@@ -7,17 +8,20 @@ import cn.webyun.meteorologicalinterface.entity.UserRole;
 import cn.webyun.meteorologicalinterface.mapper.UserMapper;
 import cn.webyun.meteorologicalinterface.message.request.UserInfoForm;
 import cn.webyun.meteorologicalinterface.misc.UserWithRoles;
+import cn.webyun.meteorologicalinterface.security.JwtProvider;
 import cn.webyun.meteorologicalinterface.utils.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -42,6 +46,9 @@ public class UserService {
 
     @Autowired
     private RolePrivilegeService rolePrivilegeService;
+
+    @Autowired
+    JwtProvider jwtProvider;
 
     /*@Cacheable(value = "userListCache")
     public List<User> getAllUsers() {
@@ -344,5 +351,44 @@ public class UserService {
         SimpleDateFormat sy1=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String dateFormat=sy1.format(data1);
         return dateFormat;
+    }
+
+    // 从token解析用户名
+    public String getUsername(HttpServletRequest request) {
+        // 获取token
+        String token = request.getHeader("Authorization").split("\\s+")[1];
+        // 解析Token获取用户名
+        String username = jwtProvider.getUserNameFromJwtToken(token);
+        return username;
+    }
+
+    // 根据用户名查询原密码 解密 进行判断
+
+    /**
+     * @param username 用户名
+     * @param currentpassword 原密码
+     * @return
+     */
+    public Boolean getPassword(String username,String currentpassword) {
+        Boolean correct  = false;
+        // 查询原密码
+        String password = userMapper.selectPassword(username);
+        // 进行密码匹配判断
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        // 新密码/数据库加密的原密码
+        if(!bCryptPasswordEncoder.matches(currentpassword,password)){
+            return correct;
+        }
+        correct = true;
+            return correct;
+    }
+
+    // 修改密码
+    public void modifyPassword(String CheckPass,String username){
+        // 密码加密
+        String password=new BCryptPasswordEncoder().encode(CheckPass);
+        // 修改密码
+         userMapper.updatePassword(password,username);
+        // System.out.println("密码修改"+number);
     }
 }

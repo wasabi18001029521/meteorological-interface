@@ -16,8 +16,8 @@ public class JwtResponse extends ResponseBase {
     private String address;
     private String phone;
     private List<String> authorities;
-    private Boolean success = true;
-    private String msg = "";
+    private Boolean success;
+    private String msg;
     private Integer id;
     private String user_key;
     private String user_register;
@@ -84,6 +84,8 @@ public class JwtResponse extends ResponseBase {
         this.msg=msg;
 
     }
+
+
 
     @Override
     public Boolean getSuccess() {
