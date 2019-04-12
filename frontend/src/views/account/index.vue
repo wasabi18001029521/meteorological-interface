@@ -96,14 +96,19 @@
             var checkCurrentPassword = (rule, value, callback) => {
                     if (value === '') {
                          callback(new Error('当前密码不能为空'));
-                    }else {
+                    }if(value.length < 6){
+                    callback(new Error('请输入6位以及6位以上的密码'));
+                     }
+                    else {
                         callback();
                     }
                   };
              var validatePass = (rule, value, callback) => {
                    if (value === '') {
-                        return callback(new Error('请输入密码'));
-                    }else if(this.ruleForm2.pass === this.ruleForm2.currentPassword){
+                      callback(new Error('请输入密码'));
+                    }if(value.length < 6){
+                     callback(new Error('请输入6位以及6位以上的密码'));
+                 }else if(this.ruleForm2.pass === this.ruleForm2.currentPassword){
                         callback(new Error('密码不能与当前密码相同'));
                     } else{
                       callback();
@@ -111,8 +116,10 @@
                   };
              var validatePass2 = (rule, value, callback) => {
                   if (value === '') {
-                    return  callback(new Error('请再次输入密码'));
-                    } else if (value !== this.ruleForm2.pass) {
+                    callback(new Error('请再次输入密码'));
+                    } if(value.length < 6){
+                     callback(new Error('请输入6位以及6位以上的密码'));
+                 }else if (value !== this.ruleForm2.pass) {
                       callback(new Error('两次输入密码不一致!'));
                     } else {
                       callback();
@@ -155,7 +162,7 @@
             confirm(ruleForm2){
                 this.$refs[ruleForm2].validate(valid => {
                     if (valid) {
-                                                    this.$store
+                        this.$store
                             .dispatch("updatePassword",this.ruleForm2)
                             .then(() => {
                             })
@@ -221,30 +228,6 @@
                 padding: 10px 20px;
                 .u-state{
                     display: block;
-                    padding-bottom: 10px;
-                }
-                .payment{
-                    background-color:#FFF4E6;
-                    padding: 18px 20px;
-                    color: #6B6D6C;
-                }
-                .u-payment{
-                    color:#FFA425;
-                }
-                .invalid{
-                    background-color:#F3F3F3;
-                    padding: 18px 20px;
-                    color: #878787;
-                }
-                .el-card__header{
-                    padding: 0;
-                }
-                ul{
-                    padding-left: 20px;
-                    color: #464646;
-                    li{
-                        line-height: 24px;
-                    }
                 }
             }
             .u-operation-btn{

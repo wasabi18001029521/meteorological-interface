@@ -59,8 +59,8 @@
                             .dispatch("Login", this.login_form)
                             .then(() => {
                                 // this.loading = false;
-                                this.$router.push({ path: "/" });
-                    })
+                                this.$router.push({path: "/"});
+                            })
                             .catch(() => {
                                 this.loading = false;
                             });
@@ -76,11 +76,12 @@
     }
 </script>
 <style lang="less">
-    .login.u-banner-box{
+    .login.u-banner-box {
         height: 90%;
         width: 100%;
         position: absolute;
     }
+
     .account {
         color:  #ffffff;
         width: 150px;
@@ -89,8 +90,8 @@
         height: 100px;
         text-align: center;
         line-height: 50px;
-
     }
+
     .u-login-context {
         background: #4585ff;
         width: 440px;

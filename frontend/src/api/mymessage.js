@@ -4,17 +4,16 @@ export function changepass() {
     return request({
         url: '/user/information',
         method: 'post',
-        data: {
-        }
+        data: {}
     })
 }
 
-export function Message(currentPassword,pass,checkPass) {
+export function message(currentPassword, pass, checkPass) {
     return request({
         url: '/api/change/password ',
         method: 'post',
         data: {
-         currentPassword,
+            currentPassword,
             pass,
             checkPass
         }

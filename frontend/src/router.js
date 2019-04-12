@@ -14,10 +14,9 @@ import Retrieve from './views/retrieve/index'
 import VueRouter from 'vue-router'
 import store from "./store";
 import {Message} from "element-ui";
-import { getToken } from '@/utils/auth' // getToken from cookie
+import {getToken} from '@/utils/auth' // getToken from cookie
 import router from './router'
 import documents from './views/documents/index.vue'
-
 
 
 Vue.use(Router)
@@ -39,7 +38,7 @@ export default new Router({
             name: 'price',
             component: Price,
         },
-         {
+        {
             path: '/purchase',
             name: 'purchase',
             component: Purchase,
@@ -76,15 +75,15 @@ export default new Router({
             component: remittance
         },
         {
-            path:'/api/retrieve',
-            name:'retrieve',
-            component:Retrieve
+            path: '/api/retrieve',
+            name: 'retrieve',
+            component: Retrieve
         },
         ,
         {
-            path:'/api/documents',
-            name:'documents',
-            component:documents
+            path: '/api/documents',
+            name: 'documents',
+            component: documents
         },
     ]
 

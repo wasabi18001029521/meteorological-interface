@@ -40,7 +40,6 @@ public class RegisterController {
             }
             // 对密码进行加密
             String password = new BCryptPasswordEncoder().encode(loginRequest.getPassword());
-            // 用户名进行32位MD5加密生产key
             String time = userService.dataTime();
             String md5username = userService.MD5(time);
             userService.insertUser(username, password, md5username);

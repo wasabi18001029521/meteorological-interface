@@ -11,8 +11,9 @@ import VueHighCharts from 'vue-highcharts'
 import '@/permission' // permission control
 import axios from 'axios';
 
-import codemirror  from 'vue-codemirror'
+import codemirror from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
+
 Vue.use(codemirror)
 
 Vue.prototype.$axios = axios;

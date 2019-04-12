@@ -1,7 +1,7 @@
 import {login, logout, getInfo} from '@/api/login'
 import {userregister} from '@/api/register'
 import {getToken, setToken, removeToken} from '@/utils/auth'
-import {Message,changepass} from '@/api/mymessage'
+import {message, changepass} from '@/api/mymessage'
 import {quit} from '@/api/quit'
 import store from "../../store";
 
@@ -12,11 +12,11 @@ const user = {
         name: '',
         roles: [],
         authenticated: false,
-        userid:'',
-        myname:'',
-        userregister:'',
-        userlogin:'',
-        userkey:'',
+        userid: '',
+        myname: '',
+        userregister: '',
+        userlogin: '',
+        userkey: '',
         //usertoken:''|| localStorage.getItem('usertoken'),
     },
 
@@ -53,12 +53,12 @@ const user = {
         SET_USERKEY: (state, value) => {
             state.userkey = value
         },
-     /*   SET_USERTOKEN: (state, value) => {
-            state.usertoken = value
-            // 把登录的用户的名保存到localStorage中，防止页面刷新，导致vuex重新启动，用户名就成为初始值（初始值为空）的情况
-            localStorage.setItem('usertoken', value)
-        }
-*/
+        /*   SET_USERTOKEN: (state, value) => {
+               state.usertoken = value
+               // 把登录的用户的名保存到localStorage中，防止页面刷新，导致vuex重新启动，用户名就成为初始值（初始值为空）的情况
+               localStorage.setItem('usertoken', value)
+           }
+   */
     },
 
     actions: {
@@ -77,7 +77,7 @@ const user = {
         //注册
         register({commit}, registerForm) {
             return new Promise((resolve, reject) => {
-                userregister(registerForm.register_email, registerForm.register_pass).then(response =>  {
+                userregister(registerForm.register_email, registerForm.register_pass).then(response => {
                 }).catch(error => {
                     reject(error)
                 })
@@ -88,9 +88,9 @@ const user = {
             pass,
             checkPass
         */
-        updatePassword({commit},ruleForm2) {
+        updatePassword({commit}, ruleForm2) {
             return new Promise((resolve, reject) => {
-                Message(ruleForm2.currentPassword,ruleForm2.pass,ruleForm2.checkPass).then(response =>  {
+                message(ruleForm2.currentPassword, ruleForm2.pass, ruleForm2.checkPass).then(response => {
                 }).catch(error => {
                     reject(error)
                 })
@@ -101,13 +101,13 @@ const user = {
         // 获取用户信息
         my({commit}) {
             return new Promise((resolve, reject) => {
-                changepass().then(response =>  {
+                changepass().then(response => {
                     commit('SET_USERID', response.data.id);
                     commit('SET_MYNAME', response.data.userName);
                     commit('SET_USERREGISTER', response.data.user_register);
                     commit('SET_USERLOGIN', response.data.user_login);
                     commit('SET_USERKEY', response.data.user_key);
-                    commit('SET_AUTHENTICATED',true);
+                    commit('SET_AUTHENTICATED', true);
                     resolve(response)
                 }).catch(error => {
                     reject(error)
@@ -153,12 +153,12 @@ const user = {
             return new Promise(resolve => {
                 removeToken()
                 resolve()
-              quit().then(response =>  {
+                quit().then(response => {
                     commit('SET_AUTHENTICATED',);
                     resolve(response)
                 }).catch(error => {
-                    reject(error)
-                }
+                        reject(error)
+                    }
                 )
             })
         },

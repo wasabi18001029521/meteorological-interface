@@ -14,9 +14,6 @@ const store = new Vuex.Store({
 })
 
 
-
-
-
 /*export default new Vuex.Store({
     getters,
     state,
