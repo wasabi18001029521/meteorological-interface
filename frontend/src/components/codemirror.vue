@@ -14,11 +14,8 @@ export default {
   name: 'CodeMirror',
   /* eslint-disable vue/require-prop-types */
   props: {
-    value: {
+    newList: {
       type: Object,
-      default: () => {
-       return { data:[{"state":"new","listImg":"weather","date":"2018-05-18","dataVolume":"15 18G"}] }
-      }
     }
   },
   data () {
@@ -27,10 +24,10 @@ export default {
     }
   },
   watch: {
-    value (value) {
+    newList (value) {
       const editorValue = this.jsonShow.getValue()
       if (value !== editorValue) {
-        this.jsonShow.setValue(JSON.stringify(this.value, null, 2))
+        this.jsonShow.setValue(JSON.stringify(this.newList, null, 2))
       }
     }
   },

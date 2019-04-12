@@ -99,7 +99,7 @@
                 </el-table>
                 <div class="u-tips">返回结果</div>
                 <div class="u-result">
-                    <code-mirror/>
+                    <code-mirror v-bind:newList="newList"></code-mirror>
                 </div>
 
             </div>
@@ -119,6 +119,7 @@
         return {
             apiType:'autoArea',
             tableData:apiData.tableData("autoArea"),
+            newList:{"state":"new","listImg":"weather","date":"2018-05-18","dataVolume":"15 18G"}
        }
     },
         methods: {
