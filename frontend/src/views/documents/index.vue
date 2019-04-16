@@ -1,4 +1,4 @@
-<template>
+<template xmlns:text-decoration="http://www.w3.org/1999/xhtml">
     <el-container class="u-documents-box">
      <el-main>
         <el-row>
@@ -77,20 +77,34 @@
                 <div class="u-describe"  v-if="apiType === 'cityOne'">根据站点编号，查询时间区间内（闭区间）的中国精细化城镇预报数据。</div>
                 <div class="u-tips">请求地址示例</div>
                 <div class="u-describe"  v-if="apiType === 'autoArea'">矩形区域范围内,中国地面气象站逐小时观测数据
-                    <span class="u-orange">http://localhost:8081/station/auto/area?key=your_api_key&level=1&maxLon=22.22&maxLat=22.22&minLon=22.22&minLat=22.22&var=1,2
-                        &datatime=2019-04-03%2010:13:55&format=2019-04-09%2002:01:58</span> </div>
+                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/auto/area?key=your_api_key&level=1&maxLon=22.22&maxLat=22.22&
+                    minLon=22.22&minLat=22.22&var=1,2&datatime=2019-04-03%2010:13:55&format=2019-04-09%2002:01:58" target="blank">
+                        http://localhost:8081/station/auto/area?key=your_api_key&level=1&maxLon=22.22&maxLat=22.22&minLon=22.22&minLat=22.22&var=1,2&datatime=2019-04-03%2010:13:55&format=2019-04-09%2002:01:58
+                    </a>
+                </div>
 
                 <div class="u-describe"  v-if="apiType === 'autoOne'">中国地面气象站逐小时观测数据
-                    <span class="u-orange">http://localhost:8081/station/auto/one?key=your_api_key&sid=2&elems=1,2&start=2019-04-10%2012:04:48&end=2019-04-10%2012:04:48</span></div>
+                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/auto/one?key=your_api_key&sid=2&elems=1,2&start=2019-04-10%2012:04:48&end=2019-04-10%2012:04:48" target="blank">
+                        http://localhost:8081/station/auto/one?key=your_api_key&sid=2&elems=1,2&start=2019-04-10%2012:04:48&end=2019-04-10%2012:04:48
+                    </a>
+                </div>
 
                 <div class="u-describe" v-if="apiType === 'autoNearest'">指定时间区间内的中国自动站观测数据。
-                    <span class="u-orange">http://localhost:8081/station/auto/nearest?key=your_api_key&lon=31.21&lat=22.12&start=2019-04-10%2012:04:48&end=2019-04-10%2012:05:36&elems=1,2</span></div>
-
-                <div class="u-describe" v-if="apiType === 'cityArea'">查找区域内全部的站点在某一时刻的中国精细化城镇预报数据
-                    <span class="u-orange">http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36</span></div>
+                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/auto/nearest?key=your_api_key&lon=31.21&lat=22.12&start=2019-04-10%2012:04:48&end=2019-04-10%2012:05:36&elems=1,2" target="blank">
+                        http://localhost:8081/station/auto/nearest?key=your_api_key&lon=31.21&lat=22.12&start=2019-04-10%2012:04:48&end=2019-04-10%2012:05:36&elems=1,2
+                    </a>
+                </div>
+                    <div class="u-describe" v-if="apiType === 'cityArea'">查找区域内全部的站点在某一时刻的中国精细化城镇预报数据
+                        <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36" target="blank">
+                            http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36
+                        </a>
+                    </div>
 
                 <div class="u-describe"  v-if="apiType === 'cityOne'">查询时间区间内（闭区间）的中国精细化城镇预报数据
-                    <span class="u-orange">http://localhost:8081/station/city/one?key=your_api_key&sid=2&elems=1,2&basetime=2019-04-10%2012:05:36&start=2019-04-10 12:05:36&end=2019-04-10 12:05:36</span></div>
+                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/city/one?key=your_api_key&sid=2&elems=1,2&basetime=2019-04-10%2012:05:36&start=2019-04-10 12:05:36&end=2019-04-10 12:05:36" target="blank">
+                        http://localhost:8081/station/city/one?key=your_api_key&sid=2&elems=1,2&basetime=2019-04-10%2012:05:36&start=2019-04-10 12:05:36&end=2019-04-10 12:05:36
+                    </a>
+                </div>
                 <div class="u-tips">参数</div>
                 <el-table :data="tableData" :header-cell-style="{background:'#eef1f6',color:'#606266'}" style="width: 100%">
                     <el-table-column prop="name" label="参数名" align="center" width="200"></el-table-column>
