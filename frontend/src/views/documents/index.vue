@@ -63,33 +63,34 @@
                     <span class="u-line"></span>
                 </div>
                 <div class="ieKsWY">
-                    <span  v-if="apiType === 'autoArea'">GET /station/auto/area</span>
-                    <span  v-if="apiType === 'autoOne'">GET /station/auto/one</span>
-                    <span  v-if="apiType === 'autoNearest'">GET /station/auto/nearest</span>
-                    <span  v-if="apiType === 'cityArea'">GET /station/city/area</span>
-                    <span  v-if="apiType === 'cityOne'">GET /station/city/one</span>
+                    <el-button type="primary" size="mini" class="u-size">GET</el-button>
+                    <span  v-if="apiType === 'autoArea'"> /station/auto/area</span>
+                    <span  v-if="apiType === 'autoOne'"> /station/auto/one</span>
+                    <span  v-if="apiType === 'autoNearest'"> /station/auto/nearest</span>
+                    <span  v-if="apiType === 'cityArea'"> /station/city/area</span>
+                    <span  v-if="apiType === 'cityOne'"> /station/city/one</span>
                 </div>
                 <div class="u-describe"  v-if="apiType === 'autoArea'">根据输入的矩形区域范围，查找区域内全部的站点在某一时刻的中国地面气象站逐小时观测数据，并提供分级抽希功能。</div>
                 <div class="u-describe"  v-if="apiType === 'autoOne'">根据站点编号，查询时间区间内（闭区间）的中国地面气象站逐小时观测数据。</div>
                 <div class="u-describe"  v-if="apiType === 'autoNearest'">根据输入的经纬度坐标，查找最近的站点在指定时间区间内的中国自动站观测数据。</div>
                 <div class="u-describe"  v-if="apiType === 'cityArea'">根据输入的矩形区域范围，查找区域内全部的站点在某一时刻的中国精细化城镇预报数据。</div>
                 <div class="u-describe"  v-if="apiType === 'cityOne'">根据站点编号，查询时间区间内（闭区间）的中国精细化城镇预报数据。</div>
-                <div class="u-tips">请求地址试例</div>
+                <div class="u-tips">请求地址示例</div>
                 <div class="u-describe"  v-if="apiType === 'autoArea'">矩形区域范围内,中国地面气象站逐小时观测数据
                     <span class="u-orange">http://localhost:8081/station/auto/area?key=your_api_key&level=1&maxLon=22.22&maxLat=22.22&minLon=22.22&minLat=22.22&var=1,2
-                        &datatime=2019-04-03%2010</span></div>
+                        &datatime=2019-04-03%2010:13:55&format=2019-04-09%2002:01:58</span></div>
 
                 <div class="u-describe"  v-if="apiType === 'autoOne'">中国地面气象站逐小时观测数据
                     <span class="u-orange">http://localhost:8081/station/auto/one?key=your_api_key&sid=2&elems=1,2&start=2019-04-10%2012:04:48&end=2019-04-10%2012:04:48</span></div>
 
                 <div class="u-describe" v-if="apiType === 'autoNearest'">指定时间区间内的中国自动站观测数据。
-                    <span class="u-orange">http://localhost:8081/station/auto/nearest?key=your_api_key&lon=31.21&lat=22.12&start=2019-04-10%2012&end=2019-04-10%2012&elems=1,2</span></div>
+                    <span class="u-orange">http://localhost:8081/station/auto/nearest?key=your_api_key&lon=31.21&lat=22.12&start=2019-04-10%2012:04:48&end=2019-04-10%2012:05:36&elems=1,2</span></div>
 
                 <div class="u-describe" v-if="apiType === 'cityArea'">查找区域内全部的站点在某一时刻的中国精细化城镇预报数据
-                    <span class="u-orange">http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat=2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012&format=2019-04-10%2012</span></div>
+                    <span class="u-orange">http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36</span></div>
 
                 <div class="u-describe"  v-if="apiType === 'cityOne'">查询时间区间内（闭区间）的中国精细化城镇预报数据
-                    <span class="u-orange">http://localhost:8081/station/city/one?key=your_api_key&sid=2&elems=1,2&basetime=2019-04-10%2012&start=2019-04-10%2012&end=2019-04-10%2012</span></div>
+                    <span class="u-orange">http://localhost:8081/station/city/one?key=your_api_key&sid=2&elems=1,2&basetime=2019-04-10%2012:05:36&start=2019-04-10 12:05:36&end=2019-04-10 12:05:36</span></div>
                 <div class="u-tips">参数</div>
                 <el-table :data="tableData" :header-cell-style="{background:'#eef1f6',color:'#606266'}" style="width: 100%">
                     <el-table-column prop="name" label="参数名" align="center" width="200"></el-table-column>
