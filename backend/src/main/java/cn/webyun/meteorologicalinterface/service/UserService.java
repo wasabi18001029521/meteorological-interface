@@ -297,9 +297,9 @@ public class UserService {
     //用户注册添加数据
     public int insertUser(String username, String password, String md5username) {
         Date date = new java.util.Date();
-        java.sql.Date data1 = new java.sql.Date(date.getTime());
-        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateFormat = sy1.format(data1);
+        java.sql.Date data2= new java.sql.Date(date.getTime());
+        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateFormat = sy1.format(data2);
         return userMapper.insertUser(username, password, md5username, dateFormat);
     }
 
@@ -335,8 +335,8 @@ public class UserService {
     public void loginTime(String username) {
         Date date = new java.util.Date();
         java.sql.Date data1 = new java.sql.Date(date.getTime());
-        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateFormat = sy1.format(data1);
+        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateFormat = sy1.format(new Date());
         userMapper.updateTime(dateFormat, username);
     }
 
@@ -350,8 +350,8 @@ public class UserService {
     public String dataTime() {
         Date date = new java.util.Date();
         java.sql.Date data1 = new java.sql.Date(date.getTime());
-        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        String dateFormat = sy1.format(data1);
+        SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateFormat = sy1.format(new Date());
         return dateFormat;
     }
 
