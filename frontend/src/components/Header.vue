@@ -84,7 +84,6 @@
                     this.$router.go(0)
                     //this.reload();
                     this.$router.push({ path: "/api/login" });
-
                     })
             }
 

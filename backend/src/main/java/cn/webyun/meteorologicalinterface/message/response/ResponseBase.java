@@ -1,10 +1,13 @@
 package cn.webyun.meteorologicalinterface.message.response;
 
 
+import java.util.ArrayList;
+
 public class ResponseBase {
     private Boolean success;
     private String msg;
     private Object data;
+    private ArrayList<Object> resultData;
 
     public ResponseBase() {
     }
@@ -22,6 +25,10 @@ public class ResponseBase {
         this.success = success;
         this.msg = msg;
         this.data = data;
+    }
+
+    public ResponseBase(ArrayList<Object> resultData) {
+        this.resultData = resultData;
     }
 
 

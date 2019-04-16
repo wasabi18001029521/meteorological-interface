@@ -1,5 +1,7 @@
 package cn.webyun.meteorologicalinterface.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,8 +11,8 @@ import java.util.ArrayList;
  *
  * @NotBlank添加不为空注解,没有密匙报400错
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class InterfaceParame implements Serializable {
-    @NotBlank(message = "密钥必填")
     private String key;
     private String sid;
     private ArrayList elems;
@@ -176,5 +178,9 @@ public class InterfaceParame implements Serializable {
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    public void removeKey() {
+        this.key = null;
     }
 }

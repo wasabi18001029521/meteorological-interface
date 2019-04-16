@@ -30,6 +30,7 @@ public class GroundService extends BaseController {
         if (shareInterfaceReturnsData.getDatatime() == null) {
             shareInterfaceReturnsData.setDatatime(userService.dataTime());
         }
+        autoArea.removeKey();
         return shareInterfaceReturnsData;
     }
 
@@ -40,6 +41,7 @@ public class GroundService extends BaseController {
         if (shareInterfaceReturnsData.getDatatime() == null) {
             shareInterfaceReturnsData.setDatatime(userService.dataTime());
         }
+        autoOne.removeKey();
         return shareInterfaceReturnsData;
     }
 
@@ -50,6 +52,7 @@ public class GroundService extends BaseController {
         if (shareInterfaceReturnsData.getDatatime() == null) {
             shareInterfaceReturnsData.setDatatime(userService.dataTime());
         }
+        nearest.removeKey();
         return shareInterfaceReturnsData;
     }
 

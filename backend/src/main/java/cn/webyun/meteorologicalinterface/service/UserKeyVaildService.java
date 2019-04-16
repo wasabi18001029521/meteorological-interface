@@ -1,8 +1,10 @@
 package cn.webyun.meteorologicalinterface.service;
 
 import cn.webyun.meteorologicalinterface.ServiceException.PrivilegeException;
+import cn.webyun.meteorologicalinterface.entity.AutoArea;
 import cn.webyun.meteorologicalinterface.mapper.UserMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -25,7 +27,7 @@ public class UserKeyVaildService {
             PrivilegeException {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String starttime = selectEffective(userkey);
-
+        System.out.println(starttime);
         Date sdate = null;// 开始时间
 
         try {
@@ -48,9 +50,14 @@ public class UserKeyVaildService {
 
     // 根据userKey查询试用开始时间
     public String selectEffective(String userkey) throws PrivilegeException {
+        if (StringUtils.isEmpty(userkey)) {
+            throw new PrivilegeException("The API key is invalid");
+        }
         if (userMapper.selectEffective(userkey) == null) {
             throw new PrivilegeException("The API key is invalid");
         }
         return userMapper.selectEffective(userkey);
     }
+
+
 }

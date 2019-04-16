@@ -60,11 +60,16 @@ public class RefinedUrbanForecastService {
      */
     public InterfaceReturnData getCityOneinfo(InterfaceParame interfaceParame)
             throws DataException {
-        InterfaceReturnData data = new InterfaceReturnData();
-        if (data == null) {
-            throw new DataException();
-        } else {
-            return data;
+        InterfaceReturnData data1 = new InterfaceReturnData();
+        //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
+        int date = userKeyVaildService.volitUserKey(interfaceParame.getKey(), 1);
+        ArrayList arr = new ArrayList();
+        arr.add("arr111111111111111");
+        arr.add("barr22222222222222");
+        if (data1.getDatatime() == null) {
+            data1.setDatatime(new Date().toString());
         }
+        data1.setLonlat(arr);
+        return data1;
     }
 }

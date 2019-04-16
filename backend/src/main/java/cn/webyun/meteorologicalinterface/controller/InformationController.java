@@ -41,6 +41,7 @@ public class InformationController {
             User user = userService.selectInformation(userNameFromJwtToken);
             // 不晓得为什么查出来的用户名存不到User对象中只能手动先放进去了
             user.setUserName(userNameFromJwtToken);
+            userService.loginTime(userNameFromJwtToken);
             return ResponseEntity.ok(new ResponseBase(user));
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,18 +1,29 @@
 package cn.webyun.meteorologicalinterface.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.validation.constraints.NotBlank;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AutoArea extends Auto {
     // 中国地面自动站区域查询数据获取接口实体类
+
     private Integer level;
+
     private Number maxLon;
+
     private Number maxLat;
+
     private Number minLon;
+
     private Number minLat;
+
     private ArrayList<Integer> var;
+
     private String datatime;
+
     private String format;
 
     public Integer getLevel() {
@@ -78,5 +89,6 @@ public class AutoArea extends Auto {
     public void setFormat(String format) {
         this.format = format;
     }
+
 
 }

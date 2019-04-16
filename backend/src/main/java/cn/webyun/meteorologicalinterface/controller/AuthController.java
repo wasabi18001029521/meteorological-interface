@@ -69,7 +69,7 @@ public class AuthController {
             status = false;
             return ResponseEntity.ok(new ResponseBase(false, "邮箱或者密码不正确"));
         }
-        userService.loginTime(loginRequest.getUsername());
+
         return ResponseEntity.ok(new JwtResponse(jwt, status, user, authorities));
 
     }
