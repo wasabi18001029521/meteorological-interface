@@ -162,7 +162,6 @@
             confirm(ruleForm2){
                 this.$refs[ruleForm2].validate(valid => {
                     if (valid) {
-                        this.$router.push({path: '/'})
                         this.$store
                             .dispatch("updatePassword",this.ruleForm2)
                             .then(() => {
