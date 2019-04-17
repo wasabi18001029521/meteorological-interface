@@ -2,7 +2,6 @@ package cn.webyun.meteorologicalinterface.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,45 +11,40 @@ import java.util.ArrayList;
  * @NotBlank添加不为空注解,没有密匙报400错
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class InterfaceParame implements Serializable {
+public class InterfaceParame{
+
     private String key;
+
     private String sid;
+
     private ArrayList elems;
+
     private String start;
+
     private String end;
+
     private Double lon;
+
     private Double lat;
+
     private Integer level;
+
     private Double maxLon;
+
     private Double maxLat;
+
     private Double minLon;
+
     private Double minLat;
+
     private ArrayList var;
+
     private String basetime;
+
     private String datatime;
+
     private String format;
 
-    @Override
-    public String toString() {
-        return "InterfaceParame{" +
-                "userkey='" + key + '\'' +
-                ", sid='" + sid + '\'' +
-                ", elems=" + elems +
-                ", start='" + start + '\'' +
-                ", end='" + end + '\'' +
-                ", lon=" + lon +
-                ", lat=" + lat +
-                ", level=" + level +
-                ", maxLon=" + maxLon +
-                ", maxLat=" + maxLat +
-                ", minLon=" + minLon +
-                ", minLat=" + minLat +
-                ", var=" + var +
-                ", basetime='" + basetime + '\'' +
-                ", datatime='" + datatime + '\'' +
-                ", format='" + format + '\'' +
-                '}';
-    }
 
     public String getKey() {
         return key;

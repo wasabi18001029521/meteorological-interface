@@ -50,8 +50,8 @@ public class RegisterController {
             userService.insertUser(username,password,key);
             //将注册的key存入到redis中
           // redisTemplate.opsForList().rightPush(key, key, String.valueOf(TimeUnit.DAYS));
-            redisTemplate.opsForValue().set(key,key);
-            System.out.println("存入成功");
+            //redisTemplate.opsForValue().set(key,key);
+           // System.out.println("存入成功");
 
             // 为新用户设置默认可以访问的接口
             userService.insertUser(username);

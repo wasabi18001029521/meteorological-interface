@@ -1,7 +1,7 @@
 package cn.webyun.meteorologicalinterface.controller;
 
 
-import cn.webyun.meteorologicalinterface.ServiceException.PrivilegeException;
+import cn.webyun.meteorologicalinterface.ServiceException.ParametersException;
 import cn.webyun.meteorologicalinterface.entity.InterfaceParame;
 import cn.webyun.meteorologicalinterface.entity.InterfaceReturnData;
 import cn.webyun.meteorologicalinterface.message.response.ResponseBase;
@@ -31,8 +31,15 @@ public class RefinedUrbanForecastController extends BaseController{
      */
     @GetMapping("/area")
     public ResponseEntity<?> CityArea(@Valid  InterfaceParame interfaceParame) {
-            InterfaceReturnData interfaceReturnDataBase = refinedUrbanForecastService.getCityAreainfo(interfaceParame);
-            return ResponseEntity.ok(new ResponseBase(true,SUCCESS, interfaceReturnDataBase));
+        System.out.println("CityArea"+interfaceParame.getMaxLon());
+        if(refinedUrbanForecastService.VolitParames(interfaceParame)){
+            throw new ParametersException("参数异常");
+        };
+   /*     System.out.println(interfaceParame.getMaxLon()+"+"+interfaceParame.getMaxLat()
+                +"+"+interfaceParame.getMinLat()+"+"+interfaceParame.getMinLon()+"+"+interfaceParame.getVar());*/
+
+        InterfaceReturnData interfaceReturnDataBase = refinedUrbanForecastService.getCityAreainfo(interfaceParame);
+            return ResponseEntity.ok(new ResponseBase(interfaceReturnDataBase));
     };
     /**
      * 根据站点编号，查询时间区间内（闭区间）的中国精细化城镇预报数据。
@@ -41,7 +48,12 @@ public class RefinedUrbanForecastController extends BaseController{
      */
     @GetMapping("/one")
     public ResponseEntity<?> CityOne(@Valid  InterfaceParame interfaceParame) {
+        System.out.println(interfaceParame.getSid()+"+"+interfaceParame.getElems()
+                +"+"+interfaceParame.getBasetime()+"+"+interfaceParame.getStart()+"+"+interfaceParame.getEnd());
+        if(refinedUrbanForecastService.VolitParames(interfaceParame)){
+            throw new ParametersException("参数异常");
+        };
             InterfaceReturnData interfaceReturnDataBase = refinedUrbanForecastService.getCityOneinfo(interfaceParame);
-            return ResponseEntity.ok(new ResponseBase(true,SUCCESS, interfaceReturnDataBase));
+            return ResponseEntity.ok(new ResponseBase(interfaceReturnDataBase));
     }
 }
