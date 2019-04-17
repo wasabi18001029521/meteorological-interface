@@ -51,9 +51,13 @@ public class MeteorologicalInterfaceApplicationTests {
         long timeInMillis = c.getTimeInMillis()+86400000*7;
         System.out.println(timeInMillis);*/
 
-        String s = userMapper.selectEffective("ae566413a4d15dfc90bc43152100178c");
-        System.out.println(s);
+    /*    String s = userMapper.selectEffective("ae566413a4d15dfc90bc43152100178c");
+        System.out.println(s);*/
 
+    // 时间测试
+    /*    String a= "yyyy-MM-dd";
+        String s = userService.dataTime2(a);
+        System.out.println(s);*/
     }
 
 
