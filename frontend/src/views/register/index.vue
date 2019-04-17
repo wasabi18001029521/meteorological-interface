@@ -50,29 +50,9 @@
                 this.$router.push({path: '/api/service'})
             },
             submitForm(register_from){
-                /*this.$axios.post('http://localhost:8081/api/auth/register', {
-                    username: this.register_from.register_email,
-                    password: this.register_from.register_pass
-
-                })
-                    .then(successResponse => {
-                        this.responseResult = JSON.stringify(successResponse.data)
-                        if (successResponse.data.code === 200) {
-                            this.$message({
-                                message: successResponse.data.message,
-                                type: 'success'
-                            });
-                        }if (successResponse.data.code !== 200) {
-                            //  alert(JSON.stringify(successResponse.data.message))
-                            this.$message({
-                                message: successResponse.data.message,
-                                type: 'warning'
-                            });
-
-
-                        }}).catch(failResponse => {})*/
                 this.$refs[register_from].validate(valid => {
                     if (valid) {
+                        this.$router.push({path: '/api/login'})
                         this.$store
                             .dispatch("register", this.register_from)
                             .then(() => {

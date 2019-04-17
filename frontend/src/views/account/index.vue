@@ -72,7 +72,7 @@
               </el-form>
               <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary"  @click="confirm('ruleForm2')" >确 认</el-button>
+                  <el-button type="primary"  @click="confirm('ruleForm2')" >确 认</el-button>
               </span>
             </el-dialog>
             </el-form>
@@ -162,6 +162,7 @@
             confirm(ruleForm2){
                 this.$refs[ruleForm2].validate(valid => {
                     if (valid) {
+                        this.$router.push({path: '/'})
                         this.$store
                             .dispatch("updatePassword",this.ruleForm2)
                             .then(() => {
