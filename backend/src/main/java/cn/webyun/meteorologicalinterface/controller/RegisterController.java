@@ -21,6 +21,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -46,6 +48,11 @@ public class RegisterController {
             // 用户名进行32位MD5加密生产key
             String key = userService.MD5(username);
             userService.insertUser(username,password,key);
+            //将注册的key存入到redis中
+          // redisTemplate.opsForList().rightPush(key, key, String.valueOf(TimeUnit.DAYS));
+            //redisTemplate.opsForValue().set(key,key);
+           // System.out.println("存入成功");
+
             // 为新用户设置默认可以访问的接口
             userService.insertUser(username);
             return ResponseEntity.ok(new ResponseBase(true, "注册成功"));

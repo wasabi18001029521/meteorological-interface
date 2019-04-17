@@ -9,10 +9,8 @@ import cn.webyun.meteorologicalinterface.mapper.RefinedUrbanForecastMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeoutException;
 
 @Service
 public class RefinedUrbanForecastService {
@@ -31,18 +29,34 @@ public class RefinedUrbanForecastService {
      * @param interfaceParame
      * @return
      */
+    InterfaceReturnData data1 = new InterfaceReturnData();
+
     public InterfaceReturnData getCityAreainfo(InterfaceParame interfaceParame)
             throws PrivilegeException, ParametersException {
-        InterfaceReturnData data1 = new InterfaceReturnData();
+        //判断参数异常的方法
+
         //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
         int date = userKeyVaildService.volitUserKey(interfaceParame.getKey(), 1);
-        ArrayList arr = new ArrayList();
-        arr.add("arr111111111111111");
-        arr.add("barr22222222222222");
+        ArrayList var = new ArrayList();
+        var.add("var1");
+        var.add("var2");
+
+        data1.setBasetime(interfaceParame.getBasetime());
         if (data1.getDatatime() == null) {
             data1.setDatatime(new Date().toString());
         }
-        data1.setLonlat(arr);
+        data1.setLcc(2.2);
+        data1.setLonlat(var);
+        data1.setP(1300.0);
+        data1.setPrec(20.5);
+        data1.setRh(18.0);
+        data1.setStaCode("十站点");
+        data1.setT(9.2);
+        data1.setTcc(493.6);
+        data1.setVis(71.6);
+        data1.setWd(83.6);
+        data1.setWp("天气现象编码1");
+        data1.setWs(5.0);
         return data1;
 
     }
@@ -60,16 +74,46 @@ public class RefinedUrbanForecastService {
      */
     public InterfaceReturnData getCityOneinfo(InterfaceParame interfaceParame)
             throws DataException {
-        InterfaceReturnData data1 = new InterfaceReturnData();
         //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
         int date = userKeyVaildService.volitUserKey(interfaceParame.getKey(), 1);
-        ArrayList arr = new ArrayList();
-        arr.add("arr111111111111111");
-        arr.add("barr22222222222222");
+        ArrayList var = new ArrayList();
+        var.add("arr111111111111111");
+        var.add("barr22222222222222");
+        data1.setBasetime(interfaceParame.getBasetime());
         if (data1.getDatatime() == null) {
             data1.setDatatime(new Date().toString());
         }
-        data1.setLonlat(arr);
+        data1.setLcc(7.6);
+        data1.setLonlat(var);
+        data1.setP(1100.0);
+        data1.setPrec(17.8);
+        data1.setRh(15.6);
+        data1.setStaCode("八站点");
+        data1.setT(8.5);
+        data1.setTcc(521.6);
+        data1.setVis(92.5);
+        data1.setWd(78.6);
+        data1.setWp("天气现象编码1");
+        data1.setWs(7.0);
         return data1;
     }
+    public boolean VolitParames(InterfaceParame interfaceParame){
+        System.out.println("VolitParames");
+
+        if(interfaceParame.getSid()==null){
+            //说明走的是1.2.11　精细化城市预报矩形区域查询数据获取接口
+            if(interfaceParame.getMaxLon()==null||interfaceParame.getMaxLat()==null||
+            interfaceParame.getMinLat()==null||interfaceParame.getMinLon()==null||
+            interfaceParame.getVar()==null){
+                System.out.println("interfaceParame.getSid()==null+VolitParames");
+                return true;
+            }
+            return true;
+        }
+        if(interfaceParame.getElems()==null||interfaceParame.getStart()==null
+        ||interfaceParame.getEnd()==null){
+            return true;
+        }
+        return false;
+    };
 }

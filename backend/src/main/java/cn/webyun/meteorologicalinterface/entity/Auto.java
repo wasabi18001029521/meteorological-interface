@@ -1,6 +1,5 @@
 package cn.webyun.meteorologicalinterface.entity;
 
-import javax.validation.constraints.NotBlank;
 
 public class Auto {
 
