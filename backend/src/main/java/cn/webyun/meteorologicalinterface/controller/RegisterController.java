@@ -45,8 +45,10 @@ public class RegisterController {
             }
             // 对密码进行加密
             String password=new BCryptPasswordEncoder().encode(loginRequest.getPassword());
-            // 用户名进行32位MD5加密生产key
-            String key = userService.MD5(username);
+            // 获取当前时间
+            String datatime = userService.dataTime();
+            // 当前时间进行32位MD5加密生产key
+            String key=userService.encrypt(datatime);
             userService.insertUser(username,password,key);
             //将注册的key存入到redis中
           // redisTemplate.opsForList().rightPush(key, key, String.valueOf(TimeUnit.DAYS));

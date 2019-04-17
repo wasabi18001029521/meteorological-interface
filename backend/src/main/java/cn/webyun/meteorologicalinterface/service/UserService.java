@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -393,5 +394,33 @@ public class UserService {
         userMapper.updatePassword(password, username);
         // System.out.println("密码修改"+number);
     }
+
+    // SHN加密算法
+    public  String encrypt(String str) throws Exception
+    {
+        try {
+            // 生成一个UUID
+            // UUID uuid = UUID.randomUUID();
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            md.update(str.getBytes());
+            byte[] digest = md.digest();
+
+            StringBuffer hexstr = new StringBuffer();
+            String shaHex = "";
+            for (int i = 0; i < digest.length; i++) {
+                shaHex = Integer.toHexString(digest[i] & 0xFF);
+                if (shaHex.length() < 2) {
+                    hexstr.append(0);
+                }
+                hexstr.append(shaHex);
+            }
+            return hexstr.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("sha1 error");
+        }
+    }
+
+
 
 }

@@ -18,10 +18,8 @@
                     ]">
                     <el-input type="password" v-model="register_from.register_pass" autocomplete="off" style="width:250px;height:0px"  placeholder="6位以上字母和数字密码" ></el-input>
                 </el-form-item>
-
                 <el-form-item>
                     <el-button type="text" class="u-banner-treaty" @click="service"><<中国气象台服务协议>></el-button>
-
                     <br/>
                     <el-button type="primary" @click="submitForm('register_from')" class="u-banner-logon" >同意以上注册协议并注册</el-button>
                 </el-form-item>

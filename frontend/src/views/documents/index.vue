@@ -77,8 +77,7 @@
                 <div class="u-describe"  v-if="apiType === 'cityOne'">根据站点编号，查询时间区间内（闭区间）的中国精细化城镇预报数据。</div>
                 <div class="u-tips">请求地址示例</div>
                 <div class="u-describe"  v-if="apiType === 'autoArea'">矩形区域范围内,中国地面气象站逐小时观测数据
-                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/auto/area?key=your_api_key&level=1&maxLon=22.22&maxLat=22.22&
-                    minLon=22.22&minLat=22.22&var=1,2&datatime=2019-04-03%2010:13:55&format=2019-04-09%2002:01:58" target="blank">
+                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/auto/area?key=your_api_key&level=1&maxLon=22.22&maxLat=22.22&minLon=22.22&minLat=22.22&var=1,2&datatime=2019-04-03%2010:13:55&format=2019-04-09%2002:01:58" target="blank">
                         http://localhost:8081/station/auto/area?key=your_api_key&level=1&maxLon=22.22&maxLat=22.22&minLon=22.22&minLat=22.22&var=1,2&datatime=2019-04-03%2010:13:55&format=2019-04-09%2002:01:58
                     </a>
                 </div>
@@ -101,8 +100,8 @@
                     </div>
 
                 <div class="u-describe"  v-if="apiType === 'cityOne'">查询时间区间内（闭区间）的中国精细化城镇预报数据
-                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/city/one?key=your_api_key&sid=2&elems=1,2&basetime=2019-04-10%2012:05:36&start=2019-04-10 12:05:36&end=2019-04-10 12:05:36" target="blank">
-                        http://localhost:8081/station/city/one?key=your_api_key&sid=2&elems=1,2&basetime=2019-04-10%2012:05:36&start=2019-04-10 12:05:36&end=2019-04-10 12:05:36
+                    <a style=" text-decoration:none" class="u-orange" href=" http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36" target="blank">
+                        http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36
                     </a>
                 </div>
                 <div class="u-tips">参数</div>
