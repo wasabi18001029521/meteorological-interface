@@ -3,6 +3,8 @@ package cn.webyun.meteorologicalinterface.service;
 import cn.webyun.meteorologicalinterface.ServiceException.PrivilegeException;
 import cn.webyun.meteorologicalinterface.entity.AutoArea;
 import cn.webyun.meteorologicalinterface.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 

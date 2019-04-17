@@ -1,17 +1,14 @@
 package cn.webyun.meteorologicalinterface.message.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.ArrayList;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseBase {
-    private Boolean success;
-    private String msg;
+    private Boolean success ;
+    private String msg ;
     private Object data;
-    private ArrayList<Object> resultData;
-
     public ResponseBase() {
     }
-
     public ResponseBase(Boolean success) {
         this.success = success;
     }
@@ -22,18 +19,15 @@ public class ResponseBase {
     }
 
     public ResponseBase(Boolean success, String msg, Object data) {
-        this.success = success;
-        this.msg = msg;
-        this.data = data;
-    }
-
-    public ResponseBase(ArrayList<Object> resultData) {
-        this.resultData = resultData;
+        this.success=success;
+        this.msg=msg;
+        this.data=data;
     }
 
 
-    public ResponseBase(Object data) {
-        this.data = data;
+
+    public ResponseBase( Object data) {
+        this.data=data;
     }
 
     public Boolean getSuccess() {

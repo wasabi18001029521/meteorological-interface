@@ -1,3 +1,4 @@
+
 package cn.webyun.meteorologicalinterface.controller;
 
 import cn.webyun.meteorologicalinterface.entity.*;
@@ -59,3 +60,4 @@ public class GroundController extends BaseController {
         return ResponseEntity.ok(new ResponseModel(hashMap));
     }
 }
+
