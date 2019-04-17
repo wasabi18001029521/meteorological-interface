@@ -13,7 +13,7 @@
                       <el-col :span="24"><div class="grid-content bg-purple-dark">5821639</div></el-col>
                     </el-row>
                     <el-row class='u-size16 u-line-height2'>
-                      <el-col :span="24"><div class="grid-content bg-purple-dark"><el-button type="warning">立即免费使用</el-button></div></el-col>
+                      <el-col :span="24"><div class="grid-content bg-purple-dark"><el-button type="warning" @click="entry">立即免费使用</el-button></div></el-col>
                     </el-row>
                 </div>
             </div>
@@ -24,7 +24,12 @@
 <script>
 
     export default {
-        name: 'welcome'
+        name: 'welcome',
+        methods: {
+            entry() {
+                this.$router.push({path: '/api/login'})
+            }
+        }
     }
 </script>
 <style lang="less">
