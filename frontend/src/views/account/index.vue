@@ -6,28 +6,43 @@
                     <el-tab-pane label="账号信息" >
                         <div class='u-account-title'>账号信息<span class='u-line'></span></div>
                         <el-row class='u-account-item'>
-                            <el-col :span="7" :offset="2"><div class="grid-content bg-purple">用户ID</div></el-col>
+                            <el-col :span="4" :offset="2"><div class="grid-content bg-purple">用户ID</div></el-col>
                             <el-col :span="15"><div class="grid-content bg-purple-light">{{userid}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
-                            <el-col :span="7" :offset="2"><div class="grid-content bg-purple">用户邮箱</div></el-col>
+                            <el-col :span="4" :offset="2"><div class="grid-content bg-purple">用户邮箱</div></el-col>
                             <el-col :span="15"><div class="grid-content bg-purple-light">{{myusername}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
-                            <el-col :span="7" :offset="2"><div class="grid-content bg-purple">注册时间</div></el-col>
+                            <el-col :span="4" :offset="2"><div class="grid-content bg-purple">注册时间</div></el-col>
                             <el-col :span="15"><div class="grid-content bg-purple-light">{{userregister}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
-                            <el-col :span="7" :offset="2"><div class="grid-content bg-purple">上次登录时间</div></el-col>
+                            <el-col :span="4" :offset="2"><div class="grid-content bg-purple">上次登录时间</div></el-col>
                             <el-col :span="15"><div class="grid-content bg-purple-light">{{userlogin}}</div></el-col>
                         </el-row>
                         <el-row class='u-account-item'>
-                            <el-col :span="7" :offset="2"><div class="grid-content bg-purple">API密钥</div></el-col>
+                            <el-col :span="4" :offset="2"><div class="grid-content bg-purple">API密钥</div></el-col>
                             <el-col :span="15"><div class="grid-content bg-purple-light">{{userkey}}</div></el-col>
                         </el-row>
-                        <el-row class='u-account-item'>
-                            <el-col :span="15" :offset="9"><el-button type="primary" @click="dialogVisible = true" >修改密码</el-button></el-col>
-                        </el-row>
+                    </el-tab-pane>
+                    <el-tab-pane label="修改密码">
+                      <div class='u-account-title'>修改密码<span class='u-line'></span></div>
+                      <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+                        <el-form-item label="当前密码" prop="currentPassword">
+                          <el-input type="password" v-model="ruleForm2.currentPassword" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="新密码" prop="pass">
+                          <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="确认新密码" prop="checkPass">
+                          <el-input type="password" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
+                        </el-form-item>
+                         <el-form-item class="u-btn">
+                            <el-button type="primary"  @click="confirm('ruleForm2')" >确 认</el-button>
+                            <el-button @click="resetForm('ruleForm2')">重置</el-button>
+                          </el-form-item>
+                      </el-form>
                     </el-tab-pane>
                     <el-tab-pane label="我的订单">
                         <div class='u-account-title'>我的订单<span class='u-line'></span></div>
@@ -57,25 +72,7 @@
                     </el-tab-pane>
                 </el-tabs>
             </div>
-            <el-form status-icon :model="ruleForm2" ref="ruleForm2"  >
-            <el-dialog title="修改密码" :visible.sync="dialogVisible" width="30%" >
-              <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="当前密码" prop="currentPassword">
-                  <el-input type="text" v-model="ruleForm2.currentPassword" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="新密码" prop="pass">
-                  <el-input ttype="text" v-model="ruleForm2.pass" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="确认新密码" prop="checkPass">
-                  <el-input type="text" v-model="ruleForm2.checkPass" autocomplete="off"></el-input>
-                </el-form-item>
-              </el-form>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                  <el-button type="primary"  @click="confirm('ruleForm2')" >确 认</el-button>
-              </span>
-            </el-dialog>
-            </el-form>
+
         </el-main>
     </el-container>
 </template>
@@ -132,7 +129,6 @@
                 userlogin:store.getters.userlogin,
                 userkey:store.getters.userkey,
                 tabPosition: 'left',
-                dialogVisible: false,
                 // chart
                 id: 'test',
                 option: option,
@@ -176,6 +172,9 @@
             },
             toPayment(){
                 this.$router.push("/payment")
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
             }
         },
         components: {
@@ -199,6 +198,17 @@
                     border-bottom: 2px solid #409EFF;
                 }
             }
+            .demo-ruleForm{
+                width: 60%;
+                margin-top: 40px;
+                .el-form-item__content{
+                    margin-bottom: 12px;
+                }
+                .u-btn{
+                    text-align: center;
+                    margin-top: 30px;
+                }
+            }
             .el-tabs__header.is-left{
                 margin-right: 40px;
             }
@@ -220,6 +230,9 @@
                     height: 40px;
                     line-height: 40px;
                 }
+                .u-account-item:nth-child(odd){
+                    background-color: #fbfbfb;
+                }
             }
             .el-tabs__nav-wrap::after{
                 background-color: #fff;
@@ -228,6 +241,9 @@
                 padding: 10px 20px;
                 .u-state{
                     display: block;
+                }
+                ul{
+                    margin-left: 20px;
                 }
             }
             .u-operation-btn{

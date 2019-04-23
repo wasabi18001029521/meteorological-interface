@@ -28,9 +28,6 @@ module.exports = {
          series: [{
                  name: 'API访问量',
                  data: [3, 4, 3, 5, 4, 10, 12]
-             }, {
-                 name: '插件访问量',
-                 data: [1, 3, 4, 3, 3, 5, 4]
              }]
      }
 }

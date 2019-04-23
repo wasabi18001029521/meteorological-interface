@@ -39,48 +39,16 @@
                     </el-col>
                 </el-row>
                 <el-row :gutter="20" class='u-data-list'>
-                    <el-col :span="6">
+                    <el-col :span="6" v-for="lists in dataType">
                         <el-card shadow="never" class="box-card">
                       <span class='u-card-decorate'>
-                        <i class='icon iconfont icon-tianqi u-odd'></i>
+                        <i v-if="lists.title=='天气'" class='icon iconfont icon-tianqi u-odd'></i>
+                        <i v-if="lists.title=='空气质量'" class='icon iconfont icon-kongqiditu'></i>
+                        <i v-if="lists.title=='生活'" class='icon iconfont icon-shenghuofuwu u-odd'></i>
+                        <i v-if="lists.title=='地理'" class='icon iconfont icon-richurila'></i>
                       </span>
-                            <div class='u-list-title u-size16'>天气</div>
-                            <div v-for="o in 6" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-card shadow="never" class="box-card">
-                      <span class='u-card-decorate'>
-                        <i class='icon iconfont icon-kongqiditu'></i>
-                      </span>
-                            <div class='u-list-title u-size16'>天气</div>
-                            <div v-for="o in 6" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-card shadow="never" class="box-card">
-                      <span class='u-card-decorate'>
-                        <i class='icon iconfont icon-shenghuofuwu u-odd'></i>
-                      </span>
-                            <div class='u-list-title u-size16'>天气</div>
-                            <div v-for="o in 6" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="6">
-                        <el-card shadow="never" class="box-card">
-                      <span class='u-card-decorate'>
-                        <i class='icon iconfont icon-richurila'></i>
-                      </span>
-                            <div class='u-list-title u-size16'>天气</div>
-                            <div v-for="o in 6" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
-                            </div>
+                            <div class='u-list-title data-text-item u-size16'>{{lists.title}}</div>
+                            <div v-for="o in lists.item" class="text-item"> {{o}} </div>
                         </el-card>
                     </el-col>
                 </el-row>
@@ -100,30 +68,14 @@
                     </el-col>
                 </el-row>
                 <el-row :gutter="20" class='u-data-list'>
-                    <el-col :span="8">
+                    <el-col :span="8"  v-for="list in serviceData">
                         <el-card class="box-card">
-                            <div class='data-serve data-serve-1'></div>
-                            <div class=' u-list-title u-size16'>天气</div>
-                            <div v-for="o in 3" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="8">
-                        <el-card class="box-card">
-                            <div class='data-serve data-serve-2'></div>
-                            <div class='u-list-title u-size16'>天气</div>
-                            <div v-for="o in 3" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
-                            </div>
-                        </el-card>
-                    </el-col>
-                    <el-col :span="8">
-                        <el-card class="box-card">
-                            <div class='data-serve data-serve-3'></div>
-                            <div class='u-list-title u-size16'>天气</div>
-                            <div v-for="o in 3" :key="o" class="text item">
-                                {{'列表内容 ' + o }}
+                            <div v-if="list.title=='权威数据'" class='data-serve data-serve-1'></div>
+                            <div v-if="list.title=='高并发支持'"  class='data-serve data-serve-2'></div>
+                            <div v-if="list.title=='贴心服务'"  class='data-serve data-serve-3'></div>
+                            <div class=' u-list-title u-size16'>{{list.title}}</div>
+                            <div class="text-item">
+                                {{ list.item }}
                             </div>
                         </el-card>
                     </el-col>
@@ -137,6 +89,18 @@
     export default {
         name: 'dataTab',
         components: {},
+        data(){
+            return{
+                dataType:[{title:'天气',item:['天气实况','分钟级降水预报','15天逐日天气预报','24小时逐小时天气预报','逐3小时精细化天气预报','过去24小时历史天气','昨日天气']},
+                	{title:'空气质量',item:['空气质量实况','空气质量实况城市安排','逐日空气质量预报','逐小时空气质量预报','过去24小时空气质量']},
+                	{title:'生活',item:['生活指数','气象灾害预警','农历、节气、生肖','机动车尾号限行']},
+                	{title:'地理',item:['潮汐预报','日出日落时间','月初月落时间']}],
+                serviceData:[{title:'权威数据',item:'国内天气数据来自中国气象局相关机构，国际数据来自欧洲中长期预报中心和美国环境预报中心。'},
+                	{title:'高并发支持',item:'分布式服务器集群，提供大客户独立服务器及宽带，通过负载均衡、缓存、CDN等技术、支持每日亿级访问量。'},
+                	{title:'贴心服务',item:'拥有10年天气数据企业服务经验，提供完善的售前支出和售后服务体系，5x8小时专属客服。'}]
+
+            }
+        },
         methods: {
             see() {
                 this.$router.push({path: '/api/documents'})
@@ -158,7 +122,14 @@
         .box-card {
             border: none;
         }
-
+        .text-item{
+            line-height: 24px;
+            text-align: left;
+            color: #9C9C9C;
+        }
+        .data-text-item{
+            text-align: left;
+        }
         .u-card-decorate {
             display: inline-block;
             position: absolute;
@@ -186,7 +157,9 @@
             padding-right: 100px;
             padding-bottom: 70px;
             margin: 40px 0px 0px 0px !important;
-
+            .box-card{
+                min-height: 232px;
+            }
             .data-serve {
                 width: 70px;
                 height: 70px;
@@ -211,6 +184,7 @@
 
             .u-list-title {
                 font-weight: bold;
+                margin-bottom: 10px;
             }
         }
 
