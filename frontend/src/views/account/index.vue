@@ -86,6 +86,8 @@
     import {getToken} from '@/utils/auth'
     import getters from '../../store/getters'
     import store from "../../store";
+    
+
     export default {
         name: 'Message',
         data() {

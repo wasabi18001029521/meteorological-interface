@@ -24,6 +24,9 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 
+import static sun.security.krb5.internal.crypto.Aes256.decrypt;
+
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
@@ -41,10 +44,11 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
+        // 后端解密(CryptoJS.AES)
+        String password = userService.decrypt(loginRequest);
+        loginRequest.setPassword(password);
 
         String jwt = "";
-//        String encode = new BCryptPasswordEncoder().encode(loginRequest.getPassword());
-//        System.out.println(encode);
         Boolean status = false;
         String userName = "";
         User user;
@@ -56,15 +60,14 @@ public class AuthController {
                             loginRequest.getPassword()
                     )
             );
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
             jwt = jwtProvider.generateJwtToken(authentication);
             status = true;
             userName = authentication.getName();
             user = userService.getUserByName(userName);
             authorities = getAuthoritiesListString(authentication.getAuthorities());
-            //解析Token中的用户名
-      /*      System.out.println("123");
-            System.out.println(jwtProvider.getUserNameFromJwtToken(jwt));*/
+
         } catch (AuthenticationException e) {
             status = false;
             return ResponseEntity.ok(new ResponseBase(false, "邮箱或者密码不正确"));

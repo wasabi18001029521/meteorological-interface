@@ -4,6 +4,7 @@ import {getToken, setToken, removeToken} from '@/utils/auth'
 import {message, changepass} from '@/api/mymessage'
 import {quit} from '@/api/quit'
 import store from "../../store";
+import CryptoJS from 'crypto-js'; //加密js
 
 
 const user = {
@@ -60,12 +61,20 @@ const user = {
            }
    */
     },
+    // encodeAesString(data,key,iv);
+    // CryptoJS.AES.encrypt(loginForm.login_pass, 'secret key 123')
 
     actions: {
+
         // 登录
         Login({commit}, loginForm) {
+            var password = CryptoJS.AES.encrypt(loginForm.login_pass, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
+                iv: CryptoJS.enc.Utf8.parse('abcdef0123456789'),
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            })
             return new Promise((resolve, reject) => {
-                login(loginForm.login_email, loginForm.login_pass).then(response => {
+                login(loginForm.login_email, "" + password).then(response => {
                     setToken(response.token)
                     resolve()
                 }).catch(error => {
@@ -76,8 +85,14 @@ const user = {
         },
         //注册
         register({commit}, registerForm) {
+            var password = CryptoJS.AES.encrypt(registerForm.register_pass, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
+                iv: CryptoJS.enc.Utf8.parse('abcdef0123456789'),
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            })
+
             return new Promise((resolve, reject) => {
-                userregister(registerForm.register_email, registerForm.register_pass).then(response => {
+                userregister(registerForm.register_email, "" + password).then(response => {
                 }).catch(error => {
                     reject(error)
                 })

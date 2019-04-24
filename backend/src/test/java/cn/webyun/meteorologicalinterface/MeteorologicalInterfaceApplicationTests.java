@@ -2,6 +2,7 @@ package cn.webyun.meteorologicalinterface;
 
 import cn.webyun.meteorologicalinterface.mapper.UserMapper;
 import cn.webyun.meteorologicalinterface.service.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -60,7 +62,15 @@ public class MeteorologicalInterfaceApplicationTests {
         System.out.println(s);*/
     }
 
+@Test
+    public void encrypt() {
+    String datatime = userService.dataTime();
+    String salt = UUID.randomUUID().toString().replaceAll("-", "");
+    String src = salt + datatime + salt + datatime + salt;
+    String Password = DigestUtils.md5Hex(src);
 
+        System.out.println(Password);
+    }
 
 
 }

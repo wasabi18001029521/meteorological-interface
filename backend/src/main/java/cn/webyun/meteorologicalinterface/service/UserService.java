@@ -6,11 +6,14 @@ import cn.webyun.meteorologicalinterface.entity.User;
 import cn.webyun.meteorologicalinterface.entity.UserCriteria;
 import cn.webyun.meteorologicalinterface.entity.UserRole;
 import cn.webyun.meteorologicalinterface.mapper.UserMapper;
+import cn.webyun.meteorologicalinterface.message.request.LoginForm;
 import cn.webyun.meteorologicalinterface.message.request.UserInfoForm;
 import cn.webyun.meteorologicalinterface.misc.UserWithRoles;
 import cn.webyun.meteorologicalinterface.security.JwtProvider;
 import cn.webyun.meteorologicalinterface.utils.StringUtils;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.ibatis.session.RowBounds;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -21,7 +24,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -298,7 +305,7 @@ public class UserService {
     //用户注册添加数据
     public int insertUser(String username, String password, String md5username) {
         Date date = new java.util.Date();
-        java.sql.Date data2= new java.sql.Date(date.getTime());
+        java.sql.Date data2 = new java.sql.Date(date.getTime());
         SimpleDateFormat sy1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateFormat = sy1.format(data2);
         return userMapper.insertUser(username, password, md5username, dateFormat);
@@ -396,12 +403,11 @@ public class UserService {
     }
 
     // SHN加密算法
-    public  String encrypt(String str) throws Exception
-    {
+    public String encrypt(String str) throws Exception {
         try {
-            // 生成一个UUID
-            // UUID uuid = UUID.randomUUID();
+            String salt = UUID.randomUUID().toString().replaceAll("-", "");
             MessageDigest md = MessageDigest.getInstance("SHA-1");
+            md.update(DatatypeConverter.parseHexBinary(salt));
             md.update(str.getBytes());
             byte[] digest = md.digest();
 
@@ -421,6 +427,53 @@ public class UserService {
         }
     }
 
+    // key加密
+    public String keyEncryption(String datatime) throws Exception {
+        // 盐值
+        String salt = UUID.randomUUID().toString().replaceAll("-", "");
+        String src = salt + datatime + salt + datatime + salt;
+        String Password = DigestUtils.sha1(src).toString();
+        return Password;
+    }
+
+    /**
+     * 将解密返回的数据转换成 String 类型
+     *
+     * @param loginRequest 接受的的用户名和加密的密码
+     */
+    public static String decrypt(LoginForm loginRequest) {
+        String key = "abcdef0123456789"; // 长度必须是 16
+        String iv = "abcdef0123456789";  // 长度必须是 16
+        //获取加密码
+        String content = loginRequest.getPassword();
+        // stringToBase64() 将 Base64编码的字符串转换成 byte[]  !!!与base64ToString(）配套使用
+        try {
+            return new String(AES_CBC_Decrypt(stringToBase64(content), key.getBytes(), iv.getBytes()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static byte[] AES_CBC_Decrypt(byte[] content, byte[] keyBytes, byte[] iv) {
+        try {
+            SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
+            byte[] result = cipher.doFinal(content);
+            return result;
+        } catch (Exception e) {
+            System.out.println("exception:" + e.toString());
+        }
+        return null;
+    }
+
+    /**
+     * 字符串装换成 Base64
+     */
+    public static byte[] stringToBase64(String key) throws Exception {
+        return Base64.decodeBase64(key.getBytes());
+    }
 
 
 }

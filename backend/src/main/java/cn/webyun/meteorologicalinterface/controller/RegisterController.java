@@ -35,26 +35,28 @@ public class RegisterController {
     private StringRedisTemplate redisTemplate;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody LoginForm loginRequest){
+    public ResponseEntity<?> register(@Valid @RequestBody LoginForm loginRequest) {
         try {
             // 获取用户输入邮箱
             String username = loginRequest.getUsername();
 
-            if(userService.selectUsername(username)!=null){
+            if (userService.selectUsername(username) != null) {
                 return ResponseEntity.ok(new ResponseBase(false, "邮箱已被注册"));
             }
+
+            String password = userService.decrypt(loginRequest);
+            loginRequest.setPassword(password);
             // 对密码进行加密
-            String password=new BCryptPasswordEncoder().encode(loginRequest.getPassword());
+            password = new BCryptPasswordEncoder().encode(loginRequest.getPassword());
             // 获取当前时间
             String datatime = userService.dataTime();
-            // 当前时间进行32位MD5加密生产key
-            String key=userService.encrypt(datatime);
-            userService.insertUser(username,password,key);
+            // key加密
+            String key = userService.encrypt(datatime);
+            userService.insertUser(username, password, key);
             //将注册的key存入到redis中
-          // redisTemplate.opsForList().rightPush(key, key, String.valueOf(TimeUnit.DAYS));
+            // redisTemplate.opsForList().rightPush(key, key, String.valueOf(TimeUnit.DAYS));
             //redisTemplate.opsForValue().set(key,key);
-           // System.out.println("存入成功");
-
+            // System.out.println("存入成功");
             // 为新用户设置默认可以访问的接口
             userService.insertUser(username);
             return ResponseEntity.ok(new ResponseBase(true, "注册成功"));
