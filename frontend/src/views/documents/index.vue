@@ -19,7 +19,7 @@
                             <el-menu-item index="2-4-2" @click="changeAPI('cityOne')">精细化城市预报单站查询数据获取接口</el-menu-item>
                         </el-submenu>
                     </el-submenu>
-                    <el-submenu index="2">
+    <!--                <el-submenu index="2">
                         <template slot="title"><i class="el-icon-menu"></i>账号相关问题</template>
                         <el-menu-item-group>
                             <template slot="title">分组一</template>
@@ -48,7 +48,7 @@
                             <template slot="title">选项4</template>
                             <el-menu-item index="3-4-1">选项4-1</el-menu-item>
                         </el-submenu>
-                    </el-submenu>
+                    </el-submenu>   -->
                 </el-menu>
             </el-aside>
           </el-col>
