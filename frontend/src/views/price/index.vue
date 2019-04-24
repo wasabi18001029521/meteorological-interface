@@ -23,42 +23,42 @@
             <el-row :gutter="20" class='u-api-box'>
                 <el-col :span="12">
                     <p class='u-con-title'>数据</p>
-                    <div v-for="o in 6" :key="o" class="u-item">
-                        {{'列表内容 ' + o }}
+                    <div v-for="item in dataRecord1"class="u-item">
+                        {{item }}
                     </div>
                 </el-col>
                 <el-col :span="12">
                     <p class='u-con-title'>数据</p>
-                    <div v-for="o in 6" :key="o" class="u-item">
-                        {{'列表内容 ' + o }}
+                    <div v-for="item in dataRecord2" class="u-item">
+                        {{ item }}
                     </div>
                 </el-col>
             </el-row>
             <el-row :gutter="20" class='u-api-box'>
                 <el-col :span="12">
                     <p class='u-con-title'>功能</p>
-                    <div v-for="o in 6" :key="o" class="u-item">
-                        {{'列表内容 ' + o }}
+                    <div v-for="item in dataFunction1" class="u-item">
+                        {{ item }}
                     </div>
                 </el-col>
                 <el-col :span="12">
                     <p class='u-con-title'>功能</p>
-                    <div v-for="o in 6" :key="o" class="u-item">
-                        {{'列表内容 ' + o }}
+                    <div v-for="item in dataFunction2" class="u-item">
+                        {{item}}
                     </div>
                 </el-col>
             </el-row>
             <el-row :gutter="20" class='u-api-box'>
                 <el-col :span="12">
                     <p class='u-con-title'>服务</p>
-                    <div v-for="o in 4" :key="o" class="u-item">
-                        {{'列表内容 ' + o }}
+                    <div v-for="item in dataService1" class="u-item">
+                        {{ item }}
                     </div>
                 </el-col>
                 <el-col :span="12">
                     <p class='u-con-title'>服务</p>
-                    <div v-for="o in 4" :key="o" class="u-item">
-                        {{'列表内容 ' + o }}
+                    <div v-for="item in dataService2" class="u-item">
+                        {{ item }}
                     </div>
                 </el-col>
             </el-row>
@@ -103,6 +103,19 @@
     export default {
         name: 'price',
         components: {},
+        data(){
+            return{
+            dataRecord1:['国内369个地级市','天气实况（2项）','3天天气预报','生活指数（基础6项）','国内空气质量实况','国内空气质量预报',
+            '国内空气质量城市排行','日出日落时间','月出月落时间和月相','昨日天气','气象灾害预警','未来24小时逐时天气预报','过去24小时历史天气',
+            '过去24小时历史空气质量','农历、节气、生肖','机动车尾号限行'],
+            dataRecord2:['多达全球2.4万城市','天气实况（12项） ','多达15天天气预报','生活指数（全部27项）','国内空气质量实况','国内空气质量逐时和逐日预报','国内空气质量城市排行',
+            '日出日落时间','月出月落时间和月相','昨日天气','气象灾害预警 ','未来24小时逐时天气预报','过去24小时历史天气','过去24小时历史空气质量','农历、节气、生肖','机动车尾号限行  '],
+            dataFunction1:['13种语言支持：简繁英日法德西葡','泰俄印度印尼阿拉伯','自动定位：经纬度、IP地址等','城市搜索','批量查询'],
+            dataFunction2:['13种语言支持：简繁英日法德西葡','泰俄印度印尼阿拉伯','自动定位：经纬度、IP地址等','城市搜索','批量查询'],
+            dataService1:['访问量限额：400次/小时','服务器与带宽：共享','服务开通方式：自助','技术支持','发票与合同','API定制开发'],
+            dataService2:['访问量限额：多至不限量','服务器与带宽：共享或独享','服务开通方式：自助或人工','技术支持：网络或电话','发票与合同','API定制开发'],
+            }
+        },
         methods: {
             toPurchase() {
                 this.$router.push('/purchase');
