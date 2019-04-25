@@ -38,7 +38,7 @@ public class GroundController extends BaseController {
                 autoArea.getVar()==null||autoArea.getLevel()==null){
             throw new ParametersException("参数异常");
         }
-        System.out.println(autoArea.getMaxLat());
+        // System.out.println(autoArea.getMaxLat());
         // hashMap.put("location", autoArea);
         shareInterfaceReturnsData = groundService.getArea(autoArea);
         hashMap.put("now", shareInterfaceReturnsData);

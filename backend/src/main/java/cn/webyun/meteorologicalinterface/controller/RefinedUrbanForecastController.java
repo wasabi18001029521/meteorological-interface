@@ -31,7 +31,7 @@ public class RefinedUrbanForecastController extends BaseController{
      */
     @GetMapping("/area")
     public ResponseEntity<?> CityArea(@Valid  InterfaceParame interfaceParame) {
-        System.out.println("CityArea"+interfaceParame.getMaxLon());
+        // System.out.println("CityArea"+interfaceParame.getMaxLon());
         if(refinedUrbanForecastService.VolitParames(interfaceParame)){
             throw new ParametersException("参数异常");
         };
@@ -48,8 +48,8 @@ public class RefinedUrbanForecastController extends BaseController{
      */
     @GetMapping("/one")
     public ResponseEntity<?> CityOne(@Valid  InterfaceParame interfaceParame) {
-        System.out.println(interfaceParame.getSid()+"+"+interfaceParame.getElems()
-                +"+"+interfaceParame.getBasetime()+"+"+interfaceParame.getStart()+"+"+interfaceParame.getEnd());
+       /*  System.out.println(interfaceParame.getSid()+"+"+interfaceParame.getElems()
+                +"+"+interfaceParame.getBasetime()+"+"+interfaceParame.getStart()+"+"+interfaceParame.getEnd());*/
         if(refinedUrbanForecastService.VolitParames(interfaceParame)){
             throw new ParametersException("参数异常");
         };

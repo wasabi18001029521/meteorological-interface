@@ -8,16 +8,20 @@ import cn.webyun.meteorologicalinterface.entity.InterfaceReturnData;
 import cn.webyun.meteorologicalinterface.mapper.RefinedUrbanForecastMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 
 @Service
 public class RefinedUrbanForecastService {
-    @Autowired
+    @Resource
     RefinedUrbanForecastMapper refinedUrbanForecastMapper;
     @Autowired
     UserKeyVaildService userKeyVaildService;
+    @Resource
+    UserService userService;
 
     /**
      * 通过密钥获取信息
@@ -43,7 +47,7 @@ public class RefinedUrbanForecastService {
 
         data1.setBasetime(interfaceParame.getBasetime());
         if (data1.getDatatime() == null) {
-            data1.setDatatime(new Date().toString());
+            data1.setDatatime(userService.dataTime());
         }
         data1.setLcc(2.2);
         data1.setLonlat(var);
@@ -81,7 +85,7 @@ public class RefinedUrbanForecastService {
         var.add("barr22222222222222");
         data1.setBasetime(interfaceParame.getBasetime());
         if (data1.getDatatime() == null) {
-            data1.setDatatime(new Date().toString());
+            data1.setDatatime(userService.dataTime());
         }
         data1.setLcc(7.6);
         data1.setLonlat(var);
@@ -97,23 +101,26 @@ public class RefinedUrbanForecastService {
         data1.setWs(7.0);
         return data1;
     }
-    public boolean VolitParames(InterfaceParame interfaceParame){
-        System.out.println("VolitParames");
 
-        if(interfaceParame.getSid()==null){
+    public boolean VolitParames(InterfaceParame interfaceParame) {
+        //  System.out.println("VolitParames");
+
+        if (interfaceParame.getSid() == null) {
             //说明走的是1.2.11　精细化城市预报矩形区域查询数据获取接口
-            if(interfaceParame.getMaxLon()==null||interfaceParame.getMaxLat()==null||
-            interfaceParame.getMinLat()==null||interfaceParame.getMinLon()==null||
-            interfaceParame.getVar()==null){
-                System.out.println("interfaceParame.getSid()==null+VolitParames");
-                return true;
+            if (interfaceParame.getMaxLon() == null || interfaceParame.getMaxLat() == null ||
+                    interfaceParame.getMinLat() == null || interfaceParame.getMinLon() == null ||
+                    interfaceParame.getVar() == null) {
+                //  System.out.println("interfaceParame.getSid()==null+VolitParames");
+                return false;
             }
-            return true;
+
         }
-        if(interfaceParame.getElems()==null||interfaceParame.getStart()==null
-        ||interfaceParame.getEnd()==null){
-            return true;
+        if (interfaceParame.getElems() == null || interfaceParame.getStart() == null
+                || interfaceParame.getEnd() == null) {
+            return false;
         }
         return false;
-    };
+    }
+
+    ;
 }

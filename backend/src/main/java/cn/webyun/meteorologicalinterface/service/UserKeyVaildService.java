@@ -29,7 +29,6 @@ public class UserKeyVaildService {
             PrivilegeException {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String starttime = selectEffective(userkey);
-        System.out.println(starttime);
         Date sdate = null;// 开始时间
 
         try {

@@ -463,7 +463,7 @@ public class UserService {
             byte[] result = cipher.doFinal(content);
             return result;
         } catch (Exception e) {
-            System.out.println("exception:" + e.toString());
+            e.printStackTrace();
         }
         return null;
     }

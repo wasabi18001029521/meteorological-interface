@@ -18,7 +18,7 @@ const user = {
         userregister: '',
         userlogin: '',
         userkey: '',
-        //usertoken:''|| localStorage.getItem('usertoken'),
+        // usertoken:''|| localStorage.getItem('usertoken'),
     },
 
     // 修改共享数据
@@ -112,7 +112,7 @@ const user = {
             })
         },
 
-        //ruleForm2.currentPassword, ruleForm2.pass,ruleForm2.checkPass
+        // ruleForm2.currentPassword, ruleForm2.pass,ruleForm2.checkPass
         // 获取用户信息
         my({commit}) {
             return new Promise((resolve, reject) => {
@@ -132,7 +132,7 @@ const user = {
 
 
         // 获取用户信息
-        GetInfo({commit, state}) {
+       /* GetInfo({commit, state}) {
             return new Promise((resolve, reject) => {
                 getInfo(state.token).then(response => {
                     const data = response.data
@@ -148,10 +148,10 @@ const user = {
                     reject(error)
                 })
             })
-        },
+        },*/
 
         // 登出
-        LogOut({commit, state}) {
+   /*     LogOut({commit, state}) {
             return new Promise((resolve, reject) => {
                 logout(state.token).then(() => {
                     setToken("123")
@@ -161,7 +161,7 @@ const user = {
                     reject(error)
                 })
             })
-        },
+        },*/
 
         // 前端 登出
         FedLogOut({commit}) {

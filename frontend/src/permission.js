@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
         if (to.path === '/login') {
             // 当前导航被中断 跳转一个新的导航
             next({path: '/'})
-            //NProgress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
+            // Progress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
         } else {
             if (store.getters.userid == '' || store.getters.userid == null) {
 
@@ -43,11 +43,11 @@ router.beforeEach((to, from, next) => {
         if (whiteList.indexOf(to.path) !== -1) {
             next()
         } else {
-            //next(`login?redirect=${to.path}`)
+            // next(`login?redirect=${to.path}`)
 
             next(`/`)
             // 否则全部重定向到登录页/login?redirect=${to.path}
-            //  NProgress.done()
+            // NProgress.done()
         }
         //没有 跳转到选择页面中去，配置地址
     }
