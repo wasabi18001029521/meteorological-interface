@@ -93,15 +93,15 @@
                         http://localhost:8081/station/auto/nearest?key=your_api_key&lon=31.21&lat=22.12&start=2019-04-10%2012:04:48&end=2019-04-10%2012:05:36&elems=1,2
                     </a>
                 </div>
-                    <div class="u-describe" v-if="apiType === 'cityArea'">查找区域内全部的站点在某一时刻的中国精细化城镇预报数据
-                        <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36" target="blank">
-                            http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36
-                        </a>
-                    </div>
+                <div class="u-describe" v-if="apiType === 'cityArea'">查找区域内全部的站点在某一时刻的中国精细化城镇预报数据
+                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36" target="blank">
+                        http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36
+                    </a>
+                </div>
 
                 <div class="u-describe"  v-if="apiType === 'cityOne'">查询时间区间内（闭区间）的中国精细化城镇预报数据
-                    <a style=" text-decoration:none" class="u-orange" href=" http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36" target="blank">
-                        http://localhost:8081/station/city/area?key=your_api_key&maxLon=22.22&maxLat=33.33&minLon=11.11&minLat2.22&var=1,2&basetime=2019-04-10%2012:05:36&datatime=2019-04-10%2012:05:36&format=2019-04-10%2012:05:36
+                    <a style=" text-decoration:none" class="u-orange" href="http://localhost:8081/station/city/one?key=your_api_key&sid=3&elems=1,2&start=2019-04-10%2012:04:48&end=2019-04-10%2012:05:36" target="blank">
+                        http://localhost:8081/station/city/one?key=your_api_key&sid=3&elems=1,2&start=2019-04-10%2012:04:48&end=2019-04-10%2012:05:36
                     </a>
                 </div>
                 <div class="u-tips">参数</div>
