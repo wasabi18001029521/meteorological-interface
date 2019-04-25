@@ -46,36 +46,27 @@ exports.Result = function (type) {
     var resultData = null;
     if (type == "autoArea") {
         resultData = {
-            location: {
-                level:"1",//抽稀级别 [1,2,3,4]
-                maxLon : "50.2",//最大经度
-                maxLat: "24.7",//最大纬度
-                minLon: "22.22",//最小经度
-                minLat: "21.56",//最小纬度
+            "Success Model": {
+               "datatime" : "2015-09-25 07:00",//数据更新时间（该城市的本地时间）
+                "dt" :"4",//露点温度,单位为c摄氏度或f华氏度
+                "lonlat" : "[160.40,39.90]",//经纬度[经度，纬度]
+                "p": "1007.6",//'气压,单位为mb百帕或in英寸
+                "prec_1h": "20",//过去1小时降水量,单位mm毫米
+                "rh": "40%",//相对湿度,0~100，单位为百分比
+                "slp": "56",//海平面气压
+                "staCode": "2018",//站点编号
+                "t": "3",//气温，单位为c摄氏度或f华氏度
+                "wd": "东风",//风向文字
+                "ws": "12"//风速，单位为km/h公里每小时或mph英里每小时
             },
-            "now": {
-               datatime : "2015-09-25 07:00",//数据更新时间（该城市的本地时间）
-                dt :"4",//露点温度,单位为c摄氏度或f华氏度
-                lonlat : "[160.40,39.90]",//经纬度[经度，纬度]
-                p: "1007.6",//'气压,单位为mb百帕或in英寸
-                prec_1h: "20",//过去1小时降水量,单位mm毫米
-                rh: "40%",//相对湿度,0~100，单位为百分比
-                slp: "56",//海平面气压
-                staCode: "2018",//站点编号
-                t: "3",//气温，单位为c摄氏度或f华氏度
-                wd: "东风",//风向文字
-                ws: "12"//风速，单位为km/h公里每小时或mph英里每小时
-            }
+            "Error Model": {
+            "errorCode": "string",//错误代码
+            "errorInfo": "string"//错误信息
+        }
         }
     } else if (type == "autoOne") {
         resultData = {
-            "location": {
-            "sid": "2",//站点编号
-            "elems": "[1,2]",//查询的列数组
-            "start": "2019-04-10 12",//开始时间，格式 yyyyMMddHH
-            "end": "2019-04-11 12",//结束时间，格式 yyyyMMddHH
-        },
-            "now": {
+            "Success Model": {
                 "datatime ":"2015-09-25 08:00", //数据时间
                 "dt": "8",//露点温度
                 "lonlat ": "[180.40,50.90]",//经纬度[经度，纬度]
@@ -87,18 +78,15 @@ exports.Result = function (type) {
                 "t": "16",//气温
                 "wd ": "东北",//风向
                 "ws ": "18"//风速
-            }
+            },
+            "Error Model":{
+            "errorCode": "string",//错误代码
+            "errorInfo": "string"//错误信息
+        }
         }
     } else if (type == "autoNearest") {
         resultData = {
-            "location": {
-                "lon": "31.21",//经度
-                "lat": "22.12",//纬度
-                "start": "2019-04-10 12",//开始时间，格式 yyyyMMddHH
-                "end": "2019-04-11 12",//结束时间，格式 yyyyMMddHH
-                "elems": "[1,2]",//查询的字段数组
-            },
-            "now": {
+            "Success Model": {
                 "datatime ": "2015-09-25 08:00",//数据时间
                 "dt ": "9",//露点温度
                 "lonlat ": "[180.40,50.90]",//经纬度[经度，纬度]
@@ -110,19 +98,15 @@ exports.Result = function (type) {
                 "t ": "1007.6",//气压
                 "wd ": "东北",//风向
                 "ws ": "23"//风速
+            },
+            "Error Model":{
+                "errorCode": "string",//错误代码
+                "errorInfo": "string"//错误信息
             }
         }
     } else if (type == "cityArea") {
         resultData = {
-            "location": {
-                "maxLon": "22.22",//最大经度
-                "maxLat": "33.33",//  最大纬度
-                "minLon": "11.11",//  最小经度
-                "minLat": "2.22",//最小纬度
-                "var": "[1,2]",//查询的字段数组
-                "datatime": "2019-04-22 18:00",//数据时间，格式 yyyyMMddHH
-            },
-            "now": {
+            "Success Model": {
                 "basetime ": "2019-04-22 18:00",//起报时间
                 "datatime ": "2019-04-22 18:00",//数据时间
                 "lcc ": "5",//低云量
@@ -137,17 +121,15 @@ exports.Result = function (type) {
                 "wd ": "东南",//风向
                 "wp ": "01",//天气现象编码，01少云
                 "ws ": "16"//风速
+            },
+            "Error Model":{
+                "errorCode": "string",//错误代码
+                "errorInfo": "string"//错误信息
             }
         }
     } else if (type == "cityOne") {
         resultData = {
-            "location": {
-                "sid": "2",//站点编号
-                "elems": "[1,2]",//查询的列数组
-                "start": "2019-04-10 12",//开始时间，格式 yyyyMMddHH
-                "end": "2019-04-10 12",//结束时间，格式 yyyyMMddHH
-            },
-            "now": {
+            "Success Model": {
             "basetime ": "2019-4-25 8:00",//起报时间
             "datatime ": "2019-4-25 9:00",//数据时间
             "lcc ": "8",//低云量
@@ -162,7 +144,11 @@ exports.Result = function (type) {
             "wd ": "南",//风向
             "wp ": "02",//天气现象编码
             "ws ": "13"//风速
-        }
+        },
+            "Error Model":{
+                "errorCode": "string",//错误代码
+                "errorInfo": "string"//错误信息
+            }
         }
     }
     return resultData;
