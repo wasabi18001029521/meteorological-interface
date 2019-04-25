@@ -68,7 +68,7 @@ const user = {
 
         // 登录
         Login({commit}, loginForm) {
-            var password = CryptoJS.AES.encrypt(loginForm.login_pass, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
+            let password = CryptoJS.AES.encrypt(loginForm.login_pass, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
                 iv: CryptoJS.enc.Utf8.parse('abcdef0123456789'),
                 mode: CryptoJS.mode.CBC,
                 padding: CryptoJS.pad.Pkcs7
@@ -85,7 +85,7 @@ const user = {
         },
         //注册
         register({commit}, registerForm) {
-            var password = CryptoJS.AES.encrypt(registerForm.register_pass, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
+            let password = CryptoJS.AES.encrypt(registerForm.register_pass, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
                 iv: CryptoJS.enc.Utf8.parse('abcdef0123456789'),
                 mode: CryptoJS.mode.CBC,
                 padding: CryptoJS.pad.Pkcs7
@@ -104,8 +104,23 @@ const user = {
             checkPass
         */
         updatePassword({commit}, ruleForm2) {
+            let currentPassword= CryptoJS.AES.encrypt(ruleForm2.currentPassword, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
+                iv: CryptoJS.enc.Utf8.parse('abcdef0123456789'),
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            let pass= CryptoJS.AES.encrypt(ruleForm2.pass, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
+                iv: CryptoJS.enc.Utf8.parse('abcdef0123456789'),
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            let checkPass= CryptoJS.AES.encrypt(ruleForm2.checkPass, CryptoJS.enc.Utf8.parse('abcdef0123456789'), {
+                iv: CryptoJS.enc.Utf8.parse('abcdef0123456789'),
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
             return new Promise((resolve, reject) => {
-                message(ruleForm2.currentPassword, ruleForm2.pass, ruleForm2.checkPass).then(response => {
+                message(""+currentPassword, ""+pass, ""+checkPass).then(response => {
                 }).catch(error => {
                     reject(error)
                 })
@@ -129,40 +144,6 @@ const user = {
                 })
             })
         },
-
-
-        // 获取用户信息
-       /* GetInfo({commit, state}) {
-            return new Promise((resolve, reject) => {
-                getInfo(state.token).then(response => {
-                    const data = response.data
-                    if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-                        commit('SET_ROLES', data.roles)
-                    } else {
-                        reject('getInfo: roles must be a non-null array !')
-                    }
-                    commit('SET_NAME', data.name)
-                    commit('SET_AVATAR', data.avatar)
-                    resolve(response)
-                }).catch(error => {
-                    reject(error)
-                })
-            })
-        },*/
-
-        // 登出
-   /*     LogOut({commit, state}) {
-            return new Promise((resolve, reject) => {
-                logout(state.token).then(() => {
-                    setToken("123")
-                    removeToken()
-                    resolve()
-                }).catch(error => {
-                    reject(error)
-                })
-            })
-        },*/
-
         // 前端 登出
         FedLogOut({commit}) {
             return new Promise(resolve => {
