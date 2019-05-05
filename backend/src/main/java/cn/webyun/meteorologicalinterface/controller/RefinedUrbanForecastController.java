@@ -31,12 +31,11 @@ public class RefinedUrbanForecastController extends BaseController{
      */
     @GetMapping("/area")
     public ResponseEntity<?> CityArea(@Valid  InterfaceParame interfaceParame) {
-        // System.out.println("CityArea"+interfaceParame.getMaxLon());
+
         if(refinedUrbanForecastService.VolitParames(interfaceParame)){
             throw new ParametersException("参数异常");
         };
-   /*     System.out.println(interfaceParame.getMaxLon()+"+"+interfaceParame.getMaxLat()
-                +"+"+interfaceParame.getMinLat()+"+"+interfaceParame.getMinLon()+"+"+interfaceParame.getVar());*/
+
 
         InterfaceReturnData interfaceReturnDataBase = refinedUrbanForecastService.getCityAreainfo(interfaceParame);
             return ResponseEntity.ok(new ResponseBase(interfaceReturnDataBase));

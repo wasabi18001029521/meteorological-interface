@@ -30,19 +30,16 @@ public class GroundController extends BaseController {
     // 中国地面自动站区域查询数据获取接口
     @GetMapping("/area")
     public ResponseEntity<?> area(@Valid AutoArea autoArea) {
-       /* System.out.println(autoArea.getMaxLon()+"+"+autoArea.getMaxLat()+"+"+
-                autoArea.getMinLat()+"+"+autoArea.getMinLon()+"+"+
-                autoArea.getVar()+"+"+autoArea.getLevel());*/
+
         if(autoArea.getMaxLon()==null||autoArea.getMaxLat()==null||
                 autoArea.getMinLat()==null||autoArea.getMinLon()==null||
                 autoArea.getVar()==null||autoArea.getLevel()==null){
             throw new ParametersException("参数异常");
         }
-        // System.out.println(autoArea.getMaxLat());
-        // hashMap.put("location", autoArea);
+
         shareInterfaceReturnsData = groundService.getArea(autoArea);
         hashMap.put("now", shareInterfaceReturnsData);
-        return ResponseEntity.ok(new ResponseBase(hashMap));
+        return ResponseEntity.ok(new ResponseBase(shareInterfaceReturnsData));
     }
 
 
@@ -58,15 +55,14 @@ public class GroundController extends BaseController {
         shareInterfaceReturnsData = groundService.getOne(autoOne);
         // hashMap.put("location", autoOne);
         hashMap.put("now", shareInterfaceReturnsData);
-        return ResponseEntity.ok(new ResponseBase(hashMap));
+        return ResponseEntity.ok(new ResponseBase(shareInterfaceReturnsData));
 
     }
 
     // 中国地面自动站最近站数据
     @GetMapping("/nearest")
     public ResponseEntity<?> nearest(@Valid Nearest nearest) {
-      /*  System.out.println(nearest.getLon()+"+"+nearest.getLat()+"+"+
-                nearest.getStart()+"+"+nearest.getEnd()+"+"+nearest.getElems()+"+");*/
+
         if(nearest.getLon()==null||nearest.getLat()==null||
                 nearest.getStart()==null||nearest.getEnd()==null
                 ||nearest.getElems()==null){
@@ -75,7 +71,7 @@ public class GroundController extends BaseController {
         shareInterfaceReturnsData = groundService.getNearest(nearest);
         // hashMap.put("location", nearest);
         hashMap.put("now", shareInterfaceReturnsData);
-        return ResponseEntity.ok(new ResponseBase(hashMap));
+        return ResponseEntity.ok(new ResponseBase(shareInterfaceReturnsData));
     }
 
 

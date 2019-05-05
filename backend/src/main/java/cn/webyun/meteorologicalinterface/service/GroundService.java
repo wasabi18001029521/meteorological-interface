@@ -26,8 +26,8 @@ public class GroundService extends BaseController {
         // 有效时间
        lagtime = userKeyVaildService.volitUserKey(autoArea.getKey(),1);
         ArrayList var = new ArrayList();
-        var.add("var2");
-        var.add("var3");
+        var.add(18.62);
+        var.add(120.26);
         // 默认时间
         if (shareInterfaceReturnsData.getDatatime() == null) {
             shareInterfaceReturnsData.setDatatime(userService.dataTime());
@@ -49,8 +49,8 @@ public class GroundService extends BaseController {
         // 有效时间
         lagtime = userKeyVaildService.volitUserKey(autoOne.getKey(),1);
         ArrayList var = new ArrayList();
-        var.add("var1");
-        var.add("var2");
+        var.add(156.21);
+        var.add(132.10);
         if (shareInterfaceReturnsData.getDatatime() == null) {
             shareInterfaceReturnsData.setDatatime(userService.dataTime());
         }
@@ -72,8 +72,8 @@ public class GroundService extends BaseController {
         // 有效时间
         lagtime = userKeyVaildService.volitUserKey(nearest.getKey(),5);
         ArrayList var = new ArrayList();
-        var.add("var3" );
-        var.add("var4");
+        var.add(19.56 );
+        var.add(100.45);
         if (shareInterfaceReturnsData.getDatatime() == null) {
             shareInterfaceReturnsData.setDatatime(userService.dataTime());
         }

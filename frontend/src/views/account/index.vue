@@ -152,7 +152,7 @@
                         { validator: checkCurrentPassword, trigger: 'blur' }
                    ]
                 },
-                myOrder:[{id:'123234983248136241982091375',time:'2019-3-2 14:22:50',price:'1200',details:['中国全部和国家主要三千城市','日出日落时间'],state:'payment'},
+                myOrder:[{id:'123234983248136241982091375',time:'2019-3-2 14:22:50',price:'1200',details:['中国全部城市','全国实时气温检测'],state:'payment'},
                 {id:'5555549832481362419855555',time:'2019-4-2 11:11:50',price:'500',details:['中国全部城市','天气实况'],state:'invalid'},]
             };
         },

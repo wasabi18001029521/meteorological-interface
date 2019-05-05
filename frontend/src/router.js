@@ -79,7 +79,7 @@ export default new Router({
             name: 'retrieve',
             component: Retrieve
         },
-        ,
+
         {
             path: '/api/documents',
             name: 'documents',

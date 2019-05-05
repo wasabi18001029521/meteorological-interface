@@ -42,8 +42,8 @@ public class RefinedUrbanForecastService {
         //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
         int date = userKeyVaildService.volitUserKey(interfaceParame.getKey(), 1);
         ArrayList var = new ArrayList();
-        var.add("var1");
-        var.add("var2");
+        var.add(150.26);
+        var.add(12.46);
 
         data1.setBasetime(interfaceParame.getBasetime());
         if (data1.getDatatime() == null) {
@@ -54,7 +54,7 @@ public class RefinedUrbanForecastService {
         data1.setP(1300.0);
         data1.setPrec(20.5);
         data1.setRh(18.0);
-        data1.setStaCode("十站点");
+        data1.setStaCode("8站点");
         data1.setT(9.2);
         data1.setTcc(493.6);
         data1.setVis(71.6);
@@ -81,8 +81,8 @@ public class RefinedUrbanForecastService {
         //传入userkey和可用时间做验证，返回剩余有效天数（暂时用不上）
         int date = userKeyVaildService.volitUserKey(interfaceParame.getKey(), 1);
         ArrayList var = new ArrayList();
-        var.add("arr111111111111111");
-        var.add("barr22222222222222");
+        var.add(168.25);
+        var.add(56.89);
         data1.setBasetime(interfaceParame.getBasetime());
         if (data1.getDatatime() == null) {
             data1.setDatatime(userService.dataTime());
@@ -92,7 +92,7 @@ public class RefinedUrbanForecastService {
         data1.setP(1100.0);
         data1.setPrec(17.8);
         data1.setRh(15.6);
-        data1.setStaCode("八站点");
+        data1.setStaCode("7站点");
         data1.setT(8.5);
         data1.setTcc(521.6);
         data1.setVis(92.5);

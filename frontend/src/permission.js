@@ -1,26 +1,21 @@
 import router from './router'
 import store from './store'
-//import NProgress from 'nprogress' // progress bar
-//import 'nprogress/nprogress.css' // progress bar style
 import {Message} from 'element-ui'
 import {getToken} from '@/utils/auth' // getToken from cookie
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-//NProgress.configure({ showSpinner: false })// NProgress configuration
 
 const whiteList = ['/api/login', '/', '/api/register', '/price', '/dataTab', '/api/service', '/api/documents','/api/retrieve'] // 不重定向白名单
 // 全局前置守卫
 // 导航完成之前获取
 router.beforeEach((to, from, next) => {
 
-    //NProgress.start()
     if (getToken()) {
         // 即将要进入的目标路由对象
         if (to.path === '/login') {
             // 当前导航被中断 跳转一个新的导航
             next({path: '/'})
-            // Progress.done() // if current page is dashboard will not trigger	afterEach hook, so manually handle it
         } else {
             if (store.getters.userid == '' || store.getters.userid == null) {
 
@@ -49,7 +44,7 @@ router.beforeEach((to, from, next) => {
             // 否则全部重定向到登录页/login?redirect=${to.path}
             // NProgress.done()
         }
-        //没有 跳转到选择页面中去，配置地址
+        //没有跳转到选择页面中去，配置地址
     }
 })
 
